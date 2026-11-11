@@ -58,6 +58,16 @@
 
 <p>Bill payment takes a customer's account number, confirms it with the biller, and pays. Find the biller, pick the service, validate the customer, then pay.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-get-merchants">List billers</a></li>
+    <li><a href="#op-get-merchant-services">List a biller's services</a></li>
+    <li><a href="#op-get-merchant-account-details">Validate the customer</a></li>
+    <li><a href="#op-pay-bill">Pay the bill</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-get-merchants" data-operation="get-merchants">
   <div class="op-header">
@@ -66,7 +76,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchants</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchants</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -74,9 +84,9 @@
   
   <h4>TypeScript</h4>
   <p><code>getMerchants</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchants" type="button">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript">const merchants = await client.getMerchants({ referenceNumber: &quot;REF-000001&quot; });
-for (const merchant of merchants.merchants ?? []) {
-  console.log(merchant.displayName, merchant.uuid);
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchants" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript"><span class="tok-kw">const</span> merchants = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchants</span>({ referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span> });
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> merchant <span class="tok-kw">of</span> merchants.merchants ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(merchant.displayName, merchant.uuid);
 }</code></pre></div>
 </article>
 
@@ -87,7 +97,7 @@ for (const merchant of merchants.merchants ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchantServices</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchantServices</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + merchantPublicId</span>
   </div>
@@ -96,9 +106,9 @@ for (const merchant of merchants.merchants ?? []) {
 <li>A service with <code>price</code> <code>0.0</code> means the customer chooses the amount; otherwise pay the service's <code>price</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMerchantServices</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-services" type="button">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript">const services = await client.getMerchantServices({
-  referenceNumber: &quot;REF-000001&quot;,
-  merchantPublicId: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchant-services" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript"><span class="tok-kw">const</span> services = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchantServices</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantPublicId: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -109,7 +119,7 @@ for (const merchant of merchants.merchants ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchantAccountDetails</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchantAccountDetails</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + merchantAccount + merchantReferenceNumber + merchantServiceProductCode</span>
   </div>
@@ -118,12 +128,12 @@ for (const merchant of merchants.merchants ?? []) {
 <li>Billers that don't need it still take part in the hash — send <code>&quot;&quot;</code> when there is no service.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMerchantAccountDetails</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-account-details" type="button">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript">const customer = await client.getMerchantAccountDetails({
-  referenceNumber: &quot;REF-000001&quot;,
-  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
-  merchantReferenceNumber: &quot;8110411076&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchant-account-details" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript"><span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchantAccountDetails</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantAccount: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
+  merchantReferenceNumber: <span class="tok-str">&quot;8110411076&quot;</span>,
 });
-console.log(customer.customerName);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(customer.customerName);</code></pre></div>
 </article>
 
 <article class="op" id="op-pay-bill" data-operation="pay-bill">
@@ -133,7 +143,7 @@ console.log(customer.customerName);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /merchantPayment</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/merchantPayment</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + amount + merchantAccount + merchantReferenceNumber</span>
   </div>
@@ -142,15 +152,15 @@ console.log(customer.customerName);</code></pre></div>
 <li><code>integrationStatus</code> is for information only.</li></ul>
   <h4>TypeScript</h4>
   <p><code>payBill</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-pay-bill" type="button">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript">const bill = await client.payBill({
-  referenceNumber: &quot;BILL-2026-0042&quot;,
-  amount: 6000,
-  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
-  merchantReferenceNumber: &quot;8110411076&quot;,
-  merchantService: [&quot;STARTERE36&quot;],
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-pay-bill" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript"><span class="tok-kw">const</span> bill = <span class="tok-kw">await</span> client.<span class="tok-fn">payBill</span>({
+  referenceNumber: <span class="tok-str">&quot;BILL-2026-0042&quot;</span>,
+  amount: <span class="tok-num">6000</span>,
+  merchantAccount: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
+  merchantReferenceNumber: <span class="tok-str">&quot;8110411076&quot;</span>,
+  merchantService: [<span class="tok-str">&quot;STARTERE36&quot;</span>],
 });
-if (bill.responseCode === 0) {
-  console.log(&quot;paid&quot;);
+<span class="tok-kw">if</span> (bill.responseCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;paid&quot;</span>);
 }</code></pre></div>
 </article>
 

@@ -58,6 +58,20 @@
 
 <p>A subsidiary account is a Paga account for one of your customers. You can hold their money, move it between accounts, and set it up to sweep straight into a bank account.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-create-subsidiary-account">Create a subsidiary account</a></li>
+    <li><a href="#op-charge-subsidiary-account">Charge a subsidiary account</a></li>
+    <li><a href="#op-top-up-subsidiary-account">Top up a subsidiary account</a></li>
+    <li><a href="#op-transfer-between-subsidiary-accounts">Transfer between subsidiary accounts</a></li>
+    <li><a href="#op-retrieve-subsidiary-account">Retrieve a subsidiary account</a></li>
+    <li><a href="#op-update-subsidiary-account">Update a subsidiary account</a></li>
+    <li><a href="#op-get-subsidiary-balance">Get a subsidiary account balance</a></li>
+    <li><a href="#op-get-subsidiary-history">Get a subsidiary account history</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-create-subsidiary-account" data-operation="create-subsidiary-account">
   <div class="op-header">
@@ -66,7 +80,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference + iifiNumber + autoSweep.bankPublicId + autoSweep.destination + autoSweep.accountNumber + callbackUrl</span>
   </div>
@@ -75,15 +89,15 @@
 <li>Reusing a <code>referenceNumber</code> or <code>accountReference</code> returns status code <code>102</code> and never creates a second account.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-create-subsidiary-account" class="language-typescript">const account = await client.createSubsidiaryAccount({
-  referenceNumber: &quot;REF-000005&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  accountName: &quot;Bello Ramon&quot;,
-  iifiNumber: &quot;22222132329&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">createSubsidiaryAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000005&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  accountName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  iifiNumber: <span class="tok-str">&quot;22222132329&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });
-if (account.statusCode === &quot;102&quot;) {
-  console.log(&quot;duplicate reference&quot;);
+<span class="tok-kw">if</span> (account.statusCode === <span class="tok-str">&quot;102&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;duplicate reference&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -94,7 +108,7 @@ if (account.statusCode === &quot;102&quot;) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/charge</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/charge</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
   </div>
@@ -103,13 +117,13 @@ if (account.statusCode === &quot;102&quot;) {
 <li>Retrying with the same <code>referenceNumber</code> never moves money twice.</li></ul>
   <h4>TypeScript</h4>
   <p><code>chargeSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-charge-subsidiary-account" class="language-typescript">const charge = await client.chargeSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-CHARGE-001&quot;,
-  amount: 1000,
-  narration: &quot;Service fee&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-charge-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-charge-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> charge = <span class="tok-kw">await</span> client.<span class="tok-fn">chargeSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-CHARGE-001&quot;</span>,
+  amount: <span class="tok-num">1000</span>,
+  narration: <span class="tok-str">&quot;Service fee&quot;</span>,
 });
-console.log(charge.newBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(charge.newBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-top-up-subsidiary-account" data-operation="top-up-subsidiary-account">
@@ -119,7 +133,7 @@ console.log(charge.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/topup</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/topup</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
   </div>
@@ -127,13 +141,13 @@ console.log(charge.newBalance);</code></pre></div>
   <ul><li>Not available on virtual accounts.</li></ul>
   <h4>TypeScript</h4>
   <p><code>topUpSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-top-up-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-top-up-subsidiary-account" class="language-typescript">const topUp = await client.topUpSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-TOPUP-001&quot;,
-  amount: 500,
-  narration: &quot;Bonus credit&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-top-up-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-top-up-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> topUp = <span class="tok-kw">await</span> client.<span class="tok-fn">topUpSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-TOPUP-001&quot;</span>,
+  amount: <span class="tok-num">500</span>,
+  narration: <span class="tok-str">&quot;Bonus credit&quot;</span>,
 });
-console.log(topUp.newBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(topUp.newBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-transfer-between-subsidiary-accounts" data-operation="transfer-between-subsidiary-accounts">
@@ -143,7 +157,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/transfer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/transfer</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + sourceAccountIdentifier + destinationAccountIdentifier + amount + currency + narration</span>
   </div>
@@ -151,12 +165,12 @@ console.log(topUp.newBalance);</code></pre></div>
   <ul><li>Paga sends one callback, for the source account only.</li></ul>
   <h4>TypeScript</h4>
   <p><code>transferBetweenSubsidiaryAccounts</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-transfer-between-subsidiary-accounts" type="button">Copy</button><pre><code id="code-typescript-transfer-between-subsidiary-accounts" class="language-typescript">const transfer = await client.transferBetweenSubsidiaryAccounts({
-  sourceAccountReference: &quot;CUST-000184-WALLET&quot;,
-  destinationAccountReference: &quot;CUST-000221-WALLET&quot;,
-  referenceNumber: &quot;REF-TRANSFER-001&quot;,
-  amount: 1500,
-  narration: &quot;Payment for goods&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-transfer-between-subsidiary-accounts" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-transfer-between-subsidiary-accounts" class="language-typescript"><span class="tok-kw">const</span> transfer = <span class="tok-kw">await</span> client.<span class="tok-fn">transferBetweenSubsidiaryAccounts</span>({
+  sourceAccountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  destinationAccountReference: <span class="tok-str">&quot;CUST-000221-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-TRANSFER-001&quot;</span>,
+  amount: <span class="tok-num">1500</span>,
+  narration: <span class="tok-str">&quot;Payment for goods&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -167,7 +181,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
   </div>
@@ -175,9 +189,9 @@ console.log(topUp.newBalance);</code></pre></div>
   <ul><li>The <code>accountIdentifier</code> is the account's <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>retrieveSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-retrieve-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-retrieve-subsidiary-account" class="language-typescript">const account = await client.retrieveSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-GET-001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-retrieve-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-retrieve-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">retrieveSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-GET-001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -188,7 +202,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">PUT /subsidiary-accounts/{accountReference}</span>
+    <span class="tag tag-method tag-put">PUT</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier + iifiNumber + autoSweep.destination + autoSweep.bankPublicId + autoSweep.accountNumber + callbackUrl</span>
   </div>
@@ -197,10 +211,10 @@ console.log(topUp.newBalance);</code></pre></div>
 <li><code>accountNumber</code> and <code>accountReference</code> cannot be changed.</li></ul>
   <h4>TypeScript</h4>
   <p><code>updateSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-update-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-update-subsidiary-account" class="language-typescript">const account = await client.updateSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-UPDATE-001&quot;,
-  status: &quot;DISABLED&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-update-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-update-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">updateSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-UPDATE-001&quot;</span>,
+  status: <span class="tok-str">&quot;DISABLED&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -211,7 +225,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/balance</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/balance</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
   </div>
@@ -219,11 +233,11 @@ console.log(topUp.newBalance);</code></pre></div>
   
   <h4>TypeScript</h4>
   <p><code>getSubsidiaryBalance</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-balance" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-balance" class="language-typescript">const balance = await client.getSubsidiaryBalance({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-BAL-001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-subsidiary-balance" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-subsidiary-balance" class="language-typescript"><span class="tok-kw">const</span> balance = <span class="tok-kw">await</span> client.<span class="tok-fn">getSubsidiaryBalance</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-BAL-001&quot;</span>,
 });
-console.log(balance.balance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(balance.balance);</code></pre></div>
 </article>
 
 <article class="op" id="op-get-subsidiary-history" data-operation="get-subsidiary-history">
@@ -233,7 +247,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/history</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/history</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">accountIdentifier + startDateTimeUTC + endDateTimeUTC</span>
   </div>
@@ -243,13 +257,13 @@ console.log(balance.balance);</code></pre></div>
 <li><code>referenceNumber</code> is required as a query parameter, but is not part of the hash.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getSubsidiaryHistory</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-history" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-history" class="language-typescript">const history = await client.getSubsidiaryHistory({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-HIS-001&quot;,
-  startDateTimeUTC: &quot;2026-06-01T00:00:00&quot;,
-  endDateTimeUTC: &quot;2026-06-30T23:59:59&quot;,
-  pageNumber: 0,
-  pageSize: 20,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-subsidiary-history" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-subsidiary-history" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getSubsidiaryHistory</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-HIS-001&quot;</span>,
+  startDateTimeUTC: <span class="tok-str">&quot;2026-06-01T00:00:00&quot;</span>,
+  endDateTimeUTC: <span class="tok-str">&quot;2026-06-30T23:59:59&quot;</span>,
+  pageNumber: <span class="tok-num">0</span>,
+  pageSize: <span class="tok-num">20</span>,
 });</code></pre></div>
 </article>
 

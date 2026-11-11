@@ -58,6 +58,8 @@
 
 <p>Some operations have no callback. The transaction status endpoint tells you where a transaction got to, and it is what you use to resolve an unknown outcome.</p>
 
+
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-get-transaction-status" data-operation="get-transaction-status">
   <div class="op-header">
@@ -66,7 +68,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /transactionStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/transactionStatus</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -76,11 +78,11 @@
 <li>The <code>status</code> field is human-readable and may be reworded — branch on <code>responseCode</code>, not on <code>status</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getTransactionStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-transaction-status" type="button">Copy</button><pre><code id="code-typescript-get-transaction-status" class="language-typescript">const status = await client.getTransactionStatus({
-  referenceNumber: &quot;PAY-2026-0311&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-transaction-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-transaction-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getTransactionStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
 });
-if (status.responseCode === 0) {
-  console.log(&quot;settled&quot;);
+<span class="tok-kw">if</span> (status.responseCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;settled&quot;</span>);
 }</code></pre></div>
 </article>
 

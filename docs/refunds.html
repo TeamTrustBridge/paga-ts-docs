@@ -58,6 +58,14 @@
 
 <p>A refund returns money to the customer. Cancelling a payment request that has not been paid uses the same endpoint — Paga decides which it is from the request's state.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-refund-payment">Refund or cancel a payment request</a></li>
+    <li><a href="#op-get-refund-status">Check refund status</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-refund-payment" data-operation="refund-payment">
   <div class="op-header">
@@ -66,7 +74,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /refund/v2</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/refund/v2</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + refundAmount</span>
   </div>
@@ -75,11 +83,11 @@
 <li>Reusing a <code>referenceNumber</code> returns status code <code>102</code> and never refunds twice.</li></ul>
   <h4>TypeScript</h4>
   <p><code>refundPayment</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-refund-payment" type="button">Copy</button><pre><code id="code-typescript-refund-payment" class="language-typescript">const refund = await client.refundPayment({
-  referenceNumber: &quot;RFD-2026-0031&quot;,
-  paymentRequestReference: &quot;ORD-2026-0187&quot;,
-  refundAmount: 50,
-  reason: &quot;Item out of stock&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-refund-payment" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-refund-payment" class="language-typescript"><span class="tok-kw">const</span> refund = <span class="tok-kw">await</span> client.<span class="tok-fn">refundPayment</span>({
+  referenceNumber: <span class="tok-str">&quot;RFD-2026-0031&quot;</span>,
+  paymentRequestReference: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  refundAmount: <span class="tok-num">50</span>,
+  reason: <span class="tok-str">&quot;Item out of stock&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -90,7 +98,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -98,11 +106,11 @@
   <ul><li><code>data.refundStatus</code> becomes <code>&quot;refunded&quot;</code> once the refund is made.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getRefundStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-refund-status" type="button">Copy</button><pre><code id="code-typescript-get-refund-status" class="language-typescript">const status = await client.getRefundStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-refund-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-refund-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getRefundStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
 });
-if (status.data?.refundStatus === &quot;refunded&quot;) {
-  console.log(&quot;refunded&quot;);
+<span class="tok-kw">if</span> (status.data?.refundStatus === <span class="tok-str">&quot;refunded&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;refunded&quot;</span>);
 }</code></pre></div>
 </article>
 

@@ -58,6 +58,18 @@
 
 <p>Direct Debit lets a customer authorise you to debit their bank account. You set the mandate up, wait for the bank to approve it, then charge it as often as the mandate allows.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-start-direct-debit-session">Start a hosted set-up session</a></li>
+    <li><a href="#op-create-direct-debit-mandate">Set up a mandate by API</a></li>
+    <li><a href="#op-get-mandate-status">Check mandate status</a></li>
+    <li><a href="#op-charge-mandate">Charge the mandate</a></li>
+    <li><a href="#op-get-charge-mandate-status">Check charge status</a></li>
+    <li><a href="#op-disable-mandate">Disable a mandate</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-start-direct-debit-session" data-operation="start-direct-debit-session">
   <div class="op-header">
@@ -66,7 +78,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /checkout/charge-process/start</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/checkout/charge-process/start</span>
     <span class="tag ">HTTP Basic</span>
     
   </div>
@@ -74,13 +86,13 @@
   <ul><li>The session expiry and payment expiry are strings of seconds.</li></ul>
   <h4>TypeScript</h4>
   <p><code>startDirectDebitSession</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-start-direct-debit-session" type="button">Copy</button><pre><code id="code-typescript-start-direct-debit-session" class="language-typescript">const session = await client.startDirectDebitSession({
-  referenceNumber: &quot;DD-2026-0001&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  amountLimit: 50000,
-  callbackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-start-direct-debit-session" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-start-direct-debit-session" class="language-typescript"><span class="tok-kw">const</span> session = <span class="tok-kw">await</span> client.<span class="tok-fn">startDirectDebitSession</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  amountLimit: <span class="tok-num">50000</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/mandate&quot;</span>,
 });
-console.log(session.data?.checkoutUrl);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(session.data?.checkoutUrl);</code></pre></div>
 </article>
 
 <article class="op" id="op-create-direct-debit-mandate" data-operation="create-direct-debit-mandate">
@@ -90,7 +102,7 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/paymentRequest</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
   </div>
@@ -99,15 +111,15 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
 <li><code>payerCollectionFeeShare</code> and <code>payeeCollectionFeeShare</code> must sum to 1.0.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createDirectDebitMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-direct-debit-mandate" type="button">Copy</button><pre><code id="code-typescript-create-direct-debit-mandate" class="language-typescript">const mandate = await client.createDirectDebitMandate({
-  referenceNumber: &quot;DD-2026-0001&quot;,
-  amount: 5000,
-  payerName: &quot;Bello Ramon&quot;,
-  payerPhoneNumber: &quot;08064343187&quot;,
-  payeeName: &quot;Your business name&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  payerEmail: &quot;customer@example.com&quot;,
-  callBackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-direct-debit-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-direct-debit-mandate" class="language-typescript"><span class="tok-kw">const</span> mandate = <span class="tok-kw">await</span> client.<span class="tok-fn">createDirectDebitMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  payerName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  payerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  payeeName: <span class="tok-str">&quot;Your business name&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  payerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  callBackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/mandate&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -118,7 +130,7 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -127,11 +139,11 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
 <li>Read <code>data.additionalData.mandate[].ProcessStatusId</code> instead: <code>PENDING</code>, <code>VERIFIED</code>, <code>APPROVED</code> or <code>REJECTED</code>. Charge only when it is <code>APPROVED</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMandateStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-mandate-status" class="language-typescript">const status = await client.getMandateStatus({
-  referenceNumber: &quot;DD-2026-0001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-mandate-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-mandate-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getMandateStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
 });
-if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVED&quot;) {
-  console.log(&quot;ready to charge&quot;);
+<span class="tok-kw">if</span> (status.data?.additionalData?.mandate?.[<span class="tok-num">0</span>]?.<span class="tok-ty">ProcessStatusId</span> === <span class="tok-str">&quot;APPROVED&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;ready to charge&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -142,7 +154,7 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /chargeDebitMandate</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/chargeDebitMandate</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + amount + accountReference</span>
   </div>
@@ -150,10 +162,10 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   <ul><li>A successful response means the charge was **accepted**, not completed — fulfil only once the charge callback confirms it.</li></ul>
   <h4>TypeScript</h4>
   <p><code>chargeMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-mandate" type="button">Copy</button><pre><code id="code-typescript-charge-mandate" class="language-typescript">const charge = await client.chargeMandate({
-  referenceNumber: &quot;DD-CHARGE-0001&quot;,
-  amount: 600,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-charge-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-charge-mandate" class="language-typescript"><span class="tok-kw">const</span> charge = <span class="tok-kw">await</span> client.<span class="tok-fn">chargeMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-CHARGE-0001&quot;</span>,
+  amount: <span class="tok-num">600</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -164,7 +176,7 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /getChargeMandateStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getChargeMandateStatus</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -172,11 +184,11 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   <ul><li><code>data.statusCode</code> is <code>0</code> charged, <code>1</code> pending, <code>-1</code> invalid and <code>-4</code> unknown.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getChargeMandateStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-charge-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-charge-mandate-status" class="language-typescript">const status = await client.getChargeMandateStatus({
-  referenceNumber: &quot;DD-CHARGE-0001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-charge-mandate-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-charge-mandate-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getChargeMandateStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-CHARGE-0001&quot;</span>,
 });
-if (status.data?.statusCode === 0) {
-  console.log(&quot;charged&quot;);
+<span class="tok-kw">if</span> (status.data?.statusCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;charged&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -187,7 +199,7 @@ if (status.data?.statusCode === 0) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /disableMandate</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/disableMandate</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference</span>
   </div>
@@ -195,9 +207,9 @@ if (status.data?.statusCode === 0) {
   
   <h4>TypeScript</h4>
   <p><code>disableMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-disable-mandate" type="button">Copy</button><pre><code id="code-typescript-disable-mandate" class="language-typescript">await client.disableMandate({
-  referenceNumber: &quot;DD-DIS-0001&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-disable-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-disable-mandate" class="language-typescript"><span class="tok-kw">await</span> client.<span class="tok-fn">disableMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-DIS-0001&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 

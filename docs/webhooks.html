@@ -61,6 +61,21 @@
   <p>Verify the signature before you act on a callback. Then de-duplicate: Paga retries until you answer, so the same callback will arrive more than once.</p>
 </div>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-checkout-notification">Checkout payment notification</a></li>
+    <li><a href="#op-payment-callback">Dynamic virtual account callback</a></li>
+    <li><a href="#op-funding-notification">Subsidiary account funding notification</a></li>
+    <li><a href="#op-subsidiary-operation">Subsidiary charge, top-up or transfer callback</a></li>
+    <li><a href="#op-money-transfer-notification">Money transfer notification</a></li>
+    <li><a href="#op-persistent-payment-account">Persistent payment account callback</a></li>
+    <li><a href="#op-mandate-callback">Direct Debit mandate callback</a></li>
+    <li><a href="#op-charge-callback">Direct Debit charge callback</a></li>
+    <li><a href="#op-usd-payment-webhook">USD (ACH, Wire and Swift) payment webhook</a></li>
+  </ul>
+</nav>
+
 <h2 id="callbacks">Callbacks</h2>
 <article class="op" id="op-checkout-notification" data-operation="checkout-notification">
   <div class="op-header">
@@ -76,7 +91,7 @@
   <ul><li>De-duplicate on the payment reference.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyCheckoutNotification</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-checkout-notification" type="button">Copy</button><pre><code id="code-typescript-checkout-notification" class="language-typescript">const ok = await verifyCheckoutNotification(payload, receivedHash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-checkout-notification" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-checkout-notification" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyCheckoutNotification</span>(payload, receivedHash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-payment-callback" data-operation="payment-callback">
@@ -94,7 +109,7 @@
 <li>De-duplicate on <code>notificationId</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyPaymentCallback</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-payment-callback" type="button">Copy</button><pre><code id="code-typescript-payment-callback" class="language-typescript">const ok = await verifyPaymentCallback(payload, receivedHash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-payment-callback" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-payment-callback" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyPaymentCallback</span>(payload, receivedHash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-funding-notification" data-operation="funding-notification">
@@ -111,7 +126,7 @@
   <ul><li>The hash travels in the <code>x-paga-hash-v3</code> header, not the body.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyFundingNotification</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-funding-notification" type="button">Copy</button><pre><code id="code-typescript-funding-notification" class="language-typescript">const ok = await verifyFundingNotification(payload, receivedHash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-funding-notification" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-funding-notification" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyFundingNotification</span>(payload, receivedHash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-subsidiary-operation" data-operation="subsidiary-operation">
@@ -129,7 +144,7 @@
 <li>A transfer sends one callback, for the source account only.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifySubsidiaryOperation</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-subsidiary-operation" type="button">Copy</button><pre><code id="code-typescript-subsidiary-operation" class="language-typescript">const ok = await verifySubsidiaryOperation(payload, receivedHash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-subsidiary-operation" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-subsidiary-operation" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifySubsidiaryOperation</span>(payload, receivedHash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-money-transfer-notification" data-operation="money-transfer-notification">
@@ -148,7 +163,7 @@
 <li>De-duplicate on <code>referenceNumber</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyMoneyTransferNotification</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-money-transfer-notification" type="button">Copy</button><pre><code id="code-typescript-money-transfer-notification" class="language-typescript">const ok = await verifyMoneyTransferNotification(payload, request.headers[&quot;x-paga-hash&quot;], hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-money-transfer-notification" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-money-transfer-notification" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyMoneyTransferNotification</span>(payload, request.headers[<span class="tok-str">&quot;x-paga-hash&quot;</span>], hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-persistent-payment-account" data-operation="persistent-payment-account">
@@ -166,7 +181,7 @@
 <li>The <code>x-paga-hash</code> header signs <code>transactionReference + accountNumber + amount</code> instead.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyPersistentPaymentAccountCallback</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-persistent-payment-account" class="language-typescript">const ok = await verifyPersistentPaymentAccountCallback(payload, receivedHash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyPersistentPaymentAccountCallback</span>(payload, receivedHash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-mandate-callback" data-operation="mandate-callback">
@@ -184,7 +199,7 @@
 <li>De-duplicate on <code>notificationId</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyMandateCallback</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-mandate-callback" type="button">Copy</button><pre><code id="code-typescript-mandate-callback" class="language-typescript">const ok = await verifyMandateCallback(payload, payload.hash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-mandate-callback" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-mandate-callback" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyMandateCallback</span>(payload, payload.hash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-charge-callback" data-operation="charge-callback">
@@ -202,7 +217,7 @@
 <li>Decide on <code>statusCode</code>, and look up any non-zero code.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyChargeCallback</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-callback" type="button">Copy</button><pre><code id="code-typescript-charge-callback" class="language-typescript">const ok = await verifyChargeCallback(payload, payload.hash, hashKey);</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-charge-callback" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-charge-callback" class="language-typescript"><span class="tok-kw">const</span> ok = <span class="tok-kw">await</span> <span class="tok-fn">verifyChargeCallback</span>(payload, payload.hash, hashKey);</code></pre></div>
 </article>
 
 <article class="op" id="op-usd-payment-webhook" data-operation="usd-payment-webhook">
@@ -220,8 +235,8 @@
 <li>De-duplicate on <code>referenceNumber</code> plus <code>paymentId</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>parseUsdPaymentWebhook</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-usd-payment-webhook" type="button">Copy</button><pre><code id="code-typescript-usd-payment-webhook" class="language-typescript">const webhook = parseUsdPaymentWebhook(payload);
-if (webhook.event === &quot;CAPTURED&quot;) { /* fulfil */ }</code></pre></div>
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-usd-payment-webhook" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-usd-payment-webhook" class="language-typescript"><span class="tok-kw">const</span> webhook = <span class="tok-fn">parseUsdPaymentWebhook</span>(payload);
+<span class="tok-kw">if</span> (webhook.event === <span class="tok-str">&quot;CAPTURED&quot;</span>) { <span class="tok-com">/* fulfil */</span> }</code></pre></div>
 </article>
 
 <h2 id="next">Next</h2>

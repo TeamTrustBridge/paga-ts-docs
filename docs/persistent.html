@@ -58,6 +58,16 @@
 
 <p>A persistent payment account is the customer-side equivalent of a direct debit mandate, but from the collection side: the customer authorises a debit, you keep taking it.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-register-persistent-payment-account">Register a persistent payment account</a></li>
+    <li><a href="#op-update-persistent-payment-account">Update a persistent payment account</a></li>
+    <li><a href="#op-get-persistent-payment-account">Get a persistent payment account</a></li>
+    <li><a href="#op-delete-persistent-payment-account">Delete a persistent payment account</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-register-persistent-payment-account" data-operation="register-persistent-payment-account">
   <div class="op-header">
@@ -66,7 +76,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /registerPersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerPersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
   </div>
@@ -75,13 +85,13 @@
 <li>Paga calls your <code>callbackUrl</code> whenever the account is funded.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerPersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-register-persistent-payment-account" class="language-typescript">const account = await client.registerPersistentPaymentAccount({
-  referenceNumber: &quot;REF-000006&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  financialIdentificationNumber: &quot;22222132329&quot;,
-  creditBankId: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
-  creditBankAccountNumber: &quot;0000000000&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">registerPersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000006&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  financialIdentificationNumber: <span class="tok-str">&quot;22222132329&quot;</span>,
+  creditBankId: <span class="tok-str">&quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;</span>,
+  creditBankAccountNumber: <span class="tok-str">&quot;0000000000&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -92,7 +102,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /updatePersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/updatePersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
   </div>
@@ -100,10 +110,10 @@
   <ul><li>Every field takes part in the hash, so send the current value of the ones you are not changing.</li></ul>
   <h4>TypeScript</h4>
   <p><code>updatePersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-update-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript">const account = await client.updatePersistentPaymentAccount({
-  referenceNumber: &quot;REF-000007&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga-v2&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-update-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">updatePersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000007&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga-v2&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -114,7 +124,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /getPersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getPersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
   </div>
@@ -122,9 +132,9 @@
   <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getPersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-get-persistent-payment-account" class="language-typescript">const account = await client.getPersistentPaymentAccount({
-  referenceNumber: &quot;REF-000008&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">getPersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000008&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -135,7 +145,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /deletePersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/deletePersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
   </div>
@@ -143,9 +153,9 @@
   <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>deletePersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-delete-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript">await client.deletePersistentPaymentAccount({
-  referenceNumber: &quot;REF-000009&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-delete-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript"><span class="tok-kw">await</span> client.<span class="tok-fn">deletePersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000009&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 

@@ -58,6 +58,16 @@
 
 <p>Registering a customer opens a Paga account for them on your business account. The KYC variants upload photographs as well.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-register-customer">Register a customer</a></li>
+    <li><a href="#op-register-customer-with-kyc">Register a customer with KYC</a></li>
+    <li><a href="#op-register-customer-account-photo">Upload a customer account photo</a></li>
+    <li><a href="#op-register-customer-identification">Upload a customer identification</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-register-customer" data-operation="register-customer">
   <div class="op-header">
@@ -66,7 +76,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomer</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
   </div>
@@ -74,13 +84,13 @@
   <ul><li>The phone number must not already belong to a registered customer.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomer</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer" type="button">Copy</button><pre><code id="code-typescript-register-customer" class="language-typescript">const customer = await client.registerCustomer({
-  referenceNumber: &quot;REF-000010&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerFirstName: &quot;Bello&quot;,
-  customerLastName: &quot;Ramon&quot;,
-  customerEmail: &quot;customer@example.com&quot;,
-  customerDateOfBirth: &quot;1989-10-02&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer" class="language-typescript"><span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomer</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000010&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerFirstName: <span class="tok-str">&quot;Bello&quot;</span>,
+  customerLastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+  customerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  customerDateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -91,7 +101,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerWithKYC</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerWithKYC</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
   </div>
@@ -100,18 +110,18 @@
 <li>Each photograph must be a JPEG of at most 500 KB.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerWithKyc</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-with-kyc" type="button">Copy</button><pre><code id="code-typescript-register-customer-with-kyc" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-with-kyc" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-with-kyc" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-const customer = await client.registerCustomerWithKyc({
-  referenceNumber: &quot;REF-000011&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerEmail: &quot;customer@example.com&quot;,
-  customerFirstName: &quot;Bello&quot;,
-  customerLastName: &quot;Ramon&quot;,
-  customerDateOfBirth: &quot;1989-10-02&quot;,
-  customerGender: &quot;MALE&quot;,
-  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
-  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+<span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerWithKyc</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000011&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  customerFirstName: <span class="tok-str">&quot;Bello&quot;</span>,
+  customerLastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+  customerDateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
+  customerGender: <span class="tok-str">&quot;MALE&quot;</span>,
+  customerAccountPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;account-photo.jpg&quot;</span>),
+  customerIdPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;id-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 
@@ -122,7 +132,7 @@ const customer = await client.registerCustomerWithKyc({
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerAccountPhoto</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerAccountPhoto</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber</span>
   </div>
@@ -131,12 +141,12 @@ const customer = await client.registerCustomerWithKyc({
 <li>The photograph must be a JPEG of at most 500 KB.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerAccountPhoto</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-account-photo" type="button">Copy</button><pre><code id="code-typescript-register-customer-account-photo" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-account-photo" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-account-photo" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-await client.registerCustomerAccountPhoto({
-  referenceNumber: &quot;REF-000012&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
+<span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerAccountPhoto</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000012&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerAccountPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;account-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 
@@ -147,7 +157,7 @@ await client.registerCustomerAccountPhoto({
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerIdentification</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerIdentification</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerIdType + customerIdNumber + customerIdExpirationDate</span>
   </div>
@@ -156,15 +166,15 @@ await client.registerCustomerAccountPhoto({
 <li><code>customerIdExpirationDate</code> is formatted as <code>YYYY-MM-DD</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerIdentification</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-identification" type="button">Copy</button><pre><code id="code-typescript-register-customer-identification" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-identification" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-identification" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-await client.registerCustomerIdentification({
-  referenceNumber: &quot;REF-000013&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerIdType: &quot;NATIONAL_ID&quot;,
-  customerIdNumber: &quot;12345678901&quot;,
-  customerIdExpirationDate: &quot;2030-01-01&quot;,
-  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+<span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerIdentification</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000013&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerIdType: <span class="tok-str">&quot;NATIONAL_ID&quot;</span>,
+  customerIdNumber: <span class="tok-str">&quot;12345678901&quot;</span>,
+  customerIdExpirationDate: <span class="tok-str">&quot;2030-01-01&quot;</span>,
+  customerIdPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;id-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 

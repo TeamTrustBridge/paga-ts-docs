@@ -58,6 +58,15 @@
 
 <p>Buy airtime or data for a phone number from your business balance. For data, pick the bundle first — the amount must match the bundle's price exactly.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-get-mobile-operators">List mobile operators</a></li>
+    <li><a href="#op-get-data-bundles">List data bundles</a></li>
+    <li><a href="#op-buy-airtime">Buy airtime or data</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-get-mobile-operators" data-operation="get-mobile-operators">
   <div class="op-header">
@@ -66,7 +75,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMobileOperators</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMobileOperators</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -75,11 +84,11 @@
 <li>Cache the list.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMobileOperators</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mobile-operators" type="button">Copy</button><pre><code id="code-typescript-get-mobile-operators" class="language-typescript">const operators = await client.getMobileOperators({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-mobile-operators" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-mobile-operators" class="language-typescript"><span class="tok-kw">const</span> operators = <span class="tok-kw">await</span> client.<span class="tok-fn">getMobileOperators</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });
-for (const operator of operators.mobileOperator ?? []) {
-  console.log(operator.name, operator.mobileOperatorCode);
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> operator <span class="tok-kw">of</span> operators.mobileOperator ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(operator.name, operator.mobileOperatorCode);
 }</code></pre></div>
 </article>
 
@@ -90,7 +99,7 @@ for (const operator of operators.mobileOperator ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getDataBundleByOperator</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getDataBundleByOperator</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + operatorPublicId</span>
   </div>
@@ -99,9 +108,9 @@ for (const operator of operators.mobileOperator ?? []) {
 <li>Bundles rarely change, so cache the list and refresh it monthly.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getDataBundles</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-data-bundles" type="button">Copy</button><pre><code id="code-typescript-get-data-bundles" class="language-typescript">const bundles = await client.getDataBundles({
-  referenceNumber: &quot;REF-000001&quot;,
-  operatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-data-bundles" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-data-bundles" class="language-typescript"><span class="tok-kw">const</span> bundles = <span class="tok-kw">await</span> client.<span class="tok-fn">getDataBundles</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  operatorPublicId: <span class="tok-str">&quot;42419156-DD57-4737-8373-20678CD9AA29&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -112,7 +121,7 @@ for (const operator of operators.mobileOperator ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /airtimePurchase</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/airtimePurchase</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationPhoneNumber</span>
   </div>
@@ -121,11 +130,11 @@ for (const operator of operators.mobileOperator ?? []) {
 <li>For a data bundle, <code>amount</code> must be exactly the bundle's <code>servicePrice</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>buyAirtime</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-buy-airtime" type="button">Copy</button><pre><code id="code-typescript-buy-airtime" class="language-typescript">const purchase = await client.buyAirtime({
-  referenceNumber: &quot;AIR-2026-0042&quot;,
-  amount: &quot;500&quot;,
-  destinationPhoneNumber: &quot;08063332187&quot;,
-  mobileOperatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-buy-airtime" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-buy-airtime" class="language-typescript"><span class="tok-kw">const</span> purchase = <span class="tok-kw">await</span> client.<span class="tok-fn">buyAirtime</span>({
+  referenceNumber: <span class="tok-str">&quot;AIR-2026-0042&quot;</span>,
+  amount: <span class="tok-str">&quot;500&quot;</span>,
+  destinationPhoneNumber: <span class="tok-str">&quot;08063332187&quot;</span>,
+  mobileOperatorPublicId: <span class="tok-str">&quot;42419156-DD57-4737-8373-20678CD9AA29&quot;</span>,
 });</code></pre></div>
 </article>
 

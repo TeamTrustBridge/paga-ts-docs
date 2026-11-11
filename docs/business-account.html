@@ -58,6 +58,18 @@
 
 <p>The business account is your own. Read the balance before a payout run, reconcile against the transaction history, and onboard the merchants you aggregate.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-get-business-balance">Check the business account balance</a></li>
+    <li><a href="#op-get-business-transactions">Get the transaction history</a></li>
+    <li><a href="#op-get-recent-transactions">Get the recent transactions</a></li>
+    <li><a href="#op-get-operation-status">Check an operation's status</a></li>
+    <li><a href="#op-onboard-merchant">Onboard a merchant</a></li>
+    <li><a href="#op-dispense-cash">Dispense cash</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-get-business-balance" data-operation="get-business-balance">
   <div class="op-header">
@@ -66,7 +78,7 @@
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /accountBalance</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/accountBalance</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -74,10 +86,10 @@
   <ul><li>Check <code>availableBalance</code>, not <code>totalBalance</code>, before a payout run — it is what you can actually send.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getBusinessBalance</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-balance" type="button">Copy</button><pre><code id="code-typescript-get-business-balance" class="language-typescript">const balance = await client.getBusinessBalance({
-  referenceNumber: &quot;BAL-2026-0042&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-business-balance" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-business-balance" class="language-typescript"><span class="tok-kw">const</span> balance = <span class="tok-kw">await</span> client.<span class="tok-fn">getBusinessBalance</span>({
+  referenceNumber: <span class="tok-str">&quot;BAL-2026-0042&quot;</span>,
 });
-console.log(balance.availableBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(balance.availableBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-get-business-transactions" data-operation="get-business-transactions">
@@ -87,7 +99,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /transactionHistory</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/transactionHistory</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -95,10 +107,10 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>Use it to reconcile your records with Paga's.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getBusinessTransactions</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-transactions" type="button">Copy</button><pre><code id="code-typescript-get-business-transactions" class="language-typescript">const history = await client.getBusinessTransactions({
-  referenceNumber: &quot;HIS-2026-0042&quot;,
-  startDateUTC: &quot;2026-11-01T00:00:00&quot;,
-  endDateUTC: &quot;2026-11-04T00:00:00&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-business-transactions" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-business-transactions" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getBusinessTransactions</span>({
+  referenceNumber: <span class="tok-str">&quot;HIS-2026-0042&quot;</span>,
+  startDateUTC: <span class="tok-str">&quot;2026-11-01T00:00:00&quot;</span>,
+  endDateUTC: <span class="tok-str">&quot;2026-11-04T00:00:00&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -109,7 +121,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /recentTransactionHistory</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/recentTransactionHistory</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -117,8 +129,8 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>For anything further back, use the transaction history endpoint.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getRecentTransactions</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-recent-transactions" type="button">Copy</button><pre><code id="code-typescript-get-recent-transactions" class="language-typescript">const recent = await client.getRecentTransactions({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-recent-transactions" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-recent-transactions" class="language-typescript"><span class="tok-kw">const</span> recent = <span class="tok-kw">await</span> client.<span class="tok-fn">getRecentTransactions</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -129,7 +141,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getOperationStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getOperationStatus</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -137,10 +149,10 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>The status is in <code>transactionStatus</code>, not <code>status</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getOperationStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-operation-status" type="button">Copy</button><pre><code id="code-typescript-get-operation-status" class="language-typescript">const status = await client.getOperationStatus({
-  referenceNumber: &quot;PAY-2026-0311&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-operation-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-operation-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getOperationStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
 });
-console.log(status.transactionStatus);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(status.transactionStatus);</code></pre></div>
 </article>
 
 <article class="op" id="op-onboard-merchant" data-operation="onboard-merchant">
@@ -150,7 +162,7 @@ console.log(status.transactionStatus);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /onboardMerchant</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/onboardMerchant</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + merchantExternalId + name + phone + email</span>
   </div>
@@ -159,20 +171,20 @@ console.log(status.transactionStatus);</code></pre></div>
 <li>Paga names the request field <code>reference</code>, not <code>referenceNumber</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>onboardMerchant</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-onboard-merchant" type="button">Copy</button><pre><code id="code-typescript-onboard-merchant" class="language-typescript">const merchant = await client.onboardMerchant({
-  reference: &quot;REF-000001&quot;,
-  merchantExternalId: &quot;MERCH-1&quot;,
-  legalEntity: { name: &quot;Acme Ltd&quot; },
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-onboard-merchant" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-onboard-merchant" class="language-typescript"><span class="tok-kw">const</span> merchant = <span class="tok-kw">await</span> client.<span class="tok-fn">onboardMerchant</span>({
+  reference: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantExternalId: <span class="tok-str">&quot;MERCH-1&quot;</span>,
+  legalEntity: { name: <span class="tok-str">&quot;Acme Ltd&quot;</span> },
   legalEntityRepresentative: {
-    firstName: &quot;Bello&quot;,
-    lastName: &quot;Ramon&quot;,
-    phone: &quot;080643643187&quot;,
-    email: &quot;director@example.com&quot;,
-    dateOfBirth: &quot;1989-10-02&quot;,
+    firstName: <span class="tok-str">&quot;Bello&quot;</span>,
+    lastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+    phone: <span class="tok-str">&quot;080643643187&quot;</span>,
+    email: <span class="tok-str">&quot;director@example.com&quot;</span>,
+    dateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
   },
   integration: {
-    type: &quot;EMAIL_NOTIFICATION&quot;,
-    financeAdminEmail: &quot;finance@example.com&quot;,
+    <span class="tok-kw">type</span>: <span class="tok-str">&quot;EMAIL_NOTIFICATION&quot;</span>,
+    financeAdminEmail: <span class="tok-str">&quot;finance@example.com&quot;</span>,
   },
 });</code></pre></div>
 </article>
@@ -184,7 +196,7 @@ console.log(status.transactionStatus);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /dispenseCash</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/dispenseCash</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + amount + withdrawalCode</span>
   </div>
@@ -192,11 +204,11 @@ console.log(status.transactionStatus);</code></pre></div>
   
   <h4>TypeScript</h4>
   <p><code>dispenseCash</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-dispense-cash" type="button">Copy</button><pre><code id="code-typescript-dispense-cash" class="language-typescript">const cash = await client.dispenseCash({
-  referenceNumber: &quot;CASH-2026-0042&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  amount: 5000,
-  withdrawalCode: &quot;123456&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-dispense-cash" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-dispense-cash" class="language-typescript"><span class="tok-kw">const</span> cash = <span class="tok-kw">await</span> client.<span class="tok-fn">dispenseCash</span>({
+  referenceNumber: <span class="tok-str">&quot;CASH-2026-0042&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  withdrawalCode: <span class="tok-str">&quot;123456&quot;</span>,
 });</code></pre></div>
 </article>
 

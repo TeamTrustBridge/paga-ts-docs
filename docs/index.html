@@ -53,8 +53,15 @@
     <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
   </div>
   <main class="content" id="main">
+<div class="hero">
+<p class="hero-eyebrow">Unofficial community SDK</p>
 <h1>paga-ts</h1>
-<p class="lead">Unofficial async TypeScript SDK for the <a href="https://developer-docs.paga.com/">Paga Engine API</a>.</p>
+<p class="hero-lead">Async TypeScript SDK for the <a href="https://developer-docs.paga.com/">Paga Engine API</a> — 50 operations and 9 webhook verifiers, organised exactly like Paga's own documentation.</p>
+<div class="hero-actions">
+  <a class="button" href="reference.html">Browse the API reference</a>
+  <a class="button" href="accept-payments.html">Start with accepting payments</a>
+</div>
+</div>
 
 <div class="callout">
   <p class="callout-title">This is an unofficial SDK</p>
@@ -62,38 +69,38 @@
 </div>
 
 <h2 id="install">Install</h2>
-<div class="code-block"><button class="button" data-copy="#code-typescript-install" type="button">Copy</button><pre><code id="code-typescript-install" class="language-typescript">npm install paga-ts</code></pre></div>
+<div class="code-block"><button class="button copy-button" data-copy="#code-typescript-install" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-install" class="language-typescript">npm install paga-ts</code></pre></div>
 <p>Import it as <code>paga</code>.</p>
 <div class="callout">
   <p class="callout-title">Importing as <code>paga</code></p>
   <p>The package is published as <code>paga-ts</code>. To import it under the short name, alias it in your <code>package.json</code>:</p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-alias" type="button">Copy</button><pre><code id="code-typescript-alias" class="language-typescript">{
-  &quot;dependencies&quot;: {
-    &quot;paga&quot;: &quot;npm:paga-ts@^0.1.0&quot;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-alias" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-alias" class="language-typescript">{
+  <span class="tok-str">&quot;dependencies&quot;</span>: {
+    <span class="tok-str">&quot;paga&quot;</span>: <span class="tok-str">&quot;npm:paga-ts@^0.1.0&quot;</span>
   }
 }</code></pre></div>
 </div>
-<div class="code-block"><button class="button" data-copy="#code-typescript-import" type="button">Copy</button><pre><code id="code-typescript-import" class="language-typescript">import { PagaClient } from &quot;paga&quot;;</code></pre></div>
+<div class="code-block"><button class="button copy-button" data-copy="#code-typescript-import" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-import" class="language-typescript"><span class="tok-kw">import</span> { <span class="tok-ty">PagaClient</span> } <span class="tok-kw">from</span> <span class="tok-str">&quot;paga&quot;</span>;</code></pre></div>
 
 <h2 id="quick-start">Quick start</h2>
-<div class="code-block"><button class="button" data-copy="#code-typescript-quick-start" type="button">Copy</button><pre><code id="code-typescript-quick-start" class="language-typescript">const client = new PagaClient(
-  process.env.PAGA_PUBLIC_KEY!,
-  process.env.PAGA_SECRET_KEY!,
-  process.env.PAGA_HASH_KEY!,
-  { environment: &quot;test&quot; },
+<div class="code-block"><button class="button copy-button" data-copy="#code-typescript-quick-start" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-quick-start" class="language-typescript"><span class="tok-kw">const</span> client = <span class="tok-kw">new</span> <span class="tok-fn">PagaClient</span>(
+  process.env.<span class="tok-ty">PAGA_PUBLIC_KEY</span>!,
+  process.env.<span class="tok-ty">PAGA_SECRET_KEY</span>!,
+  process.env.<span class="tok-ty">PAGA_HASH_KEY</span>!,
+  { environment: <span class="tok-str">&quot;test&quot;</span> },
 );
 
-const payment = await client.createPayment({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
-  amount: 50,
-  payerName: &quot;Bello Ramon&quot;,
-  payerPhoneNumber: &quot;08064343187&quot;,
-  payeeName: &quot;Your business name&quot;,
-  callBackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+<span class="tok-kw">const</span> payment = <span class="tok-kw">await</span> client.<span class="tok-fn">createPayment</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  amount: <span class="tok-num">50</span>,
+  payerName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  payerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  payeeName: <span class="tok-str">&quot;Your business name&quot;</span>,
+  callBackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });
 
-const status = await client.getPaymentStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
+<span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getPaymentStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
 });</code></pre></div>
 
 <h2 id="what-is-covered">What is covered</h2>

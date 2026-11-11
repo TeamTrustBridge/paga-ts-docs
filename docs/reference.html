@@ -84,7 +84,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /checkout/transaction/verify</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/checkout/transaction/verify</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Checkout</span>
     
@@ -94,13 +94,13 @@
 <li>A pending charge is a legitimate answer, so the response is returned rather than raised.</li></ul>
   <h4>TypeScript</h4>
   <p><code>verifyCharge</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-verify-charge" type="button">Copy</button><pre><code id="code-typescript-verify-charge" class="language-typescript">const verified = await client.verifyCharge({
-  paymentReference: &quot;PAY-2026-0311&quot;,
-  publicKey: &quot;YOUR_PUBLIC_KEY&quot;,
-  amount: 50,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-verify-charge" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-verify-charge" class="language-typescript"><span class="tok-kw">const</span> verified = <span class="tok-kw">await</span> client.<span class="tok-fn">verifyCharge</span>({
+  paymentReference: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
+  publicKey: <span class="tok-str">&quot;YOUR_PUBLIC_KEY&quot;</span>,
+  amount: <span class="tok-num">50</span>,
 });
-if (verified.status_code === 0) {
-  console.log(&quot;paid&quot;);
+<span class="tok-kw">if</span> (verified.status_code === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;paid&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -111,7 +111,7 @@ if (verified.status_code === 0) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/paymentRequest</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Collection</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
@@ -121,15 +121,15 @@ if (verified.status_code === 0) {
 <li><code>payer.email</code> takes part in the hash even when you omit it.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createPayment</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-payment" type="button">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript">const payment = await client.createPayment({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
-  amount: 50,
-  payerName: &quot;Bello Ramon&quot;,
-  payerPhoneNumber: &quot;08064343187&quot;,
-  payeeName: &quot;Your business name&quot;,
-  payerEmail: &quot;customer@example.com&quot;,
-  callBackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
-  paymentMethods: [&quot;BANK_TRANSFER&quot;],
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-payment" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript"><span class="tok-kw">const</span> payment = <span class="tok-kw">await</span> client.<span class="tok-fn">createPayment</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  amount: <span class="tok-num">50</span>,
+  payerName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  payerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  payeeName: <span class="tok-str">&quot;Your business name&quot;</span>,
+  payerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  callBackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
+  paymentMethods: [<span class="tok-str">&quot;BANK_TRANSFER&quot;</span>],
 });</code></pre></div>
 </article>
 
@@ -140,7 +140,7 @@ if (verified.status_code === 0) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Collection</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -149,11 +149,11 @@ if (verified.status_code === 0) {
   <ul><li><code>data.statusCode</code> of <code>&quot;0&quot;</code> means the payment was paid.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getPaymentStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript">const status = await client.getPaymentStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-payment-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getPaymentStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
 });
-if (status.data?.statusCode === &quot;0&quot;) {
-  console.log(&quot;paid&quot;);
+<span class="tok-kw">if</span> (status.data?.statusCode === <span class="tok-str">&quot;0&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;paid&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -164,7 +164,7 @@ if (status.data?.statusCode === &quot;0&quot;) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /banks</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/banks</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Collection</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -173,9 +173,9 @@ if (status.data?.statusCode === &quot;0&quot;) {
   
   <h4>TypeScript</h4>
   <p><code>getCollectBanks</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-collect-banks" type="button">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript">const banks = await client.getCollectBanks({ referenceNumber: &quot;REF-000001&quot; });
-for (const bank of banks.banks ?? []) {
-  console.log(bank.name, bank.uuid);
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-collect-banks" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript"><span class="tok-kw">const</span> banks = <span class="tok-kw">await</span> client.<span class="tok-fn">getCollectBanks</span>({ referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span> });
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> bank <span class="tok-kw">of</span> banks.banks ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(bank.name, bank.uuid);
 }</code></pre></div>
 </article>
 
@@ -186,7 +186,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Collection</span>
     <span class="tag tag-endpoint">referenceNumber + paymentCurrency</span>
@@ -195,9 +195,9 @@ for (const bank of banks.banks ?? []) {
   <ul><li><code>data.statusCode</code> of <code>&quot;1&quot;</code> means the payment is still pending.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getUsdPaymentStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-usd-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript">const status = await client.getUsdPaymentStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
-  paymentCurrency: &quot;USD&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-usd-payment-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getUsdPaymentStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  paymentCurrency: <span class="tok-str">&quot;USD&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -208,7 +208,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /history</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/history</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Collection</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -217,8 +217,8 @@ for (const bank of banks.banks ?? []) {
   
   <h4>TypeScript</h4>
   <p><code>getPaymentRequestHistory</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-request-history" type="button">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript">const history = await client.getPaymentRequestHistory({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-payment-request-history" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getPaymentRequestHistory</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -229,7 +229,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /refund/v2</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/refund/v2</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Refunds</span>
     <span class="tag tag-endpoint">referenceNumber + refundAmount</span>
@@ -239,11 +239,11 @@ for (const bank of banks.banks ?? []) {
 <li>Reusing a <code>referenceNumber</code> returns status code <code>102</code> and never refunds twice.</li></ul>
   <h4>TypeScript</h4>
   <p><code>refundPayment</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-refund-payment" type="button">Copy</button><pre><code id="code-typescript-refund-payment" class="language-typescript">const refund = await client.refundPayment({
-  referenceNumber: &quot;RFD-2026-0031&quot;,
-  paymentRequestReference: &quot;ORD-2026-0187&quot;,
-  refundAmount: 50,
-  reason: &quot;Item out of stock&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-refund-payment" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-refund-payment" class="language-typescript"><span class="tok-kw">const</span> refund = <span class="tok-kw">await</span> client.<span class="tok-fn">refundPayment</span>({
+  referenceNumber: <span class="tok-str">&quot;RFD-2026-0031&quot;</span>,
+  paymentRequestReference: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  refundAmount: <span class="tok-num">50</span>,
+  reason: <span class="tok-str">&quot;Item out of stock&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -254,7 +254,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Refunds</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -263,11 +263,11 @@ for (const bank of banks.banks ?? []) {
   <ul><li><code>data.refundStatus</code> becomes <code>&quot;refunded&quot;</code> once the refund is made.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getRefundStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-refund-status" type="button">Copy</button><pre><code id="code-typescript-get-refund-status" class="language-typescript">const status = await client.getRefundStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-refund-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-refund-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getRefundStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
 });
-if (status.data?.refundStatus === &quot;refunded&quot;) {
-  console.log(&quot;refunded&quot;);
+<span class="tok-kw">if</span> (status.data?.refundStatus === <span class="tok-str">&quot;refunded&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;refunded&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -278,7 +278,7 @@ if (status.data?.refundStatus === &quot;refunded&quot;) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /checkout/charge-process/start</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/checkout/charge-process/start</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     
@@ -287,13 +287,13 @@ if (status.data?.refundStatus === &quot;refunded&quot;) {
   <ul><li>The session expiry and payment expiry are strings of seconds.</li></ul>
   <h4>TypeScript</h4>
   <p><code>startDirectDebitSession</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-start-direct-debit-session" type="button">Copy</button><pre><code id="code-typescript-start-direct-debit-session" class="language-typescript">const session = await client.startDirectDebitSession({
-  referenceNumber: &quot;DD-2026-0001&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  amountLimit: 50000,
-  callbackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-start-direct-debit-session" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-start-direct-debit-session" class="language-typescript"><span class="tok-kw">const</span> session = <span class="tok-kw">await</span> client.<span class="tok-fn">startDirectDebitSession</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  amountLimit: <span class="tok-num">50000</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/mandate&quot;</span>,
 });
-console.log(session.data?.checkoutUrl);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(session.data?.checkoutUrl);</code></pre></div>
 </article>
 
 <article class="op" id="op-create-direct-debit-mandate" data-operation="create-direct-debit-mandate" data-filter-item data-section="direct-debit" data-search="set up a mandate by api direct debit - set up a mandate by api post /paymentrequest direct debit createdirectdebitmandate">
@@ -303,7 +303,7 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/paymentRequest</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
@@ -313,15 +313,15 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
 <li><code>payerCollectionFeeShare</code> and <code>payeeCollectionFeeShare</code> must sum to 1.0.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createDirectDebitMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-direct-debit-mandate" type="button">Copy</button><pre><code id="code-typescript-create-direct-debit-mandate" class="language-typescript">const mandate = await client.createDirectDebitMandate({
-  referenceNumber: &quot;DD-2026-0001&quot;,
-  amount: 5000,
-  payerName: &quot;Bello Ramon&quot;,
-  payerPhoneNumber: &quot;08064343187&quot;,
-  payeeName: &quot;Your business name&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  payerEmail: &quot;customer@example.com&quot;,
-  callBackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-direct-debit-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-direct-debit-mandate" class="language-typescript"><span class="tok-kw">const</span> mandate = <span class="tok-kw">await</span> client.<span class="tok-fn">createDirectDebitMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  payerName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  payerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  payeeName: <span class="tok-str">&quot;Your business name&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  payerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  callBackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/mandate&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -332,7 +332,7 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -342,11 +342,11 @@ console.log(session.data?.checkoutUrl);</code></pre></div>
 <li>Read <code>data.additionalData.mandate[].ProcessStatusId</code> instead: <code>PENDING</code>, <code>VERIFIED</code>, <code>APPROVED</code> or <code>REJECTED</code>. Charge only when it is <code>APPROVED</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMandateStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-mandate-status" class="language-typescript">const status = await client.getMandateStatus({
-  referenceNumber: &quot;DD-2026-0001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-mandate-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-mandate-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getMandateStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-2026-0001&quot;</span>,
 });
-if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVED&quot;) {
-  console.log(&quot;ready to charge&quot;);
+<span class="tok-kw">if</span> (status.data?.additionalData?.mandate?.[<span class="tok-num">0</span>]?.<span class="tok-ty">ProcessStatusId</span> === <span class="tok-str">&quot;APPROVED&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;ready to charge&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -357,7 +357,7 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /chargeDebitMandate</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/chargeDebitMandate</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     <span class="tag tag-endpoint">referenceNumber + amount + accountReference</span>
@@ -366,10 +366,10 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   <ul><li>A successful response means the charge was **accepted**, not completed — fulfil only once the charge callback confirms it.</li></ul>
   <h4>TypeScript</h4>
   <p><code>chargeMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-mandate" type="button">Copy</button><pre><code id="code-typescript-charge-mandate" class="language-typescript">const charge = await client.chargeMandate({
-  referenceNumber: &quot;DD-CHARGE-0001&quot;,
-  amount: 600,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-charge-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-charge-mandate" class="language-typescript"><span class="tok-kw">const</span> charge = <span class="tok-kw">await</span> client.<span class="tok-fn">chargeMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-CHARGE-0001&quot;</span>,
+  amount: <span class="tok-num">600</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -380,7 +380,7 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /getChargeMandateStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getChargeMandateStatus</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -389,11 +389,11 @@ if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVE
   <ul><li><code>data.statusCode</code> is <code>0</code> charged, <code>1</code> pending, <code>-1</code> invalid and <code>-4</code> unknown.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getChargeMandateStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-charge-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-charge-mandate-status" class="language-typescript">const status = await client.getChargeMandateStatus({
-  referenceNumber: &quot;DD-CHARGE-0001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-charge-mandate-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-charge-mandate-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getChargeMandateStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-CHARGE-0001&quot;</span>,
 });
-if (status.data?.statusCode === 0) {
-  console.log(&quot;charged&quot;);
+<span class="tok-kw">if</span> (status.data?.statusCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;charged&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -404,7 +404,7 @@ if (status.data?.statusCode === 0) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /disableMandate</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/disableMandate</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Direct Debit</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference</span>
@@ -413,9 +413,9 @@ if (status.data?.statusCode === 0) {
   
   <h4>TypeScript</h4>
   <p><code>disableMandate</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-disable-mandate" type="button">Copy</button><pre><code id="code-typescript-disable-mandate" class="language-typescript">await client.disableMandate({
-  referenceNumber: &quot;DD-DIS-0001&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-disable-mandate" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-disable-mandate" class="language-typescript"><span class="tok-kw">await</span> client.<span class="tok-fn">disableMandate</span>({
+  referenceNumber: <span class="tok-str">&quot;DD-DIS-0001&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -426,7 +426,7 @@ if (status.data?.statusCode === 0) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getBanks</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getBanks</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -436,9 +436,9 @@ if (status.data?.statusCode === 0) {
 <li>To send to a Paga wallet, use Paga's UUID <code>AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getBanks</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-banks" type="button">Copy</button><pre><code id="code-typescript-get-banks" class="language-typescript">const banks = await client.getBanks({ referenceNumber: &quot;REF-000001&quot; });
-for (const bank of banks.banks ?? []) {
-  console.log(bank.name, bank.uuid);
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-banks" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-banks" class="language-typescript"><span class="tok-kw">const</span> banks = <span class="tok-kw">await</span> client.<span class="tok-fn">getBanks</span>({ referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span> });
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> bank <span class="tok-kw">of</span> banks.banks ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(bank.name, bank.uuid);
 }</code></pre></div>
 </article>
 
@@ -449,7 +449,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /validateDepositToBank</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/validateDepositToBank</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber</span>
@@ -458,13 +458,13 @@ for (const bank of banks.banks ?? []) {
   <ul><li>Send <code>amount</code> exactly as you will send it later: <code>&quot;5000.00&quot;</code> and <code>&quot;5000&quot;</code> sign differently.</li></ul>
   <h4>TypeScript</h4>
   <p><code>validateDepositToBank</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-validate-deposit-to-bank" type="button">Copy</button><pre><code id="code-typescript-validate-deposit-to-bank" class="language-typescript">const validation = await client.validateDepositToBank({
-  referenceNumber: &quot;REF-000002&quot;,
-  amount: &quot;5000.00&quot;,
-  destinationBankUUID: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
-  destinationBankAccountNumber: &quot;0000000000&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-validate-deposit-to-bank" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-validate-deposit-to-bank" class="language-typescript"><span class="tok-kw">const</span> validation = <span class="tok-kw">await</span> client.<span class="tok-fn">validateDepositToBank</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000002&quot;</span>,
+  amount: <span class="tok-str">&quot;5000.00&quot;</span>,
+  destinationBankUUID: <span class="tok-str">&quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;</span>,
+  destinationBankAccountNumber: <span class="tok-str">&quot;0000000000&quot;</span>,
 });
-console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(validation.destinationAccountHolderNameAtBank, validation.fee);</code></pre></div>
 </article>
 
 <article class="op" id="op-send-money" data-operation="send-money" data-filter-item data-section="money-transfer" data-search="send money to a bank account money transfer - send the money post /deposittobank money transfer sendmoney">
@@ -474,7 +474,7 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /depositToBank</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/depositToBank</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber</span>
@@ -484,12 +484,12 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
 <li>There is no callback for the outcome; use the transaction status endpoint.</li></ul>
   <h4>TypeScript</h4>
   <p><code>sendMoney</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-send-money" type="button">Copy</button><pre><code id="code-typescript-send-money" class="language-typescript">const transfer = await client.sendMoney({
-  referenceNumber: &quot;PAY-2026-0311&quot;,
-  amount: &quot;5000.00&quot;,
-  destinationBankUUID: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
-  destinationBankAccountNumber: &quot;0000000000&quot;,
-  remarks: &quot;Salary for June&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-send-money" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-send-money" class="language-typescript"><span class="tok-kw">const</span> transfer = <span class="tok-kw">await</span> client.<span class="tok-fn">sendMoney</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
+  amount: <span class="tok-str">&quot;5000.00&quot;</span>,
+  destinationBankUUID: <span class="tok-str">&quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;</span>,
+  destinationBankAccountNumber: <span class="tok-str">&quot;0000000000&quot;</span>,
+  remarks: <span class="tok-str">&quot;Salary for June&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -500,7 +500,7 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /moneyTransfer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/moneyTransfer</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount</span>
@@ -509,10 +509,10 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
   <ul><li><code>referenceNumber</code> must be at most 50 characters.</li></ul>
   <h4>TypeScript</h4>
   <p><code>transferToPagaWallet</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-transfer-to-paga-wallet" type="button">Copy</button><pre><code id="code-typescript-transfer-to-paga-wallet" class="language-typescript">const transfer = await client.transferToPagaWallet({
-  referenceNumber: &quot;PAY-2026-0312&quot;,
-  amount: 5000,
-  destinationAccount: &quot;08064343187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-transfer-to-paga-wallet" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-transfer-to-paga-wallet" class="language-typescript"><span class="tok-kw">const</span> transfer = <span class="tok-kw">await</span> client.<span class="tok-fn">transferToPagaWallet</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0312&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  destinationAccount: <span class="tok-str">&quot;08064343187&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -523,7 +523,7 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /validateMoneyTransfer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/validateMoneyTransfer</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount</span>
@@ -532,12 +532,12 @@ console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</cod
   
   <h4>TypeScript</h4>
   <p><code>validateMoneyTransfer</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-validate-money-transfer" type="button">Copy</button><pre><code id="code-typescript-validate-money-transfer" class="language-typescript">const validation = await client.validateMoneyTransfer({
-  referenceNumber: &quot;REF-000003&quot;,
-  amount: 5000,
-  destinationAccount: &quot;08064343187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-validate-money-transfer" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-validate-money-transfer" class="language-typescript"><span class="tok-kw">const</span> validation = <span class="tok-kw">await</span> client.<span class="tok-fn">validateMoneyTransfer</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000003&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  destinationAccount: <span class="tok-str">&quot;08064343187&quot;</span>,
 });
-console.log(validation.recipientAccountHolderName, validation.fee);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(validation.recipientAccountHolderName, validation.fee);</code></pre></div>
 </article>
 
 <article class="op" id="op-send-bulk-money-transfer" data-operation="send-bulk-money-transfer" data-filter-item data-section="money-transfer" data-search="bulk money transfer business api - bulk money transfer post /moneytransferbulk money transfer sendbulkmoneytransfer">
@@ -547,7 +547,7 @@ console.log(validation.recipientAccountHolderName, validation.fee);</code></pre>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /moneyTransferBulk</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/moneyTransferBulk</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Money Transfer</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount + itemCount</span>
@@ -557,12 +557,12 @@ console.log(validation.recipientAccountHolderName, validation.fee);</code></pre>
 <li>A bulk transfer can partially succeed, so check every entry in <code>results</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>sendBulkMoneyTransfer</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-send-bulk-money-transfer" type="button">Copy</button><pre><code id="code-typescript-send-bulk-money-transfer" class="language-typescript">const bulk = await client.sendBulkMoneyTransfer({
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-send-bulk-money-transfer" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-send-bulk-money-transfer" class="language-typescript"><span class="tok-kw">const</span> bulk = <span class="tok-kw">await</span> client.<span class="tok-fn">sendBulkMoneyTransfer</span>({
   items: [
-    { referenceNumber: &quot;ITEM-1&quot;, amount: 100, destinationAccount: &quot;08064343187&quot; },
-    { referenceNumber: &quot;ITEM-2&quot;, amount: 200, destinationAccount: &quot;08064343188&quot; },
+    { referenceNumber: <span class="tok-str">&quot;ITEM-1&quot;</span>, amount: <span class="tok-num">100</span>, destinationAccount: <span class="tok-str">&quot;08064343187&quot;</span> },
+    { referenceNumber: <span class="tok-str">&quot;ITEM-2&quot;</span>, amount: <span class="tok-num">200</span>, destinationAccount: <span class="tok-str">&quot;08064343188&quot;</span> },
   ],
-  bulkReferenceNumber: &quot;BULK-2026-0001&quot;,
+  bulkReferenceNumber: <span class="tok-str">&quot;BULK-2026-0001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -573,7 +573,7 @@ console.log(validation.recipientAccountHolderName, validation.fee);</code></pre>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /transactionStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/transactionStatus</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Transaction status</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -584,11 +584,11 @@ console.log(validation.recipientAccountHolderName, validation.fee);</code></pre>
 <li>The <code>status</code> field is human-readable and may be reworded — branch on <code>responseCode</code>, not on <code>status</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getTransactionStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-transaction-status" type="button">Copy</button><pre><code id="code-typescript-get-transaction-status" class="language-typescript">const status = await client.getTransactionStatus({
-  referenceNumber: &quot;PAY-2026-0311&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-transaction-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-transaction-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getTransactionStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
 });
-if (status.responseCode === 0) {
-  console.log(&quot;settled&quot;);
+<span class="tok-kw">if</span> (status.responseCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;settled&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -599,7 +599,7 @@ if (status.responseCode === 0) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMobileOperators</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMobileOperators</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Airtime and data</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -609,11 +609,11 @@ if (status.responseCode === 0) {
 <li>Cache the list.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMobileOperators</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mobile-operators" type="button">Copy</button><pre><code id="code-typescript-get-mobile-operators" class="language-typescript">const operators = await client.getMobileOperators({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-mobile-operators" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-mobile-operators" class="language-typescript"><span class="tok-kw">const</span> operators = <span class="tok-kw">await</span> client.<span class="tok-fn">getMobileOperators</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });
-for (const operator of operators.mobileOperator ?? []) {
-  console.log(operator.name, operator.mobileOperatorCode);
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> operator <span class="tok-kw">of</span> operators.mobileOperator ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(operator.name, operator.mobileOperatorCode);
 }</code></pre></div>
 </article>
 
@@ -624,7 +624,7 @@ for (const operator of operators.mobileOperator ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getDataBundleByOperator</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getDataBundleByOperator</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Airtime and data</span>
     <span class="tag tag-endpoint">referenceNumber + operatorPublicId</span>
@@ -634,9 +634,9 @@ for (const operator of operators.mobileOperator ?? []) {
 <li>Bundles rarely change, so cache the list and refresh it monthly.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getDataBundles</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-data-bundles" type="button">Copy</button><pre><code id="code-typescript-get-data-bundles" class="language-typescript">const bundles = await client.getDataBundles({
-  referenceNumber: &quot;REF-000001&quot;,
-  operatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-data-bundles" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-data-bundles" class="language-typescript"><span class="tok-kw">const</span> bundles = <span class="tok-kw">await</span> client.<span class="tok-fn">getDataBundles</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  operatorPublicId: <span class="tok-str">&quot;42419156-DD57-4737-8373-20678CD9AA29&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -647,7 +647,7 @@ for (const operator of operators.mobileOperator ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /airtimePurchase</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/airtimePurchase</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Airtime and data</span>
     <span class="tag tag-endpoint">referenceNumber + amount + destinationPhoneNumber</span>
@@ -657,11 +657,11 @@ for (const operator of operators.mobileOperator ?? []) {
 <li>For a data bundle, <code>amount</code> must be exactly the bundle's <code>servicePrice</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>buyAirtime</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-buy-airtime" type="button">Copy</button><pre><code id="code-typescript-buy-airtime" class="language-typescript">const purchase = await client.buyAirtime({
-  referenceNumber: &quot;AIR-2026-0042&quot;,
-  amount: &quot;500&quot;,
-  destinationPhoneNumber: &quot;08063332187&quot;,
-  mobileOperatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-buy-airtime" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-buy-airtime" class="language-typescript"><span class="tok-kw">const</span> purchase = <span class="tok-kw">await</span> client.<span class="tok-fn">buyAirtime</span>({
+  referenceNumber: <span class="tok-str">&quot;AIR-2026-0042&quot;</span>,
+  amount: <span class="tok-str">&quot;500&quot;</span>,
+  destinationPhoneNumber: <span class="tok-str">&quot;08063332187&quot;</span>,
+  mobileOperatorPublicId: <span class="tok-str">&quot;42419156-DD57-4737-8373-20678CD9AA29&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -672,7 +672,7 @@ for (const operator of operators.mobileOperator ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchants</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchants</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Bill payment</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -681,9 +681,9 @@ for (const operator of operators.mobileOperator ?? []) {
   
   <h4>TypeScript</h4>
   <p><code>getMerchants</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchants" type="button">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript">const merchants = await client.getMerchants({ referenceNumber: &quot;REF-000001&quot; });
-for (const merchant of merchants.merchants ?? []) {
-  console.log(merchant.displayName, merchant.uuid);
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchants" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript"><span class="tok-kw">const</span> merchants = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchants</span>({ referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span> });
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> merchant <span class="tok-kw">of</span> merchants.merchants ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(merchant.displayName, merchant.uuid);
 }</code></pre></div>
 </article>
 
@@ -694,7 +694,7 @@ for (const merchant of merchants.merchants ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchantServices</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchantServices</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Bill payment</span>
     <span class="tag tag-endpoint">referenceNumber + merchantPublicId</span>
@@ -704,9 +704,9 @@ for (const merchant of merchants.merchants ?? []) {
 <li>A service with <code>price</code> <code>0.0</code> means the customer chooses the amount; otherwise pay the service's <code>price</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMerchantServices</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-services" type="button">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript">const services = await client.getMerchantServices({
-  referenceNumber: &quot;REF-000001&quot;,
-  merchantPublicId: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchant-services" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript"><span class="tok-kw">const</span> services = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchantServices</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantPublicId: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -717,7 +717,7 @@ for (const merchant of merchants.merchants ?? []) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getMerchantAccountDetails</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getMerchantAccountDetails</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Bill payment</span>
     <span class="tag tag-endpoint">referenceNumber + merchantAccount + merchantReferenceNumber + merchantServiceProductCode</span>
@@ -727,12 +727,12 @@ for (const merchant of merchants.merchants ?? []) {
 <li>Billers that don't need it still take part in the hash — send <code>&quot;&quot;</code> when there is no service.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getMerchantAccountDetails</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-account-details" type="button">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript">const customer = await client.getMerchantAccountDetails({
-  referenceNumber: &quot;REF-000001&quot;,
-  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
-  merchantReferenceNumber: &quot;8110411076&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-merchant-account-details" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript"><span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">getMerchantAccountDetails</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantAccount: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
+  merchantReferenceNumber: <span class="tok-str">&quot;8110411076&quot;</span>,
 });
-console.log(customer.customerName);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(customer.customerName);</code></pre></div>
 </article>
 
 <article class="op" id="op-pay-bill" data-operation="pay-bill" data-filter-item data-section="bill-payment" data-search="pay the bill bill payment - pay the bill post /merchantpayment bill payment paybill">
@@ -742,7 +742,7 @@ console.log(customer.customerName);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /merchantPayment</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/merchantPayment</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Bill payment</span>
     <span class="tag tag-endpoint">referenceNumber + amount + merchantAccount + merchantReferenceNumber</span>
@@ -752,15 +752,15 @@ console.log(customer.customerName);</code></pre></div>
 <li><code>integrationStatus</code> is for information only.</li></ul>
   <h4>TypeScript</h4>
   <p><code>payBill</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-pay-bill" type="button">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript">const bill = await client.payBill({
-  referenceNumber: &quot;BILL-2026-0042&quot;,
-  amount: 6000,
-  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
-  merchantReferenceNumber: &quot;8110411076&quot;,
-  merchantService: [&quot;STARTERE36&quot;],
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-pay-bill" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript"><span class="tok-kw">const</span> bill = <span class="tok-kw">await</span> client.<span class="tok-fn">payBill</span>({
+  referenceNumber: <span class="tok-str">&quot;BILL-2026-0042&quot;</span>,
+  amount: <span class="tok-num">6000</span>,
+  merchantAccount: <span class="tok-str">&quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;</span>,
+  merchantReferenceNumber: <span class="tok-str">&quot;8110411076&quot;</span>,
+  merchantService: [<span class="tok-str">&quot;STARTERE36&quot;</span>],
 });
-if (bill.responseCode === 0) {
-  console.log(&quot;paid&quot;);
+<span class="tok-kw">if</span> (bill.responseCode === <span class="tok-num">0</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;paid&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -771,7 +771,7 @@ if (bill.responseCode === 0) {
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /accountBalance</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/accountBalance</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -780,10 +780,10 @@ if (bill.responseCode === 0) {
   <ul><li>Check <code>availableBalance</code>, not <code>totalBalance</code>, before a payout run — it is what you can actually send.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getBusinessBalance</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-balance" type="button">Copy</button><pre><code id="code-typescript-get-business-balance" class="language-typescript">const balance = await client.getBusinessBalance({
-  referenceNumber: &quot;BAL-2026-0042&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-business-balance" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-business-balance" class="language-typescript"><span class="tok-kw">const</span> balance = <span class="tok-kw">await</span> client.<span class="tok-fn">getBusinessBalance</span>({
+  referenceNumber: <span class="tok-str">&quot;BAL-2026-0042&quot;</span>,
 });
-console.log(balance.availableBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(balance.availableBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-get-business-transactions" data-operation="get-business-transactions" data-filter-item data-section="business-account" data-search="get the transaction history your business account - get your transaction history post /transactionhistory business account getbusinesstransactions">
@@ -793,7 +793,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /transactionHistory</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/transactionHistory</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -802,10 +802,10 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>Use it to reconcile your records with Paga's.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getBusinessTransactions</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-transactions" type="button">Copy</button><pre><code id="code-typescript-get-business-transactions" class="language-typescript">const history = await client.getBusinessTransactions({
-  referenceNumber: &quot;HIS-2026-0042&quot;,
-  startDateUTC: &quot;2026-11-01T00:00:00&quot;,
-  endDateUTC: &quot;2026-11-04T00:00:00&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-business-transactions" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-business-transactions" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getBusinessTransactions</span>({
+  referenceNumber: <span class="tok-str">&quot;HIS-2026-0042&quot;</span>,
+  startDateUTC: <span class="tok-str">&quot;2026-11-01T00:00:00&quot;</span>,
+  endDateUTC: <span class="tok-str">&quot;2026-11-04T00:00:00&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -816,7 +816,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /recentTransactionHistory</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/recentTransactionHistory</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -825,8 +825,8 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>For anything further back, use the transaction history endpoint.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getRecentTransactions</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-recent-transactions" type="button">Copy</button><pre><code id="code-typescript-get-recent-transactions" class="language-typescript">const recent = await client.getRecentTransactions({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-recent-transactions" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-recent-transactions" class="language-typescript"><span class="tok-kw">const</span> recent = <span class="tok-kw">await</span> client.<span class="tok-fn">getRecentTransactions</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -837,7 +837,7 @@ console.log(balance.availableBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /getOperationStatus</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getOperationStatus</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber</span>
@@ -846,10 +846,10 @@ console.log(balance.availableBalance);</code></pre></div>
   <ul><li>The status is in <code>transactionStatus</code>, not <code>status</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getOperationStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-operation-status" type="button">Copy</button><pre><code id="code-typescript-get-operation-status" class="language-typescript">const status = await client.getOperationStatus({
-  referenceNumber: &quot;PAY-2026-0311&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-operation-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-operation-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getOperationStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;PAY-2026-0311&quot;</span>,
 });
-console.log(status.transactionStatus);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(status.transactionStatus);</code></pre></div>
 </article>
 
 <article class="op" id="op-onboard-merchant" data-operation="onboard-merchant" data-filter-item data-section="business-account" data-search="onboard a merchant business api - onboard a merchant post /onboardmerchant business account onboardmerchant">
@@ -859,7 +859,7 @@ console.log(status.transactionStatus);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /onboardMerchant</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/onboardMerchant</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber + merchantExternalId + name + phone + email</span>
@@ -869,20 +869,20 @@ console.log(status.transactionStatus);</code></pre></div>
 <li>Paga names the request field <code>reference</code>, not <code>referenceNumber</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>onboardMerchant</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-onboard-merchant" type="button">Copy</button><pre><code id="code-typescript-onboard-merchant" class="language-typescript">const merchant = await client.onboardMerchant({
-  reference: &quot;REF-000001&quot;,
-  merchantExternalId: &quot;MERCH-1&quot;,
-  legalEntity: { name: &quot;Acme Ltd&quot; },
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-onboard-merchant" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-onboard-merchant" class="language-typescript"><span class="tok-kw">const</span> merchant = <span class="tok-kw">await</span> client.<span class="tok-fn">onboardMerchant</span>({
+  reference: <span class="tok-str">&quot;REF-000001&quot;</span>,
+  merchantExternalId: <span class="tok-str">&quot;MERCH-1&quot;</span>,
+  legalEntity: { name: <span class="tok-str">&quot;Acme Ltd&quot;</span> },
   legalEntityRepresentative: {
-    firstName: &quot;Bello&quot;,
-    lastName: &quot;Ramon&quot;,
-    phone: &quot;080643643187&quot;,
-    email: &quot;director@example.com&quot;,
-    dateOfBirth: &quot;1989-10-02&quot;,
+    firstName: <span class="tok-str">&quot;Bello&quot;</span>,
+    lastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+    phone: <span class="tok-str">&quot;080643643187&quot;</span>,
+    email: <span class="tok-str">&quot;director@example.com&quot;</span>,
+    dateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
   },
   integration: {
-    type: &quot;EMAIL_NOTIFICATION&quot;,
-    financeAdminEmail: &quot;finance@example.com&quot;,
+    <span class="tok-kw">type</span>: <span class="tok-str">&quot;EMAIL_NOTIFICATION&quot;</span>,
+    financeAdminEmail: <span class="tok-str">&quot;finance@example.com&quot;</span>,
   },
 });</code></pre></div>
 </article>
@@ -894,7 +894,7 @@ console.log(status.transactionStatus);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /dispenseCash</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/dispenseCash</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Business account</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + amount + withdrawalCode</span>
@@ -903,11 +903,11 @@ console.log(status.transactionStatus);</code></pre></div>
   
   <h4>TypeScript</h4>
   <p><code>dispenseCash</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-dispense-cash" type="button">Copy</button><pre><code id="code-typescript-dispense-cash" class="language-typescript">const cash = await client.dispenseCash({
-  referenceNumber: &quot;CASH-2026-0042&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  amount: 5000,
-  withdrawalCode: &quot;123456&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-dispense-cash" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-dispense-cash" class="language-typescript"><span class="tok-kw">const</span> cash = <span class="tok-kw">await</span> client.<span class="tok-fn">dispenseCash</span>({
+  referenceNumber: <span class="tok-str">&quot;CASH-2026-0042&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  amount: <span class="tok-num">5000</span>,
+  withdrawalCode: <span class="tok-str">&quot;123456&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -918,7 +918,7 @@ console.log(status.transactionStatus);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference + iifiNumber + autoSweep.bankPublicId + autoSweep.destination + autoSweep.accountNumber + callbackUrl</span>
@@ -928,15 +928,15 @@ console.log(status.transactionStatus);</code></pre></div>
 <li>Reusing a <code>referenceNumber</code> or <code>accountReference</code> returns status code <code>102</code> and never creates a second account.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-create-subsidiary-account" class="language-typescript">const account = await client.createSubsidiaryAccount({
-  referenceNumber: &quot;REF-000005&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  accountName: &quot;Bello Ramon&quot;,
-  iifiNumber: &quot;22222132329&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">createSubsidiaryAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000005&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  accountName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  iifiNumber: <span class="tok-str">&quot;22222132329&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });
-if (account.statusCode === &quot;102&quot;) {
-  console.log(&quot;duplicate reference&quot;);
+<span class="tok-kw">if</span> (account.statusCode === <span class="tok-str">&quot;102&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;duplicate reference&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -947,7 +947,7 @@ if (account.statusCode === &quot;102&quot;) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/charge</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/charge</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
@@ -957,13 +957,13 @@ if (account.statusCode === &quot;102&quot;) {
 <li>Retrying with the same <code>referenceNumber</code> never moves money twice.</li></ul>
   <h4>TypeScript</h4>
   <p><code>chargeSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-charge-subsidiary-account" class="language-typescript">const charge = await client.chargeSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-CHARGE-001&quot;,
-  amount: 1000,
-  narration: &quot;Service fee&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-charge-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-charge-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> charge = <span class="tok-kw">await</span> client.<span class="tok-fn">chargeSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-CHARGE-001&quot;</span>,
+  amount: <span class="tok-num">1000</span>,
+  narration: <span class="tok-str">&quot;Service fee&quot;</span>,
 });
-console.log(charge.newBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(charge.newBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-top-up-subsidiary-account" data-operation="top-up-subsidiary-account" data-filter-item data-section="subsidiary" data-search="top up a subsidiary account subsidiary accounts - top up an account post /subsidiary-accounts/{accountreference}/topup subsidiary accounts topupsubsidiaryaccount">
@@ -973,7 +973,7 @@ console.log(charge.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/topup</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/topup</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
@@ -982,13 +982,13 @@ console.log(charge.newBalance);</code></pre></div>
   <ul><li>Not available on virtual accounts.</li></ul>
   <h4>TypeScript</h4>
   <p><code>topUpSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-top-up-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-top-up-subsidiary-account" class="language-typescript">const topUp = await client.topUpSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-TOPUP-001&quot;,
-  amount: 500,
-  narration: &quot;Bonus credit&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-top-up-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-top-up-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> topUp = <span class="tok-kw">await</span> client.<span class="tok-fn">topUpSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-TOPUP-001&quot;</span>,
+  amount: <span class="tok-num">500</span>,
+  narration: <span class="tok-str">&quot;Bonus credit&quot;</span>,
 });
-console.log(topUp.newBalance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(topUp.newBalance);</code></pre></div>
 </article>
 
 <article class="op" id="op-transfer-between-subsidiary-accounts" data-operation="transfer-between-subsidiary-accounts" data-filter-item data-section="subsidiary" data-search="transfer between subsidiary accounts subsidiary accounts - transfer between accounts post /subsidiary-accounts/transfer subsidiary accounts transferbetweensubsidiaryaccounts">
@@ -998,7 +998,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /subsidiary-accounts/transfer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/subsidiary-accounts/transfer</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + sourceAccountIdentifier + destinationAccountIdentifier + amount + currency + narration</span>
@@ -1007,12 +1007,12 @@ console.log(topUp.newBalance);</code></pre></div>
   <ul><li>Paga sends one callback, for the source account only.</li></ul>
   <h4>TypeScript</h4>
   <p><code>transferBetweenSubsidiaryAccounts</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-transfer-between-subsidiary-accounts" type="button">Copy</button><pre><code id="code-typescript-transfer-between-subsidiary-accounts" class="language-typescript">const transfer = await client.transferBetweenSubsidiaryAccounts({
-  sourceAccountReference: &quot;CUST-000184-WALLET&quot;,
-  destinationAccountReference: &quot;CUST-000221-WALLET&quot;,
-  referenceNumber: &quot;REF-TRANSFER-001&quot;,
-  amount: 1500,
-  narration: &quot;Payment for goods&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-transfer-between-subsidiary-accounts" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-transfer-between-subsidiary-accounts" class="language-typescript"><span class="tok-kw">const</span> transfer = <span class="tok-kw">await</span> client.<span class="tok-fn">transferBetweenSubsidiaryAccounts</span>({
+  sourceAccountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  destinationAccountReference: <span class="tok-str">&quot;CUST-000221-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-TRANSFER-001&quot;</span>,
+  amount: <span class="tok-num">1500</span>,
+  narration: <span class="tok-str">&quot;Payment for goods&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1023,7 +1023,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
@@ -1032,9 +1032,9 @@ console.log(topUp.newBalance);</code></pre></div>
   <ul><li>The <code>accountIdentifier</code> is the account's <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>retrieveSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-retrieve-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-retrieve-subsidiary-account" class="language-typescript">const account = await client.retrieveSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-GET-001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-retrieve-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-retrieve-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">retrieveSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-GET-001&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1045,7 +1045,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">PUT /subsidiary-accounts/{accountReference}</span>
+    <span class="tag tag-method tag-put">PUT</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier + iifiNumber + autoSweep.destination + autoSweep.bankPublicId + autoSweep.accountNumber + callbackUrl</span>
@@ -1055,10 +1055,10 @@ console.log(topUp.newBalance);</code></pre></div>
 <li><code>accountNumber</code> and <code>accountReference</code> cannot be changed.</li></ul>
   <h4>TypeScript</h4>
   <p><code>updateSubsidiaryAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-update-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-update-subsidiary-account" class="language-typescript">const account = await client.updateSubsidiaryAccount({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-UPDATE-001&quot;,
-  status: &quot;DISABLED&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-update-subsidiary-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-update-subsidiary-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">updateSubsidiaryAccount</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-UPDATE-001&quot;</span>,
+  status: <span class="tok-str">&quot;DISABLED&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1069,7 +1069,7 @@ console.log(topUp.newBalance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/balance</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/balance</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
@@ -1078,11 +1078,11 @@ console.log(topUp.newBalance);</code></pre></div>
   
   <h4>TypeScript</h4>
   <p><code>getSubsidiaryBalance</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-balance" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-balance" class="language-typescript">const balance = await client.getSubsidiaryBalance({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-BAL-001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-subsidiary-balance" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-subsidiary-balance" class="language-typescript"><span class="tok-kw">const</span> balance = <span class="tok-kw">await</span> client.<span class="tok-fn">getSubsidiaryBalance</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-BAL-001&quot;</span>,
 });
-console.log(balance.balance);</code></pre></div>
+<span class="tok-bi">console</span>.<span class="tok-fn">log</span>(balance.balance);</code></pre></div>
 </article>
 
 <article class="op" id="op-get-subsidiary-history" data-operation="get-subsidiary-history" data-filter-item data-section="subsidiary" data-search="get a subsidiary account history subsidiary accounts - get transaction history get /subsidiary-accounts/{accountreference}/history subsidiary accounts getsubsidiaryhistory">
@@ -1092,7 +1092,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/history</span>
+    <span class="tag tag-method tag-get">GET</span><span class="tag tag-endpoint">/subsidiary-accounts/{accountReference}/history</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Subsidiary accounts</span>
     <span class="tag tag-endpoint">accountIdentifier + startDateTimeUTC + endDateTimeUTC</span>
@@ -1103,13 +1103,13 @@ console.log(balance.balance);</code></pre></div>
 <li><code>referenceNumber</code> is required as a query parameter, but is not part of the hash.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getSubsidiaryHistory</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-history" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-history" class="language-typescript">const history = await client.getSubsidiaryHistory({
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  referenceNumber: &quot;REF-HIS-001&quot;,
-  startDateTimeUTC: &quot;2026-06-01T00:00:00&quot;,
-  endDateTimeUTC: &quot;2026-06-30T23:59:59&quot;,
-  pageNumber: 0,
-  pageSize: 20,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-subsidiary-history" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-subsidiary-history" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getSubsidiaryHistory</span>({
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  referenceNumber: <span class="tok-str">&quot;REF-HIS-001&quot;</span>,
+  startDateTimeUTC: <span class="tok-str">&quot;2026-06-01T00:00:00&quot;</span>,
+  endDateTimeUTC: <span class="tok-str">&quot;2026-06-30T23:59:59&quot;</span>,
+  pageNumber: <span class="tok-num">0</span>,
+  pageSize: <span class="tok-num">20</span>,
 });</code></pre></div>
 </article>
 
@@ -1120,7 +1120,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /registerPersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerPersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Persistent accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountReference + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
@@ -1130,13 +1130,13 @@ console.log(balance.balance);</code></pre></div>
 <li>Paga calls your <code>callbackUrl</code> whenever the account is funded.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerPersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-register-persistent-payment-account" class="language-typescript">const account = await client.registerPersistentPaymentAccount({
-  referenceNumber: &quot;REF-000006&quot;,
-  accountReference: &quot;CUST-000184-WALLET&quot;,
-  financialIdentificationNumber: &quot;22222132329&quot;,
-  creditBankId: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
-  creditBankAccountNumber: &quot;0000000000&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">registerPersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000006&quot;</span>,
+  accountReference: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  financialIdentificationNumber: <span class="tok-str">&quot;22222132329&quot;</span>,
+  creditBankId: <span class="tok-str">&quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;</span>,
+  creditBankAccountNumber: <span class="tok-str">&quot;0000000000&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1147,7 +1147,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /updatePersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/updatePersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Persistent accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
@@ -1156,10 +1156,10 @@ console.log(balance.balance);</code></pre></div>
   <ul><li>Every field takes part in the hash, so send the current value of the ones you are not changing.</li></ul>
   <h4>TypeScript</h4>
   <p><code>updatePersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-update-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript">const account = await client.updatePersistentPaymentAccount({
-  referenceNumber: &quot;REF-000007&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
-  callbackUrl: &quot;https://yourstore.com/webhooks/paga-v2&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-update-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">updatePersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000007&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga-v2&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1170,7 +1170,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /getPersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/getPersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Persistent accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
@@ -1179,9 +1179,9 @@ console.log(balance.balance);</code></pre></div>
   <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getPersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-get-persistent-payment-account" class="language-typescript">const account = await client.getPersistentPaymentAccount({
-  referenceNumber: &quot;REF-000008&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">getPersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000008&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1192,7 +1192,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /deletePersistentPaymentAccount</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/deletePersistentPaymentAccount</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag ">Persistent accounts</span>
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
@@ -1201,9 +1201,9 @@ console.log(balance.balance);</code></pre></div>
   <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>deletePersistentPaymentAccount</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-delete-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript">await client.deletePersistentPaymentAccount({
-  referenceNumber: &quot;REF-000009&quot;,
-  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-delete-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript"><span class="tok-kw">await</span> client.<span class="tok-fn">deletePersistentPaymentAccount</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000009&quot;</span>,
+  accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1214,7 +1214,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomer</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomer</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Customers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
@@ -1223,13 +1223,13 @@ console.log(balance.balance);</code></pre></div>
   <ul><li>The phone number must not already belong to a registered customer.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomer</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer" type="button">Copy</button><pre><code id="code-typescript-register-customer" class="language-typescript">const customer = await client.registerCustomer({
-  referenceNumber: &quot;REF-000010&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerFirstName: &quot;Bello&quot;,
-  customerLastName: &quot;Ramon&quot;,
-  customerEmail: &quot;customer@example.com&quot;,
-  customerDateOfBirth: &quot;1989-10-02&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer" class="language-typescript"><span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomer</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000010&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerFirstName: <span class="tok-str">&quot;Bello&quot;</span>,
+  customerLastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+  customerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  customerDateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -1240,7 +1240,7 @@ console.log(balance.balance);</code></pre></div>
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerWithKYC</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerWithKYC</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Customers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
@@ -1250,18 +1250,18 @@ console.log(balance.balance);</code></pre></div>
 <li>Each photograph must be a JPEG of at most 500 KB.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerWithKyc</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-with-kyc" type="button">Copy</button><pre><code id="code-typescript-register-customer-with-kyc" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-with-kyc" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-with-kyc" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-const customer = await client.registerCustomerWithKyc({
-  referenceNumber: &quot;REF-000011&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerEmail: &quot;customer@example.com&quot;,
-  customerFirstName: &quot;Bello&quot;,
-  customerLastName: &quot;Ramon&quot;,
-  customerDateOfBirth: &quot;1989-10-02&quot;,
-  customerGender: &quot;MALE&quot;,
-  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
-  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+<span class="tok-kw">const</span> customer = <span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerWithKyc</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000011&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  customerFirstName: <span class="tok-str">&quot;Bello&quot;</span>,
+  customerLastName: <span class="tok-str">&quot;Ramon&quot;</span>,
+  customerDateOfBirth: <span class="tok-str">&quot;1989-10-02&quot;</span>,
+  customerGender: <span class="tok-str">&quot;MALE&quot;</span>,
+  customerAccountPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;account-photo.jpg&quot;</span>),
+  customerIdPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;id-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 
@@ -1272,7 +1272,7 @@ const customer = await client.registerCustomerWithKyc({
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerAccountPhoto</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerAccountPhoto</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Customers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber</span>
@@ -1282,12 +1282,12 @@ const customer = await client.registerCustomerWithKyc({
 <li>The photograph must be a JPEG of at most 500 KB.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerAccountPhoto</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-account-photo" type="button">Copy</button><pre><code id="code-typescript-register-customer-account-photo" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-account-photo" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-account-photo" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-await client.registerCustomerAccountPhoto({
-  referenceNumber: &quot;REF-000012&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
+<span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerAccountPhoto</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000012&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerAccountPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;account-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 
@@ -1298,7 +1298,7 @@ await client.registerCustomerAccountPhoto({
   </div>
   <div class="meta">
     <span class="tag ">Business API</span>
-    <span class="tag tag-endpoint">POST /registerCustomerIdentification</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/registerCustomerIdentification</span>
     <span class="tag ">principal / credentials headers</span>
     <span class="tag ">Customers</span>
     <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerIdType + customerIdNumber + customerIdExpirationDate</span>
@@ -1308,15 +1308,15 @@ await client.registerCustomerAccountPhoto({
 <li><code>customerIdExpirationDate</code> is formatted as <code>YYYY-MM-DD</code>.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerCustomerIdentification</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-identification" type="button">Copy</button><pre><code id="code-typescript-register-customer-identification" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-register-customer-identification" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-register-customer-identification" class="language-typescript"><span class="tok-kw">import</span> { readFile } <span class="tok-kw">from</span> <span class="tok-str">&quot;node:fs/promises&quot;</span>;
 
-await client.registerCustomerIdentification({
-  referenceNumber: &quot;REF-000013&quot;,
-  customerPhoneNumber: &quot;08064343187&quot;,
-  customerIdType: &quot;NATIONAL_ID&quot;,
-  customerIdNumber: &quot;12345678901&quot;,
-  customerIdExpirationDate: &quot;2030-01-01&quot;,
-  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+<span class="tok-kw">await</span> client.<span class="tok-fn">registerCustomerIdentification</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000013&quot;</span>,
+  customerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  customerIdType: <span class="tok-str">&quot;NATIONAL_ID&quot;</span>,
+  customerIdNumber: <span class="tok-str">&quot;12345678901&quot;</span>,
+  customerIdExpirationDate: <span class="tok-str">&quot;2030-01-01&quot;</span>,
+  customerIdPhoto: <span class="tok-kw">await</span> <span class="tok-fn">readFile</span>(<span class="tok-str">&quot;id-photo.jpg&quot;</span>),
 });</code></pre></div>
 </article>
 </div>

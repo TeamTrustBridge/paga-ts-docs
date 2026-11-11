@@ -58,6 +58,17 @@
 
 <p>A payment request tells Paga to collect a specific amount from a specific customer. How the customer pays is up to you: a one-time virtual account number, a USSD prompt, their Paga wallet, or a USD bank transfer.</p>
 
+<nav class="toc" aria-label="On this page">
+  <p class="toc-heading">On this page</p>
+  <ul>
+    <li><a href="#op-create-payment">Create a payment request</a></li>
+    <li><a href="#op-get-payment-status">Check payment status</a></li>
+    <li><a href="#op-get-collect-banks">List the customer's banks</a></li>
+    <li><a href="#op-get-usd-payment-status">Check USD payment status</a></li>
+    <li><a href="#op-get-payment-request-history">Payment request history</a></li>
+  </ul>
+</nav>
+
 <h2 id="operations">Operations</h2>
 <article class="op" id="op-create-payment" data-operation="create-payment">
   <div class="op-header">
@@ -66,7 +77,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/paymentRequest</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
   </div>
@@ -75,15 +86,15 @@
 <li><code>payer.email</code> takes part in the hash even when you omit it.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createPayment</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-create-payment" type="button">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript">const payment = await client.createPayment({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
-  amount: 50,
-  payerName: &quot;Bello Ramon&quot;,
-  payerPhoneNumber: &quot;08064343187&quot;,
-  payeeName: &quot;Your business name&quot;,
-  payerEmail: &quot;customer@example.com&quot;,
-  callBackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
-  paymentMethods: [&quot;BANK_TRANSFER&quot;],
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-create-payment" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript"><span class="tok-kw">const</span> payment = <span class="tok-kw">await</span> client.<span class="tok-fn">createPayment</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  amount: <span class="tok-num">50</span>,
+  payerName: <span class="tok-str">&quot;Bello Ramon&quot;</span>,
+  payerPhoneNumber: <span class="tok-str">&quot;08064343187&quot;</span>,
+  payeeName: <span class="tok-str">&quot;Your business name&quot;</span>,
+  payerEmail: <span class="tok-str">&quot;customer@example.com&quot;</span>,
+  callBackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
+  paymentMethods: [<span class="tok-str">&quot;BANK_TRANSFER&quot;</span>],
 });</code></pre></div>
 </article>
 
@@ -94,7 +105,7 @@
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -102,11 +113,11 @@
   <ul><li><code>data.statusCode</code> of <code>&quot;0&quot;</code> means the payment was paid.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getPaymentStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript">const status = await client.getPaymentStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-payment-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getPaymentStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
 });
-if (status.data?.statusCode === &quot;0&quot;) {
-  console.log(&quot;paid&quot;);
+<span class="tok-kw">if</span> (status.data?.statusCode === <span class="tok-str">&quot;0&quot;</span>) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(<span class="tok-str">&quot;paid&quot;</span>);
 }</code></pre></div>
 </article>
 
@@ -117,7 +128,7 @@ if (status.data?.statusCode === &quot;0&quot;) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /banks</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/banks</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -125,9 +136,9 @@ if (status.data?.statusCode === &quot;0&quot;) {
   
   <h4>TypeScript</h4>
   <p><code>getCollectBanks</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-collect-banks" type="button">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript">const banks = await client.getCollectBanks({ referenceNumber: &quot;REF-000001&quot; });
-for (const bank of banks.banks ?? []) {
-  console.log(bank.name, bank.uuid);
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-collect-banks" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript"><span class="tok-kw">const</span> banks = <span class="tok-kw">await</span> client.<span class="tok-fn">getCollectBanks</span>({ referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span> });
+<span class="tok-kw">for</span> (<span class="tok-kw">const</span> bank <span class="tok-kw">of</span> banks.banks ?? []) {
+  <span class="tok-bi">console</span>.<span class="tok-fn">log</span>(bank.name, bank.uuid);
 }</code></pre></div>
 </article>
 
@@ -138,7 +149,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/status</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber + paymentCurrency</span>
   </div>
@@ -146,9 +157,9 @@ for (const bank of banks.banks ?? []) {
   <ul><li><code>data.statusCode</code> of <code>&quot;1&quot;</code> means the payment is still pending.</li></ul>
   <h4>TypeScript</h4>
   <p><code>getUsdPaymentStatus</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-usd-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript">const status = await client.getUsdPaymentStatus({
-  referenceNumber: &quot;ORD-2026-0187&quot;,
-  paymentCurrency: &quot;USD&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-usd-payment-status" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript"><span class="tok-kw">const</span> status = <span class="tok-kw">await</span> client.<span class="tok-fn">getUsdPaymentStatus</span>({
+  referenceNumber: <span class="tok-str">&quot;ORD-2026-0187&quot;</span>,
+  paymentCurrency: <span class="tok-str">&quot;USD&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -159,7 +170,7 @@ for (const bank of banks.banks ?? []) {
   </div>
   <div class="meta">
     <span class="tag tag-collect">Collect API</span>
-    <span class="tag tag-endpoint">POST /history</span>
+    <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/history</span>
     <span class="tag ">HTTP Basic</span>
     <span class="tag tag-endpoint">referenceNumber</span>
   </div>
@@ -167,8 +178,8 @@ for (const bank of banks.banks ?? []) {
   
   <h4>TypeScript</h4>
   <p><code>getPaymentRequestHistory</code></p>
-  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-request-history" type="button">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript">const history = await client.getPaymentRequestHistory({
-  referenceNumber: &quot;REF-000001&quot;,
+  <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-get-payment-request-history" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript"><span class="tok-kw">const</span> history = <span class="tok-kw">await</span> client.<span class="tok-fn">getPaymentRequestHistory</span>({
+  referenceNumber: <span class="tok-str">&quot;REF-000001&quot;</span>,
 });</code></pre></div>
 </article>
 
