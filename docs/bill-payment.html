@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bill payment (VAS) — paga-ts</title>
+<meta name="description" content="Pay a biller on behalf of a customer: electricity, water, TV, airtime and more. 4 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/bill-payment.html">
+<meta property="og:title" content="Bill payment (VAS) — paga-ts">
+<meta property="og:description" content="Pay a biller on behalf of a customer: electricity, water, TV, airtime and more. 4 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/bill-payment.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html" aria-current="page">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Bill payment (VAS)</h1>
+<p class="lead">Pay a biller on behalf of a customer: electricity, water, TV, airtime and more.</p>
+
+<p>Bill payment takes a customer's account number, confirms it with the biller, and pays. Find the biller, pick the service, validate the customer, then pay.</p>
+
+<h2 id="operations">Operations</h2>
+<article class="op" id="op-get-merchants" data-operation="get-merchants">
+  <div class="op-header">
+    <h3 class="op-name">List billers</h3>
+    <a class="op-anchor" href="#op-get-merchants" aria-label="Link to List billers">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchants</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists every biller, with the <code>uuid</code> you send as <code>merchantAccount</code>. Cache the list.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getMerchants</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchants" type="button">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript">const merchants = await client.getMerchants({ referenceNumber: &quot;REF-000001&quot; });
+for (const merchant of merchants.merchants ?? []) {
+  console.log(merchant.displayName, merchant.uuid);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-merchant-services" data-operation="get-merchant-services">
+  <div class="op-header">
+    <h3 class="op-name">List a biller's services</h3>
+    <a class="op-anchor" href="#op-get-merchant-services" aria-label="Link to List a biller&#39;s services">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchantServices</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag tag-endpoint">referenceNumber + merchantPublicId</span>
+  </div>
+  <p>Lists what a biller can be paid for.</p>
+  <ul><li>No services means any amount is allowed.</li>
+<li>A service with <code>price</code> <code>0.0</code> means the customer chooses the amount; otherwise pay the service's <code>price</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMerchantServices</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-services" type="button">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript">const services = await client.getMerchantServices({
+  referenceNumber: &quot;REF-000001&quot;,
+  merchantPublicId: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-merchant-account-details" data-operation="get-merchant-account-details">
+  <div class="op-header">
+    <h3 class="op-name">Validate the customer</h3>
+    <a class="op-anchor" href="#op-get-merchant-account-details" aria-label="Link to Validate the customer">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchantAccountDetails</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag tag-endpoint">referenceNumber + merchantAccount + merchantReferenceNumber + merchantServiceProductCode</span>
+  </div>
+  <p>Checks a meter, smart card or account number and returns the customer's name.</p>
+  <ul><li>If the customer chose a service, always send its <code>code</code> as <code>merchantServiceProductCode</code>.</li>
+<li>Billers that don't need it still take part in the hash — send <code>&quot;&quot;</code> when there is no service.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMerchantAccountDetails</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-account-details" type="button">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript">const customer = await client.getMerchantAccountDetails({
+  referenceNumber: &quot;REF-000001&quot;,
+  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  merchantReferenceNumber: &quot;8110411076&quot;,
+});
+console.log(customer.customerName);</code></pre></div>
+</article>
+
+<article class="op" id="op-pay-bill" data-operation="pay-bill">
+  <div class="op-header">
+    <h3 class="op-name">Pay the bill</h3>
+    <a class="op-anchor" href="#op-pay-bill" aria-label="Link to Pay the bill">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /merchantPayment</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + merchantAccount + merchantReferenceNumber</span>
+  </div>
+  <p>Pays a bill from the business balance.</p>
+  <ul><li>There is no callback: decide on <code>responseCode</code>.</li>
+<li><code>integrationStatus</code> is for information only.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>payBill</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-pay-bill" type="button">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript">const bill = await client.payBill({
+  referenceNumber: &quot;BILL-2026-0042&quot;,
+  amount: 6000,
+  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  merchantReferenceNumber: &quot;8110411076&quot;,
+  merchantService: [&quot;STARTERE36&quot;],
+});
+if (bill.responseCode === 0) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<h2 id="next">Next</h2>
+<ul>
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit (Open Banking)</a></li>
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="status.html">Check the transaction status</a></li>
+<li><a href="business-account.html">Your business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent payment accounts</a></li>
+<li><a href="customers.html">Customer registration and KYC</a></li>
+  <li><a href="reference.html">All operations</a></li>
+</ul>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

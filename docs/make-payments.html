@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Make payments — paga-ts</title>
+<meta name="description" content="Send money out to a customer, a biller or a network. 14 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/make-payments.html">
+<meta property="og:title" content="Make payments — paga-ts">
+<meta property="og:description" content="Send money out to a customer, a biller or a network. 14 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/make-payments.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Make payments</h1>
+<p class="lead">Send money out to a customer, a biller or a network.</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h3><a href="money-transfer.html">Money Transfer</a></h3>
+    <p>Send money out of your business balance to a bank account or a Paga wallet.</p>
+  </div>
+  <div class="card">
+    <h3><a href="airtime.html">Airtime and data</a></h3>
+    <p>Top up a phone with airtime or a data bundle.</p>
+  </div>
+  <div class="card">
+    <h3><a href="bill-payment.html">Bill payment (VAS)</a></h3>
+    <p>Pay a biller on behalf of a customer: electricity, water, TV, airtime and more.</p>
+  </div>
+  <div class="card">
+    <h3><a href="status.html">Check the transaction status</a></h3>
+    <p>Find out what happened to a money transfer, airtime purchase or bill payment you already sent.</p>
+  </div>
+</div>
+
+<h2 id="operations">Operations in this section</h2>
+<div class="table-wrap">
+<table>
+<caption>4 sections, 14 operations</caption>
+<thead><tr><th scope="col">Operation</th><th scope="col">Endpoint</th><th scope="col">Section</th><th scope="col">Method</th></tr></thead>
+<tbody>
+<tr data-filter-item data-section="money-transfer" data-search="list institutions you can pay money transfer - get the bank&#39;s uuid post /getbanks money transfer getbanks">
+  <td><a href="#op-get-banks">List institutions you can pay</a></td>
+  <td><code>POST /getBanks</code></td>
+  <td>Money Transfer</td>
+  <td><code>getBanks</code></td>
+</tr>
+<tr data-filter-item data-section="money-transfer" data-search="validate the destination account money transfer - validate the account post /validatedeposittobank money transfer validatedeposittobank">
+  <td><a href="#op-validate-deposit-to-bank">Validate the destination account</a></td>
+  <td><code>POST /validateDepositToBank</code></td>
+  <td>Money Transfer</td>
+  <td><code>validateDepositToBank</code></td>
+</tr>
+<tr data-filter-item data-section="money-transfer" data-search="send money to a bank account money transfer - send the money post /deposittobank money transfer sendmoney">
+  <td><a href="#op-send-money">Send money to a bank account</a></td>
+  <td><code>POST /depositToBank</code></td>
+  <td>Money Transfer</td>
+  <td><code>sendMoney</code></td>
+</tr>
+<tr data-filter-item data-section="money-transfer" data-search="send money to a paga wallet business api - money transfer to a paga wallet post /moneytransfer money transfer transfertopagawallet">
+  <td><a href="#op-transfer-to-paga-wallet">Send money to a Paga wallet</a></td>
+  <td><code>POST /moneyTransfer</code></td>
+  <td>Money Transfer</td>
+  <td><code>transferToPagaWallet</code></td>
+</tr>
+<tr data-filter-item data-section="money-transfer" data-search="validate a paga wallet transfer business api - validate a money transfer post /validatemoneytransfer money transfer validatemoneytransfer">
+  <td><a href="#op-validate-money-transfer">Validate a Paga wallet transfer</a></td>
+  <td><code>POST /validateMoneyTransfer</code></td>
+  <td>Money Transfer</td>
+  <td><code>validateMoneyTransfer</code></td>
+</tr>
+<tr data-filter-item data-section="money-transfer" data-search="bulk money transfer business api - bulk money transfer post /moneytransferbulk money transfer sendbulkmoneytransfer">
+  <td><a href="#op-send-bulk-money-transfer">Bulk money transfer</a></td>
+  <td><code>POST /moneyTransferBulk</code></td>
+  <td>Money Transfer</td>
+  <td><code>sendBulkMoneyTransfer</code></td>
+</tr>
+<tr data-filter-item data-section="status" data-search="check the transaction status money transfer / airtime / bill payment - check the transaction status post /transactionstatus transaction status gettransactionstatus">
+  <td><a href="#op-get-transaction-status">Check the transaction status</a></td>
+  <td><code>POST /transactionStatus</code></td>
+  <td>Transaction status</td>
+  <td><code>getTransactionStatus</code></td>
+</tr>
+<tr data-filter-item data-section="airtime" data-search="list mobile operators airtime and data - get the mobile operator post /getmobileoperators airtime and data getmobileoperators">
+  <td><a href="#op-get-mobile-operators">List mobile operators</a></td>
+  <td><code>POST /getMobileOperators</code></td>
+  <td>Airtime and data</td>
+  <td><code>getMobileOperators</code></td>
+</tr>
+<tr data-filter-item data-section="airtime" data-search="list data bundles airtime and data - for data, pick a bundle post /getdatabundlebyoperator airtime and data getdatabundles">
+  <td><a href="#op-get-data-bundles">List data bundles</a></td>
+  <td><code>POST /getDataBundleByOperator</code></td>
+  <td>Airtime and data</td>
+  <td><code>getDataBundles</code></td>
+</tr>
+<tr data-filter-item data-section="airtime" data-search="buy airtime or data airtime and data - buy the airtime or data post /airtimepurchase airtime and data buyairtime">
+  <td><a href="#op-buy-airtime">Buy airtime or data</a></td>
+  <td><code>POST /airtimePurchase</code></td>
+  <td>Airtime and data</td>
+  <td><code>buyAirtime</code></td>
+</tr>
+<tr data-filter-item data-section="bill-payment" data-search="list billers bill payment - find the biller post /getmerchants bill payment getmerchants">
+  <td><a href="#op-get-merchants">List billers</a></td>
+  <td><code>POST /getMerchants</code></td>
+  <td>Bill payment</td>
+  <td><code>getMerchants</code></td>
+</tr>
+<tr data-filter-item data-section="bill-payment" data-search="list a biller&#39;s services bill payment - pick the service post /getmerchantservices bill payment getmerchantservices">
+  <td><a href="#op-get-merchant-services">List a biller's services</a></td>
+  <td><code>POST /getMerchantServices</code></td>
+  <td>Bill payment</td>
+  <td><code>getMerchantServices</code></td>
+</tr>
+<tr data-filter-item data-section="bill-payment" data-search="validate the customer bill payment - validate the customer post /getmerchantaccountdetails bill payment getmerchantaccountdetails">
+  <td><a href="#op-get-merchant-account-details">Validate the customer</a></td>
+  <td><code>POST /getMerchantAccountDetails</code></td>
+  <td>Bill payment</td>
+  <td><code>getMerchantAccountDetails</code></td>
+</tr>
+<tr data-filter-item data-section="bill-payment" data-search="pay the bill bill payment - pay the bill post /merchantpayment bill payment paybill">
+  <td><a href="#op-pay-bill">Pay the bill</a></td>
+  <td><code>POST /merchantPayment</code></td>
+  <td>Bill payment</td>
+  <td><code>payBill</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

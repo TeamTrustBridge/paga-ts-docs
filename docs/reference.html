@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All operations — paga-ts</title>
+<meta name="description" content="All 50 documented Paga Engine operations, with endpoints, auth styles, hash fields and TypeScript examples.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/reference.html">
+<meta property="og:title" content="All operations — paga-ts">
+<meta property="og:description" content="All 50 documented Paga Engine operations, with endpoints, auth styles, hash fields and TypeScript examples.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/reference.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html" aria-current="page">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>All operations</h1>
+<p class="lead">Every documented Paga Engine operation, in one place.</p>
+
+<div data-filter-root>
+  <div class="filter-group">
+    <input class="search" type="search" placeholder="Filter operations&hellip;  (press /)" data-filter-search aria-label="Filter operations">
+  </div>
+  <div class="filter-group">
+    <button class="filter" data-filter-section="all" type="button" aria-pressed="true">All</button>
+    <button class="filter" data-filter-section="checkout" type="button" aria-pressed="false">Checkout</button>
+    <button class="filter" data-filter-section="collection" type="button" aria-pressed="false">Collection</button>
+    <button class="filter" data-filter-section="refunds" type="button" aria-pressed="false">Refunds</button>
+    <button class="filter" data-filter-section="direct-debit" type="button" aria-pressed="false">Direct Debit</button>
+    <button class="filter" data-filter-section="money-transfer" type="button" aria-pressed="false">Money Transfer</button>
+    <button class="filter" data-filter-section="airtime" type="button" aria-pressed="false">Airtime and data</button>
+    <button class="filter" data-filter-section="bill-payment" type="button" aria-pressed="false">Bill payment</button>
+    <button class="filter" data-filter-section="status" type="button" aria-pressed="false">Transaction status</button>
+    <button class="filter" data-filter-section="business-account" type="button" aria-pressed="false">Business account</button>
+    <button class="filter" data-filter-section="subsidiary" type="button" aria-pressed="false">Subsidiary accounts</button>
+    <button class="filter" data-filter-section="persistent" type="button" aria-pressed="false">Persistent accounts</button>
+    <button class="filter" data-filter-section="customers" type="button" aria-pressed="false">Customers</button>
+  </div>
+  <p class="no-results" data-filter-empty hidden>No operation matches that filter.</p>
+
+<article class="op" id="op-verify-charge" data-operation="verify-charge" data-filter-item data-section="checkout" data-search="verify a charge checkout - verify a charge post /checkout/transaction/verify checkout verifycharge">
+  <div class="op-header">
+    <h3 class="op-name">Verify a charge</h3>
+    <a class="op-anchor" href="#op-verify-charge" aria-label="Link to Verify a charge">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /checkout/transaction/verify</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Checkout</span>
+    
+  </div>
+  <p>Confirms a Checkout payment from your server at any time, using its <code>paymentReference</code>. Uses HTTP Basic only — it sends no <code>hash</code> header.</p>
+  <ul><li><code>status_code</code> <code>0</code> means paid, <code>2</code> means pending.</li>
+<li>A pending charge is a legitimate answer, so the response is returned rather than raised.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>verifyCharge</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-verify-charge" type="button">Copy</button><pre><code id="code-typescript-verify-charge" class="language-typescript">const verified = await client.verifyCharge({
+  paymentReference: &quot;PAY-2026-0311&quot;,
+  publicKey: &quot;YOUR_PUBLIC_KEY&quot;,
+  amount: 50,
+});
+if (verified.status_code === 0) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-create-payment" data-operation="create-payment" data-filter-item data-section="collection" data-search="create a payment request dynamic virtual account - create a payment request post /paymentrequest collection createpayment">
+  <div class="op-header">
+    <h3 class="op-name">Create a payment request</h3>
+    <a class="op-anchor" href="#op-create-payment" aria-label="Link to Create a payment request">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Collection</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
+  </div>
+  <p>Creates a payment request. The customer pays via the payment methods you send, and Paga calls your callback when the payment completes.</p>
+  <ul><li>The same operation serves the Bank USSD, Paga wallet and USD bank transfer flows — pick the flow with <code>paymentMethods</code>.</li>
+<li><code>payer.email</code> takes part in the hash even when you omit it.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>createPayment</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-create-payment" type="button">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript">const payment = await client.createPayment({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+  amount: 50,
+  payerName: &quot;Bello Ramon&quot;,
+  payerPhoneNumber: &quot;08064343187&quot;,
+  payeeName: &quot;Your business name&quot;,
+  payerEmail: &quot;customer@example.com&quot;,
+  callBackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  paymentMethods: [&quot;BANK_TRANSFER&quot;],
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-payment-status" data-operation="get-payment-status" data-filter-item data-section="collection" data-search="check payment status dynamic virtual account - check payment status post /status collection getpaymentstatus">
+  <div class="op-header">
+    <h3 class="op-name">Check payment status</h3>
+    <a class="op-anchor" href="#op-get-payment-status" aria-label="Link to Check payment status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Collection</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the status of a payment request. The outer <code>statusCode</code> only says whether the status request worked; the payment's own status is in <code>data.statusCode</code>.</p>
+  <ul><li><code>data.statusCode</code> of <code>&quot;0&quot;</code> means the payment was paid.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getPaymentStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript">const status = await client.getPaymentStatus({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+});
+if (status.data?.statusCode === &quot;0&quot;) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-collect-banks" data-operation="get-collect-banks" data-filter-item data-section="collection" data-search="list the customer&#39;s banks bank ussd - get the customer&#39;s bank post /banks collection getcollectbanks">
+  <div class="op-header">
+    <h3 class="op-name">List the customer's banks</h3>
+    <a class="op-anchor" href="#op-get-collect-banks" aria-label="Link to List the customer&#39;s banks">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /banks</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Collection</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists the banks available for a Bank USSD payment. Send a bank's <code>uuid</code> as <code>payer.bankId</code> when creating a payment request, or as <code>autoSweep.bankPublicId</code> for subsidiary accounts.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getCollectBanks</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-collect-banks" type="button">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript">const banks = await client.getCollectBanks({ referenceNumber: &quot;REF-000001&quot; });
+for (const bank of banks.banks ?? []) {
+  console.log(bank.name, bank.uuid);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-usd-payment-status" data-operation="get-usd-payment-status" data-filter-item data-section="collection" data-search="check usd payment status bank transfer (ach, wire and swift) - check payment status post /status collection getusdpaymentstatus">
+  <div class="op-header">
+    <h3 class="op-name">Check USD payment status</h3>
+    <a class="op-anchor" href="#op-get-usd-payment-status" aria-label="Link to Check USD payment status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Collection</span>
+    <span class="tag tag-endpoint">referenceNumber + paymentCurrency</span>
+  </div>
+  <p>Returns the status of a USD payment request. Unlike the other <code>/status</code> operations, this one signs the currency as well as the reference number.</p>
+  <ul><li><code>data.statusCode</code> of <code>&quot;1&quot;</code> means the payment is still pending.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getUsdPaymentStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-usd-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript">const status = await client.getUsdPaymentStatus({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+  paymentCurrency: &quot;USD&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-payment-request-history" data-operation="get-payment-request-history" data-filter-item data-section="collection" data-search="payment request history collect api - payment request history post /history collection getpaymentrequesthistory">
+  <div class="op-header">
+    <h3 class="op-name">Payment request history</h3>
+    <a class="op-anchor" href="#op-get-payment-request-history" aria-label="Link to Payment request history">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /history</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Collection</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the history of your payment requests.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getPaymentRequestHistory</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-request-history" type="button">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript">const history = await client.getPaymentRequestHistory({
+  referenceNumber: &quot;REF-000001&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-refund-payment" data-operation="refund-payment" data-filter-item data-section="refunds" data-search="refund or cancel a payment request refunds - refund or cancel a payment request post /refund/v2 refunds refundpayment">
+  <div class="op-header">
+    <h3 class="op-name">Refund or cancel a payment request</h3>
+    <a class="op-anchor" href="#op-refund-payment" aria-label="Link to Refund or cancel a payment request">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /refund/v2</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Refunds</span>
+    <span class="tag tag-endpoint">referenceNumber + refundAmount</span>
+  </div>
+  <p>Refunds a paid payment request in full or in part, or cancels one that has not been paid.</p>
+  <ul><li>Send one request per partial refund, each with its own <code>referenceNumber</code>.</li>
+<li>Reusing a <code>referenceNumber</code> returns status code <code>102</code> and never refunds twice.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>refundPayment</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-refund-payment" type="button">Copy</button><pre><code id="code-typescript-refund-payment" class="language-typescript">const refund = await client.refundPayment({
+  referenceNumber: &quot;RFD-2026-0031&quot;,
+  paymentRequestReference: &quot;ORD-2026-0187&quot;,
+  refundAmount: 50,
+  reason: &quot;Item out of stock&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-refund-status" data-operation="get-refund-status" data-filter-item data-section="refunds" data-search="check refund status refunds - check refund status post /status refunds getrefundstatus">
+  <div class="op-header">
+    <h3 class="op-name">Check refund status</h3>
+    <a class="op-anchor" href="#op-get-refund-status" aria-label="Link to Check refund status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Refunds</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Checks whether a payment request was refunded. Call it with the **original** payment request's <code>referenceNumber</code>, not the refund's.</p>
+  <ul><li><code>data.refundStatus</code> becomes <code>&quot;refunded&quot;</code> once the refund is made.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getRefundStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-refund-status" type="button">Copy</button><pre><code id="code-typescript-get-refund-status" class="language-typescript">const status = await client.getRefundStatus({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+});
+if (status.data?.refundStatus === &quot;refunded&quot;) {
+  console.log(&quot;refunded&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-start-direct-debit-session" data-operation="start-direct-debit-session" data-filter-item data-section="direct-debit" data-search="start a hosted set-up session direct debit - start a hosted set-up session post /checkout/charge-process/start direct debit startdirectdebitsession">
+  <div class="op-header">
+    <h3 class="op-name">Start a hosted set-up session</h3>
+    <a class="op-anchor" href="#op-start-direct-debit-session" aria-label="Link to Start a hosted set-up session">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /checkout/charge-process/start</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    
+  </div>
+  <p>Creates a hosted session and returns the <code>checkoutUrl</code> to redirect your customer to. This endpoint uses HTTP Basic only — it sends no <code>hash</code> header.</p>
+  <ul><li>The session expiry and payment expiry are strings of seconds.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>startDirectDebitSession</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-start-direct-debit-session" type="button">Copy</button><pre><code id="code-typescript-start-direct-debit-session" class="language-typescript">const session = await client.startDirectDebitSession({
+  referenceNumber: &quot;DD-2026-0001&quot;,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  amountLimit: 50000,
+  callbackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+});
+console.log(session.data?.checkoutUrl);</code></pre></div>
+</article>
+
+<article class="op" id="op-create-direct-debit-mandate" data-operation="create-direct-debit-mandate" data-filter-item data-section="direct-debit" data-search="set up a mandate by api direct debit - set up a mandate by api post /paymentrequest direct debit createdirectdebitmandate">
+  <div class="op-header">
+    <h3 class="op-name">Set up a mandate by API</h3>
+    <a class="op-anchor" href="#op-create-direct-debit-mandate" aria-label="Link to Set up a mandate by API">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
+  </div>
+  <p>Creates a payment request with <code>paymentMethods</code> set to <code>[&quot;DIRECT_DEBIT&quot;]</code>, so the customer authorises you to debit their bank account.</p>
+  <ul><li>The authorisation transfer must come from mobile banking, internet banking or a branch — not from POS, USSD or ATM.</li>
+<li><code>payerCollectionFeeShare</code> and <code>payeeCollectionFeeShare</code> must sum to 1.0.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>createDirectDebitMandate</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-create-direct-debit-mandate" type="button">Copy</button><pre><code id="code-typescript-create-direct-debit-mandate" class="language-typescript">const mandate = await client.createDirectDebitMandate({
+  referenceNumber: &quot;DD-2026-0001&quot;,
+  amount: 5000,
+  payerName: &quot;Bello Ramon&quot;,
+  payerPhoneNumber: &quot;08064343187&quot;,
+  payeeName: &quot;Your business name&quot;,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  payerEmail: &quot;customer@example.com&quot;,
+  callBackUrl: &quot;https://yourstore.com/webhooks/mandate&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-mandate-status" data-operation="get-mandate-status" data-filter-item data-section="direct-debit" data-search="check mandate status direct debit - check mandate status post /status direct debit getmandatestatus">
+  <div class="op-header">
+    <h3 class="op-name">Check mandate status</h3>
+    <a class="op-anchor" href="#op-get-mandate-status" aria-label="Link to Check mandate status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns a mandate's status.</p>
+  <ul><li><code>data.statusCode</code> stays <code>&quot;1&quot;</code> / <code>&quot;pending&quot;</code> forever — it tells you nothing.</li>
+<li>Read <code>data.additionalData.mandate[].ProcessStatusId</code> instead: <code>PENDING</code>, <code>VERIFIED</code>, <code>APPROVED</code> or <code>REJECTED</code>. Charge only when it is <code>APPROVED</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMandateStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-mandate-status" class="language-typescript">const status = await client.getMandateStatus({
+  referenceNumber: &quot;DD-2026-0001&quot;,
+});
+if (status.data?.additionalData?.mandate?.[0]?.ProcessStatusId === &quot;APPROVED&quot;) {
+  console.log(&quot;ready to charge&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-charge-mandate" data-operation="charge-mandate" data-filter-item data-section="direct-debit" data-search="charge the mandate direct debit - charge the mandate post /chargedebitmandate direct debit chargemandate">
+  <div class="op-header">
+    <h3 class="op-name">Charge the mandate</h3>
+    <a class="op-anchor" href="#op-charge-mandate" aria-label="Link to Charge the mandate">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /chargeDebitMandate</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + accountReference</span>
+  </div>
+  <p>Debits an approved mandate for any amount up to its limit.</p>
+  <ul><li>A successful response means the charge was **accepted**, not completed — fulfil only once the charge callback confirms it.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>chargeMandate</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-mandate" type="button">Copy</button><pre><code id="code-typescript-charge-mandate" class="language-typescript">const charge = await client.chargeMandate({
+  referenceNumber: &quot;DD-CHARGE-0001&quot;,
+  amount: 600,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-charge-mandate-status" data-operation="get-charge-mandate-status" data-filter-item data-section="direct-debit" data-search="check charge status direct debit - check charge status post /getchargemandatestatus direct debit getchargemandatestatus">
+  <div class="op-header">
+    <h3 class="op-name">Check charge status</h3>
+    <a class="op-anchor" href="#op-get-charge-mandate-status" aria-label="Link to Check charge status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /getChargeMandateStatus</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the status of a mandate charge, using the charge's own <code>referenceNumber</code>.</p>
+  <ul><li><code>data.statusCode</code> is <code>0</code> charged, <code>1</code> pending, <code>-1</code> invalid and <code>-4</code> unknown.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getChargeMandateStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-charge-mandate-status" type="button">Copy</button><pre><code id="code-typescript-get-charge-mandate-status" class="language-typescript">const status = await client.getChargeMandateStatus({
+  referenceNumber: &quot;DD-CHARGE-0001&quot;,
+});
+if (status.data?.statusCode === 0) {
+  console.log(&quot;charged&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-disable-mandate" data-operation="disable-mandate" data-filter-item data-section="direct-debit" data-search="disable a mandate direct debit - disable a mandate post /disablemandate direct debit disablemandate">
+  <div class="op-header">
+    <h3 class="op-name">Disable a mandate</h3>
+    <a class="op-anchor" href="#op-disable-mandate" aria-label="Link to Disable a mandate">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /disableMandate</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Direct Debit</span>
+    <span class="tag tag-endpoint">referenceNumber + accountReference</span>
+  </div>
+  <p>Stops all future charges on a mandate. Its <code>ProcessStatusId</code> then becomes <code>REJECTED</code>, and it can never be charged again.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>disableMandate</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-disable-mandate" type="button">Copy</button><pre><code id="code-typescript-disable-mandate" class="language-typescript">await client.disableMandate({
+  referenceNumber: &quot;DD-DIS-0001&quot;,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-banks" data-operation="get-banks" data-filter-item data-section="money-transfer" data-search="list institutions you can pay money transfer - get the bank&#39;s uuid post /getbanks money transfer getbanks">
+  <div class="op-header">
+    <h3 class="op-name">List institutions you can pay</h3>
+    <a class="op-anchor" href="#op-get-banks" aria-label="Link to List institutions you can pay">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getBanks</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists every institution money can be sent to, with the <code>uuid</code> you send as <code>destinationBankUUID</code>.</p>
+  <ul><li>UUIDs never change, but new institutions are added every month — cache the list and refresh it weekly or monthly.</li>
+<li>To send to a Paga wallet, use Paga's UUID <code>AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getBanks</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-banks" type="button">Copy</button><pre><code id="code-typescript-get-banks" class="language-typescript">const banks = await client.getBanks({ referenceNumber: &quot;REF-000001&quot; });
+for (const bank of banks.banks ?? []) {
+  console.log(bank.name, bank.uuid);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-validate-deposit-to-bank" data-operation="validate-deposit-to-bank" data-filter-item data-section="money-transfer" data-search="validate the destination account money transfer - validate the account post /validatedeposittobank money transfer validatedeposittobank">
+  <div class="op-header">
+    <h3 class="op-name">Validate the destination account</h3>
+    <a class="op-anchor" href="#op-validate-deposit-to-bank" aria-label="Link to Validate the destination account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /validateDepositToBank</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber</span>
+  </div>
+  <p>Confirms the account exists and returns the account holder's name and the fee, before any money moves.</p>
+  <ul><li>Send <code>amount</code> exactly as you will send it later: <code>&quot;5000.00&quot;</code> and <code>&quot;5000&quot;</code> sign differently.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>validateDepositToBank</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-validate-deposit-to-bank" type="button">Copy</button><pre><code id="code-typescript-validate-deposit-to-bank" class="language-typescript">const validation = await client.validateDepositToBank({
+  referenceNumber: &quot;REF-000002&quot;,
+  amount: &quot;5000.00&quot;,
+  destinationBankUUID: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
+  destinationBankAccountNumber: &quot;0000000000&quot;,
+});
+console.log(validation.destinationAccountHolderNameAtBank, validation.fee);</code></pre></div>
+</article>
+
+<article class="op" id="op-send-money" data-operation="send-money" data-filter-item data-section="money-transfer" data-search="send money to a bank account money transfer - send the money post /deposittobank money transfer sendmoney">
+  <div class="op-header">
+    <h3 class="op-name">Send money to a bank account</h3>
+    <a class="op-anchor" href="#op-send-money" aria-label="Link to Send money to a bank account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /depositToBank</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber</span>
+  </div>
+  <p>Sends money from the business balance to a bank account, or to a Paga wallet using Paga's UUID.</p>
+  <ul><li>Send <code>amount</code> as a string (e.g. <code>&quot;5000.00&quot;</code>) — it is signed verbatim.</li>
+<li>There is no callback for the outcome; use the transaction status endpoint.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>sendMoney</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-send-money" type="button">Copy</button><pre><code id="code-typescript-send-money" class="language-typescript">const transfer = await client.sendMoney({
+  referenceNumber: &quot;PAY-2026-0311&quot;,
+  amount: &quot;5000.00&quot;,
+  destinationBankUUID: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
+  destinationBankAccountNumber: &quot;0000000000&quot;,
+  remarks: &quot;Salary for June&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-transfer-to-paga-wallet" data-operation="transfer-to-paga-wallet" data-filter-item data-section="money-transfer" data-search="send money to a paga wallet business api - money transfer to a paga wallet post /moneytransfer money transfer transfertopagawallet">
+  <div class="op-header">
+    <h3 class="op-name">Send money to a Paga wallet</h3>
+    <a class="op-anchor" href="#op-transfer-to-paga-wallet" aria-label="Link to Send money to a Paga wallet">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /moneyTransfer</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount</span>
+  </div>
+  <p>Sends money from the business balance to a Paga user, identified by their phone number, nickname or account number.</p>
+  <ul><li><code>referenceNumber</code> must be at most 50 characters.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>transferToPagaWallet</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-transfer-to-paga-wallet" type="button">Copy</button><pre><code id="code-typescript-transfer-to-paga-wallet" class="language-typescript">const transfer = await client.transferToPagaWallet({
+  referenceNumber: &quot;PAY-2026-0312&quot;,
+  amount: 5000,
+  destinationAccount: &quot;08064343187&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-validate-money-transfer" data-operation="validate-money-transfer" data-filter-item data-section="money-transfer" data-search="validate a paga wallet transfer business api - validate a money transfer post /validatemoneytransfer money transfer validatemoneytransfer">
+  <div class="op-header">
+    <h3 class="op-name">Validate a Paga wallet transfer</h3>
+    <a class="op-anchor" href="#op-validate-money-transfer" aria-label="Link to Validate a Paga wallet transfer">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /validateMoneyTransfer</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount</span>
+  </div>
+  <p>Confirms the recipient exists and returns their name, registration status, KYC level and the fee, before any money moves.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>validateMoneyTransfer</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-validate-money-transfer" type="button">Copy</button><pre><code id="code-typescript-validate-money-transfer" class="language-typescript">const validation = await client.validateMoneyTransfer({
+  referenceNumber: &quot;REF-000003&quot;,
+  amount: 5000,
+  destinationAccount: &quot;08064343187&quot;,
+});
+console.log(validation.recipientAccountHolderName, validation.fee);</code></pre></div>
+</article>
+
+<article class="op" id="op-send-bulk-money-transfer" data-operation="send-bulk-money-transfer" data-filter-item data-section="money-transfer" data-search="bulk money transfer business api - bulk money transfer post /moneytransferbulk money transfer sendbulkmoneytransfer">
+  <div class="op-header">
+    <h3 class="op-name">Bulk money transfer</h3>
+    <a class="op-anchor" href="#op-send-bulk-money-transfer" aria-label="Link to Bulk money transfer">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /moneyTransferBulk</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Money Transfer</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationAccount + itemCount</span>
+  </div>
+  <p>Sends up to 300 money transfers in one call.</p>
+  <ul><li>Paga hashes the **first item's** reference number, amount and destination account, followed by the total number of items — the SDK does that for you.</li>
+<li>A bulk transfer can partially succeed, so check every entry in <code>results</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>sendBulkMoneyTransfer</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-send-bulk-money-transfer" type="button">Copy</button><pre><code id="code-typescript-send-bulk-money-transfer" class="language-typescript">const bulk = await client.sendBulkMoneyTransfer({
+  items: [
+    { referenceNumber: &quot;ITEM-1&quot;, amount: 100, destinationAccount: &quot;08064343187&quot; },
+    { referenceNumber: &quot;ITEM-2&quot;, amount: 200, destinationAccount: &quot;08064343188&quot; },
+  ],
+  bulkReferenceNumber: &quot;BULK-2026-0001&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-transaction-status" data-operation="get-transaction-status" data-filter-item data-section="status" data-search="check the transaction status money transfer / airtime / bill payment - check the transaction status post /transactionstatus transaction status gettransactionstatus">
+  <div class="op-header">
+    <h3 class="op-name">Check the transaction status</h3>
+    <a class="op-anchor" href="#op-get-transaction-status" aria-label="Link to Check the transaction status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /transactionStatus</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Transaction status</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Checks what happened to a transaction you already sent. It covers money transfers, airtime purchases and bill payments.</p>
+  <ul><li>Only the last 48 hours are covered.</li>
+<li>After a timeout or an ambiguous response, wait at least 5 seconds before the first check.</li>
+<li>The <code>status</code> field is human-readable and may be reworded — branch on <code>responseCode</code>, not on <code>status</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getTransactionStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-transaction-status" type="button">Copy</button><pre><code id="code-typescript-get-transaction-status" class="language-typescript">const status = await client.getTransactionStatus({
+  referenceNumber: &quot;PAY-2026-0311&quot;,
+});
+if (status.responseCode === 0) {
+  console.log(&quot;settled&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-mobile-operators" data-operation="get-mobile-operators" data-filter-item data-section="airtime" data-search="list mobile operators airtime and data - get the mobile operator post /getmobileoperators airtime and data getmobileoperators">
+  <div class="op-header">
+    <h3 class="op-name">List mobile operators</h3>
+    <a class="op-anchor" href="#op-get-mobile-operators" aria-label="Link to List mobile operators">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMobileOperators</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Airtime and data</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists the networks you can top up.</p>
+  <ul><li>Send a network's <code>mobileOperatorCode</code> as <code>mobileOperatorPublicId</code> when buying, and as <code>operatorPublicId</code> when listing data bundles.</li>
+<li>Cache the list.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMobileOperators</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-mobile-operators" type="button">Copy</button><pre><code id="code-typescript-get-mobile-operators" class="language-typescript">const operators = await client.getMobileOperators({
+  referenceNumber: &quot;REF-000001&quot;,
+});
+for (const operator of operators.mobileOperator ?? []) {
+  console.log(operator.name, operator.mobileOperatorCode);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-data-bundles" data-operation="get-data-bundles" data-filter-item data-section="airtime" data-search="list data bundles airtime and data - for data, pick a bundle post /getdatabundlebyoperator airtime and data getdatabundles">
+  <div class="op-header">
+    <h3 class="op-name">List data bundles</h3>
+    <a class="op-anchor" href="#op-get-data-bundles" aria-label="Link to List data bundles">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getDataBundleByOperator</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Airtime and data</span>
+    <span class="tag tag-endpoint">referenceNumber + operatorPublicId</span>
+  </div>
+  <p>Lists a network's data bundles.</p>
+  <ul><li>Send a bundle's <code>serviceId</code> as <code>mobileOperatorServiceId</code> and **exactly** its <code>servicePrice</code> as <code>amount</code>.</li>
+<li>Bundles rarely change, so cache the list and refresh it monthly.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getDataBundles</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-data-bundles" type="button">Copy</button><pre><code id="code-typescript-get-data-bundles" class="language-typescript">const bundles = await client.getDataBundles({
+  referenceNumber: &quot;REF-000001&quot;,
+  operatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-buy-airtime" data-operation="buy-airtime" data-filter-item data-section="airtime" data-search="buy airtime or data airtime and data - buy the airtime or data post /airtimepurchase airtime and data buyairtime">
+  <div class="op-header">
+    <h3 class="op-name">Buy airtime or data</h3>
+    <a class="op-anchor" href="#op-buy-airtime" aria-label="Link to Buy airtime or data">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /airtimePurchase</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Airtime and data</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + destinationPhoneNumber</span>
+  </div>
+  <p>Tops up a phone with airtime or data from the business balance.</p>
+  <ul><li>There is no callback: decide on <code>responseCode</code>, and check the transaction status if you need to.</li>
+<li>For a data bundle, <code>amount</code> must be exactly the bundle's <code>servicePrice</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>buyAirtime</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-buy-airtime" type="button">Copy</button><pre><code id="code-typescript-buy-airtime" class="language-typescript">const purchase = await client.buyAirtime({
+  referenceNumber: &quot;AIR-2026-0042&quot;,
+  amount: &quot;500&quot;,
+  destinationPhoneNumber: &quot;08063332187&quot;,
+  mobileOperatorPublicId: &quot;42419156-DD57-4737-8373-20678CD9AA29&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-merchants" data-operation="get-merchants" data-filter-item data-section="bill-payment" data-search="list billers bill payment - find the biller post /getmerchants bill payment getmerchants">
+  <div class="op-header">
+    <h3 class="op-name">List billers</h3>
+    <a class="op-anchor" href="#op-get-merchants" aria-label="Link to List billers">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchants</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Bill payment</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists every biller, with the <code>uuid</code> you send as <code>merchantAccount</code>. Cache the list.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getMerchants</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchants" type="button">Copy</button><pre><code id="code-typescript-get-merchants" class="language-typescript">const merchants = await client.getMerchants({ referenceNumber: &quot;REF-000001&quot; });
+for (const merchant of merchants.merchants ?? []) {
+  console.log(merchant.displayName, merchant.uuid);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-merchant-services" data-operation="get-merchant-services" data-filter-item data-section="bill-payment" data-search="list a biller&#39;s services bill payment - pick the service post /getmerchantservices bill payment getmerchantservices">
+  <div class="op-header">
+    <h3 class="op-name">List a biller's services</h3>
+    <a class="op-anchor" href="#op-get-merchant-services" aria-label="Link to List a biller&#39;s services">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchantServices</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Bill payment</span>
+    <span class="tag tag-endpoint">referenceNumber + merchantPublicId</span>
+  </div>
+  <p>Lists what a biller can be paid for.</p>
+  <ul><li>No services means any amount is allowed.</li>
+<li>A service with <code>price</code> <code>0.0</code> means the customer chooses the amount; otherwise pay the service's <code>price</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMerchantServices</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-services" type="button">Copy</button><pre><code id="code-typescript-get-merchant-services" class="language-typescript">const services = await client.getMerchantServices({
+  referenceNumber: &quot;REF-000001&quot;,
+  merchantPublicId: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-merchant-account-details" data-operation="get-merchant-account-details" data-filter-item data-section="bill-payment" data-search="validate the customer bill payment - validate the customer post /getmerchantaccountdetails bill payment getmerchantaccountdetails">
+  <div class="op-header">
+    <h3 class="op-name">Validate the customer</h3>
+    <a class="op-anchor" href="#op-get-merchant-account-details" aria-label="Link to Validate the customer">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getMerchantAccountDetails</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Bill payment</span>
+    <span class="tag tag-endpoint">referenceNumber + merchantAccount + merchantReferenceNumber + merchantServiceProductCode</span>
+  </div>
+  <p>Checks a meter, smart card or account number and returns the customer's name.</p>
+  <ul><li>If the customer chose a service, always send its <code>code</code> as <code>merchantServiceProductCode</code>.</li>
+<li>Billers that don't need it still take part in the hash — send <code>&quot;&quot;</code> when there is no service.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getMerchantAccountDetails</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-merchant-account-details" type="button">Copy</button><pre><code id="code-typescript-get-merchant-account-details" class="language-typescript">const customer = await client.getMerchantAccountDetails({
+  referenceNumber: &quot;REF-000001&quot;,
+  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  merchantReferenceNumber: &quot;8110411076&quot;,
+});
+console.log(customer.customerName);</code></pre></div>
+</article>
+
+<article class="op" id="op-pay-bill" data-operation="pay-bill" data-filter-item data-section="bill-payment" data-search="pay the bill bill payment - pay the bill post /merchantpayment bill payment paybill">
+  <div class="op-header">
+    <h3 class="op-name">Pay the bill</h3>
+    <a class="op-anchor" href="#op-pay-bill" aria-label="Link to Pay the bill">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /merchantPayment</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Bill payment</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + merchantAccount + merchantReferenceNumber</span>
+  </div>
+  <p>Pays a bill from the business balance.</p>
+  <ul><li>There is no callback: decide on <code>responseCode</code>.</li>
+<li><code>integrationStatus</code> is for information only.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>payBill</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-pay-bill" type="button">Copy</button><pre><code id="code-typescript-pay-bill" class="language-typescript">const bill = await client.payBill({
+  referenceNumber: &quot;BILL-2026-0042&quot;,
+  amount: 6000,
+  merchantAccount: &quot;A3878DC1-F07D-48E7-AA59-8276C3C26647&quot;,
+  merchantReferenceNumber: &quot;8110411076&quot;,
+  merchantService: [&quot;STARTERE36&quot;],
+});
+if (bill.responseCode === 0) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-business-balance" data-operation="get-business-balance" data-filter-item data-section="business-account" data-search="check the business account balance your business account - check your balance post /accountbalance business account getbusinessbalance">
+  <div class="op-header">
+    <h3 class="op-name">Check the business account balance</h3>
+    <a class="op-anchor" href="#op-get-business-balance" aria-label="Link to Check the business account balance">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /accountBalance</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the business account balance.</p>
+  <ul><li>Check <code>availableBalance</code>, not <code>totalBalance</code>, before a payout run — it is what you can actually send.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getBusinessBalance</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-balance" type="button">Copy</button><pre><code id="code-typescript-get-business-balance" class="language-typescript">const balance = await client.getBusinessBalance({
+  referenceNumber: &quot;BAL-2026-0042&quot;,
+});
+console.log(balance.availableBalance);</code></pre></div>
+</article>
+
+<article class="op" id="op-get-business-transactions" data-operation="get-business-transactions" data-filter-item data-section="business-account" data-search="get the transaction history your business account - get your transaction history post /transactionhistory business account getbusinesstransactions">
+  <div class="op-header">
+    <h3 class="op-name">Get the transaction history</h3>
+    <a class="op-anchor" href="#op-get-business-transactions" aria-label="Link to Get the transaction history">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /transactionHistory</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns every transaction on the business account between two dates: money in, money out and fees, up to 10,000 at a time.</p>
+  <ul><li>Use it to reconcile your records with Paga's.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getBusinessTransactions</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-business-transactions" type="button">Copy</button><pre><code id="code-typescript-get-business-transactions" class="language-typescript">const history = await client.getBusinessTransactions({
+  referenceNumber: &quot;HIS-2026-0042&quot;,
+  startDateUTC: &quot;2026-11-01T00:00:00&quot;,
+  endDateUTC: &quot;2026-11-04T00:00:00&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-recent-transactions" data-operation="get-recent-transactions" data-filter-item data-section="business-account" data-search="get the recent transactions your business account - get your recent transactions post /recenttransactionhistory business account getrecenttransactions">
+  <div class="op-header">
+    <h3 class="op-name">Get the recent transactions</h3>
+    <a class="op-anchor" href="#op-get-recent-transactions" aria-label="Link to Get the recent transactions">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /recentTransactionHistory</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the last five transactions on the business account, newest first, without a date range.</p>
+  <ul><li>For anything further back, use the transaction history endpoint.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getRecentTransactions</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-recent-transactions" type="button">Copy</button><pre><code id="code-typescript-get-recent-transactions" class="language-typescript">const recent = await client.getRecentTransactions({
+  referenceNumber: &quot;REF-000001&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-operation-status" data-operation="get-operation-status" data-filter-item data-section="business-account" data-search="check an operation&#39;s status business api - get an operation status post /getoperationstatus business account getoperationstatus">
+  <div class="op-header">
+    <h3 class="op-name">Check an operation's status</h3>
+    <a class="op-anchor" href="#op-get-operation-status" aria-label="Link to Check an operation&#39;s status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /getOperationStatus</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the status of a business operation.</p>
+  <ul><li>The status is in <code>transactionStatus</code>, not <code>status</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getOperationStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-operation-status" type="button">Copy</button><pre><code id="code-typescript-get-operation-status" class="language-typescript">const status = await client.getOperationStatus({
+  referenceNumber: &quot;PAY-2026-0311&quot;,
+});
+console.log(status.transactionStatus);</code></pre></div>
+</article>
+
+<article class="op" id="op-onboard-merchant" data-operation="onboard-merchant" data-filter-item data-section="business-account" data-search="onboard a merchant business api - onboard a merchant post /onboardmerchant business account onboardmerchant">
+  <div class="op-header">
+    <h3 class="op-name">Onboard a merchant</h3>
+    <a class="op-anchor" href="#op-onboard-merchant" aria-label="Link to Onboard a merchant">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /onboardMerchant</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber + merchantExternalId + name + phone + email</span>
+  </div>
+  <p>Onboards a merchant and returns the credentials Paga issues for it.</p>
+  <ul><li>For aggregators only.</li>
+<li>Paga names the request field <code>reference</code>, not <code>referenceNumber</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>onboardMerchant</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-onboard-merchant" type="button">Copy</button><pre><code id="code-typescript-onboard-merchant" class="language-typescript">const merchant = await client.onboardMerchant({
+  reference: &quot;REF-000001&quot;,
+  merchantExternalId: &quot;MERCH-1&quot;,
+  legalEntity: { name: &quot;Acme Ltd&quot; },
+  legalEntityRepresentative: {
+    firstName: &quot;Bello&quot;,
+    lastName: &quot;Ramon&quot;,
+    phone: &quot;080643643187&quot;,
+    email: &quot;director@example.com&quot;,
+    dateOfBirth: &quot;1989-10-02&quot;,
+  },
+  integration: {
+    type: &quot;EMAIL_NOTIFICATION&quot;,
+    financeAdminEmail: &quot;finance@example.com&quot;,
+  },
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-dispense-cash" data-operation="dispense-cash" data-filter-item data-section="business-account" data-search="dispense cash business api - dispense cash post /dispensecash business account dispensecash">
+  <div class="op-header">
+    <h3 class="op-name">Dispense cash</h3>
+    <a class="op-anchor" href="#op-dispense-cash" aria-label="Link to Dispense cash">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /dispenseCash</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Business account</span>
+    <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + amount + withdrawalCode</span>
+  </div>
+  <p>Dispenses cash against a customer's withdrawal code.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>dispenseCash</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-dispense-cash" type="button">Copy</button><pre><code id="code-typescript-dispense-cash" class="language-typescript">const cash = await client.dispenseCash({
+  referenceNumber: &quot;CASH-2026-0042&quot;,
+  customerPhoneNumber: &quot;08064343187&quot;,
+  amount: 5000,
+  withdrawalCode: &quot;123456&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-create-subsidiary-account" data-operation="create-subsidiary-account" data-filter-item data-section="subsidiary" data-search="create a subsidiary account subsidiary accounts - create an account post /subsidiary-accounts subsidiary accounts createsubsidiaryaccount">
+  <div class="op-header">
+    <h3 class="op-name">Create a subsidiary account</h3>
+    <a class="op-anchor" href="#op-create-subsidiary-account" aria-label="Link to Create a subsidiary account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /subsidiary-accounts</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountReference + iifiNumber + autoSweep.bankPublicId + autoSweep.destination + autoSweep.accountNumber + callbackUrl</span>
+  </div>
+  <p>Creates a Paga account for one of your customers.</p>
+  <ul><li>Leave out <code>autoSweep</code> for a ledger-backed account that holds funds; set <code>autoSweep.destination</code> to <code>VIRTUAL_ACCOUNT</code> or <code>BANK</code> for a virtual account that settles straight away.</li>
+<li>Reusing a <code>referenceNumber</code> or <code>accountReference</code> returns status code <code>102</code> and never creates a second account.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>createSubsidiaryAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-create-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-create-subsidiary-account" class="language-typescript">const account = await client.createSubsidiaryAccount({
+  referenceNumber: &quot;REF-000005&quot;,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  accountName: &quot;Bello Ramon&quot;,
+  iifiNumber: &quot;22222132329&quot;,
+  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+});
+if (account.statusCode === &quot;102&quot;) {
+  console.log(&quot;duplicate reference&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-charge-subsidiary-account" data-operation="charge-subsidiary-account" data-filter-item data-section="subsidiary" data-search="charge a subsidiary account subsidiary accounts - charge an account post /subsidiary-accounts/{accountreference}/charge subsidiary accounts chargesubsidiaryaccount">
+  <div class="op-header">
+    <h3 class="op-name">Charge a subsidiary account</h3>
+    <a class="op-anchor" href="#op-charge-subsidiary-account" aria-label="Link to Charge a subsidiary account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/charge</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
+  </div>
+  <p>Debits a ledger-backed subsidiary account.</p>
+  <ul><li>Not available on virtual accounts.</li>
+<li>Retrying with the same <code>referenceNumber</code> never moves money twice.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>chargeSubsidiaryAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-charge-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-charge-subsidiary-account" class="language-typescript">const charge = await client.chargeSubsidiaryAccount({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-CHARGE-001&quot;,
+  amount: 1000,
+  narration: &quot;Service fee&quot;,
+});
+console.log(charge.newBalance);</code></pre></div>
+</article>
+
+<article class="op" id="op-top-up-subsidiary-account" data-operation="top-up-subsidiary-account" data-filter-item data-section="subsidiary" data-search="top up a subsidiary account subsidiary accounts - top up an account post /subsidiary-accounts/{accountreference}/topup subsidiary accounts topupsubsidiaryaccount">
+  <div class="op-header">
+    <h3 class="op-name">Top up a subsidiary account</h3>
+    <a class="op-anchor" href="#op-top-up-subsidiary-account" aria-label="Link to Top up a subsidiary account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /subsidiary-accounts/{accountReference}/topup</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + narration</span>
+  </div>
+  <p>Credits a ledger-backed subsidiary account from your business balance.</p>
+  <ul><li>Not available on virtual accounts.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>topUpSubsidiaryAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-top-up-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-top-up-subsidiary-account" class="language-typescript">const topUp = await client.topUpSubsidiaryAccount({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-TOPUP-001&quot;,
+  amount: 500,
+  narration: &quot;Bonus credit&quot;,
+});
+console.log(topUp.newBalance);</code></pre></div>
+</article>
+
+<article class="op" id="op-transfer-between-subsidiary-accounts" data-operation="transfer-between-subsidiary-accounts" data-filter-item data-section="subsidiary" data-search="transfer between subsidiary accounts subsidiary accounts - transfer between accounts post /subsidiary-accounts/transfer subsidiary accounts transferbetweensubsidiaryaccounts">
+  <div class="op-header">
+    <h3 class="op-name">Transfer between subsidiary accounts</h3>
+    <a class="op-anchor" href="#op-transfer-between-subsidiary-accounts" aria-label="Link to Transfer between subsidiary accounts">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /subsidiary-accounts/transfer</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + sourceAccountIdentifier + destinationAccountIdentifier + amount + currency + narration</span>
+  </div>
+  <p>Moves money between two ledger-backed subsidiary accounts.</p>
+  <ul><li>Paga sends one callback, for the source account only.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>transferBetweenSubsidiaryAccounts</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-transfer-between-subsidiary-accounts" type="button">Copy</button><pre><code id="code-typescript-transfer-between-subsidiary-accounts" class="language-typescript">const transfer = await client.transferBetweenSubsidiaryAccounts({
+  sourceAccountReference: &quot;CUST-000184-WALLET&quot;,
+  destinationAccountReference: &quot;CUST-000221-WALLET&quot;,
+  referenceNumber: &quot;REF-TRANSFER-001&quot;,
+  amount: 1500,
+  narration: &quot;Payment for goods&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-retrieve-subsidiary-account" data-operation="retrieve-subsidiary-account" data-filter-item data-section="subsidiary" data-search="retrieve a subsidiary account subsidiary accounts - retrieve an account get /subsidiary-accounts/{accountreference} subsidiary accounts retrievesubsidiaryaccount">
+  <div class="op-header">
+    <h3 class="op-name">Retrieve a subsidiary account</h3>
+    <a class="op-anchor" href="#op-retrieve-subsidiary-account" aria-label="Link to Retrieve a subsidiary account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
+  </div>
+  <p>Returns an account's details, limits, callback URL and balance.</p>
+  <ul><li>The <code>accountIdentifier</code> is the account's <code>accountReference</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>retrieveSubsidiaryAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-retrieve-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-retrieve-subsidiary-account" class="language-typescript">const account = await client.retrieveSubsidiaryAccount({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-GET-001&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-update-subsidiary-account" data-operation="update-subsidiary-account" data-filter-item data-section="subsidiary" data-search="update a subsidiary account subsidiary accounts - update an account put /subsidiary-accounts/{accountreference} subsidiary accounts updatesubsidiaryaccount">
+  <div class="op-header">
+    <h3 class="op-name">Update a subsidiary account</h3>
+    <a class="op-anchor" href="#op-update-subsidiary-account" aria-label="Link to Update a subsidiary account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">PUT /subsidiary-accounts/{accountReference}</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier + iifiNumber + autoSweep.destination + autoSweep.bankPublicId + autoSweep.accountNumber + callbackUrl</span>
+  </div>
+  <p>Changes an account.</p>
+  <ul><li>Send only what you want to change.</li>
+<li><code>accountNumber</code> and <code>accountReference</code> cannot be changed.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>updateSubsidiaryAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-update-subsidiary-account" type="button">Copy</button><pre><code id="code-typescript-update-subsidiary-account" class="language-typescript">const account = await client.updateSubsidiaryAccount({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-UPDATE-001&quot;,
+  status: &quot;DISABLED&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-subsidiary-balance" data-operation="get-subsidiary-balance" data-filter-item data-section="subsidiary" data-search="get a subsidiary account balance subsidiary accounts - get the balance get /subsidiary-accounts/{accountreference}/balance subsidiary accounts getsubsidiarybalance">
+  <div class="op-header">
+    <h3 class="op-name">Get a subsidiary account balance</h3>
+    <a class="op-anchor" href="#op-get-subsidiary-balance" aria-label="Link to Get a subsidiary account balance">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/balance</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
+  </div>
+  <p>Returns an account's balance.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getSubsidiaryBalance</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-balance" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-balance" class="language-typescript">const balance = await client.getSubsidiaryBalance({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-BAL-001&quot;,
+});
+console.log(balance.balance);</code></pre></div>
+</article>
+
+<article class="op" id="op-get-subsidiary-history" data-operation="get-subsidiary-history" data-filter-item data-section="subsidiary" data-search="get a subsidiary account history subsidiary accounts - get transaction history get /subsidiary-accounts/{accountreference}/history subsidiary accounts getsubsidiaryhistory">
+  <div class="op-header">
+    <h3 class="op-name">Get a subsidiary account history</h3>
+    <a class="op-anchor" href="#op-get-subsidiary-history" aria-label="Link to Get a subsidiary account history">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">GET /subsidiary-accounts/{accountReference}/history</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Subsidiary accounts</span>
+    <span class="tag tag-endpoint">accountIdentifier + startDateTimeUTC + endDateTimeUTC</span>
+  </div>
+  <p>Returns an account's transactions.</p>
+  <ul><li>Up to three months at a time.</li>
+<li>Pages start at <code>0</code>.</li>
+<li><code>referenceNumber</code> is required as a query parameter, but is not part of the hash.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getSubsidiaryHistory</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-subsidiary-history" type="button">Copy</button><pre><code id="code-typescript-get-subsidiary-history" class="language-typescript">const history = await client.getSubsidiaryHistory({
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  referenceNumber: &quot;REF-HIS-001&quot;,
+  startDateTimeUTC: &quot;2026-06-01T00:00:00&quot;,
+  endDateTimeUTC: &quot;2026-06-30T23:59:59&quot;,
+  pageNumber: 0,
+  pageSize: 20,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-register-persistent-payment-account" data-operation="register-persistent-payment-account" data-filter-item data-section="persistent" data-search="register a persistent payment account collect api - register a persistent payment account post /registerpersistentpaymentaccount persistent accounts registerpersistentpaymentaccount">
+  <div class="op-header">
+    <h3 class="op-name">Register a persistent payment account</h3>
+    <a class="op-anchor" href="#op-register-persistent-payment-account" aria-label="Link to Register a persistent payment account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /registerPersistentPaymentAccount</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Persistent accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountReference + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
+  </div>
+  <p>Registers a standing instruction that lets a customer pay you repeatedly from the same account.</p>
+  <ul><li><code>accountReference</code> must be 11 to 30 characters.</li>
+<li>Paga calls your <code>callbackUrl</code> whenever the account is funded.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>registerPersistentPaymentAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-register-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-register-persistent-payment-account" class="language-typescript">const account = await client.registerPersistentPaymentAccount({
+  referenceNumber: &quot;REF-000006&quot;,
+  accountReference: &quot;CUST-000184-WALLET&quot;,
+  financialIdentificationNumber: &quot;22222132329&quot;,
+  creditBankId: &quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;,
+  creditBankAccountNumber: &quot;0000000000&quot;,
+  callbackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-update-persistent-payment-account" data-operation="update-persistent-payment-account" data-filter-item data-section="persistent" data-search="update a persistent payment account collect api - update a persistent payment account post /updatepersistentpaymentaccount persistent accounts updatepersistentpaymentaccount">
+  <div class="op-header">
+    <h3 class="op-name">Update a persistent payment account</h3>
+    <a class="op-anchor" href="#op-update-persistent-payment-account" aria-label="Link to Update a persistent payment account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /updatePersistentPaymentAccount</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Persistent accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
+  </div>
+  <p>Changes a persistent payment account.</p>
+  <ul><li>Every field takes part in the hash, so send the current value of the ones you are not changing.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>updatePersistentPaymentAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-update-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript">const account = await client.updatePersistentPaymentAccount({
+  referenceNumber: &quot;REF-000007&quot;,
+  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+  callbackUrl: &quot;https://yourstore.com/webhooks/paga-v2&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-persistent-payment-account" data-operation="get-persistent-payment-account" data-filter-item data-section="persistent" data-search="get a persistent payment account collect api - get a persistent payment account post /getpersistentpaymentaccount persistent accounts getpersistentpaymentaccount">
+  <div class="op-header">
+    <h3 class="op-name">Get a persistent payment account</h3>
+    <a class="op-anchor" href="#op-get-persistent-payment-account" aria-label="Link to Get a persistent payment account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /getPersistentPaymentAccount</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Persistent accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
+  </div>
+  <p>Returns a persistent payment account.</p>
+  <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getPersistentPaymentAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-get-persistent-payment-account" class="language-typescript">const account = await client.getPersistentPaymentAccount({
+  referenceNumber: &quot;REF-000008&quot;,
+  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-delete-persistent-payment-account" data-operation="delete-persistent-payment-account" data-filter-item data-section="persistent" data-search="delete a persistent payment account collect api - delete a persistent payment account post /deletepersistentpaymentaccount persistent accounts deletepersistentpaymentaccount">
+  <div class="op-header">
+    <h3 class="op-name">Delete a persistent payment account</h3>
+    <a class="op-anchor" href="#op-delete-persistent-payment-account" aria-label="Link to Delete a persistent payment account">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /deletePersistentPaymentAccount</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag ">Persistent accounts</span>
+    <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
+  </div>
+  <p>Deletes a persistent payment account.</p>
+  <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>deletePersistentPaymentAccount</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-delete-persistent-payment-account" type="button">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript">await client.deletePersistentPaymentAccount({
+  referenceNumber: &quot;REF-000009&quot;,
+  accountIdentifier: &quot;CUST-000184-WALLET&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-register-customer" data-operation="register-customer" data-filter-item data-section="customers" data-search="register a customer business api - register a customer post /registercustomer customers registercustomer">
+  <div class="op-header">
+    <h3 class="op-name">Register a customer</h3>
+    <a class="op-anchor" href="#op-register-customer" aria-label="Link to Register a customer">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /registerCustomer</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Customers</span>
+    <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
+  </div>
+  <p>Opens a Paga account for a customer on your business account.</p>
+  <ul><li>The phone number must not already belong to a registered customer.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>registerCustomer</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer" type="button">Copy</button><pre><code id="code-typescript-register-customer" class="language-typescript">const customer = await client.registerCustomer({
+  referenceNumber: &quot;REF-000010&quot;,
+  customerPhoneNumber: &quot;08064343187&quot;,
+  customerFirstName: &quot;Bello&quot;,
+  customerLastName: &quot;Ramon&quot;,
+  customerEmail: &quot;customer@example.com&quot;,
+  customerDateOfBirth: &quot;1989-10-02&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-register-customer-with-kyc" data-operation="register-customer-with-kyc" data-filter-item data-section="customers" data-search="register a customer with kyc business api - register a customer with kyc post /registercustomerwithkyc customers registercustomerwithkyc">
+  <div class="op-header">
+    <h3 class="op-name">Register a customer with KYC</h3>
+    <a class="op-anchor" href="#op-register-customer-with-kyc" aria-label="Link to Register a customer with KYC">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /registerCustomerWithKYC</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Customers</span>
+    <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerFirstName + customerLastName</span>
+  </div>
+  <p>Opens a Paga account for a customer and uploads their identification photographs.</p>
+  <ul><li>Sent as <code>multipart/form-data</code>: a <code>customer</code> JSON part, plus <code>customerAccountPhoto</code> and <code>customerIdPhoto</code> image parts.</li>
+<li>Each photograph must be a JPEG of at most 500 KB.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>registerCustomerWithKyc</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-with-kyc" type="button">Copy</button><pre><code id="code-typescript-register-customer-with-kyc" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+
+const customer = await client.registerCustomerWithKyc({
+  referenceNumber: &quot;REF-000011&quot;,
+  customerPhoneNumber: &quot;08064343187&quot;,
+  customerEmail: &quot;customer@example.com&quot;,
+  customerFirstName: &quot;Bello&quot;,
+  customerLastName: &quot;Ramon&quot;,
+  customerDateOfBirth: &quot;1989-10-02&quot;,
+  customerGender: &quot;MALE&quot;,
+  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
+  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-register-customer-account-photo" data-operation="register-customer-account-photo" data-filter-item data-section="customers" data-search="upload a customer account photo business api - register a customer account photo post /registercustomeraccountphoto customers registercustomeraccountphoto">
+  <div class="op-header">
+    <h3 class="op-name">Upload a customer account photo</h3>
+    <a class="op-anchor" href="#op-register-customer-account-photo" aria-label="Link to Upload a customer account photo">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /registerCustomerAccountPhoto</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Customers</span>
+    <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber</span>
+  </div>
+  <p>Uploads a customer's account photograph.</p>
+  <ul><li>Sent as <code>multipart/form-data</code>: a <code>customer</code> JSON part plus a <code>customerAccountPhoto</code> image part.</li>
+<li>The photograph must be a JPEG of at most 500 KB.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>registerCustomerAccountPhoto</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-account-photo" type="button">Copy</button><pre><code id="code-typescript-register-customer-account-photo" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+
+await client.registerCustomerAccountPhoto({
+  referenceNumber: &quot;REF-000012&quot;,
+  customerPhoneNumber: &quot;08064343187&quot;,
+  customerAccountPhoto: await readFile(&quot;account-photo.jpg&quot;),
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-register-customer-identification" data-operation="register-customer-identification" data-filter-item data-section="customers" data-search="upload a customer identification business api - register a customer identification post /registercustomeridentification customers registercustomeridentification">
+  <div class="op-header">
+    <h3 class="op-name">Upload a customer identification</h3>
+    <a class="op-anchor" href="#op-register-customer-identification" aria-label="Link to Upload a customer identification">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag ">Business API</span>
+    <span class="tag tag-endpoint">POST /registerCustomerIdentification</span>
+    <span class="tag ">principal / credentials headers</span>
+    <span class="tag ">Customers</span>
+    <span class="tag tag-endpoint">referenceNumber + customerPhoneNumber + customerIdType + customerIdNumber + customerIdExpirationDate</span>
+  </div>
+  <p>Uploads a customer's identification and its photograph.</p>
+  <ul><li>Sent as <code>multipart/form-data</code>: a <code>customer</code> JSON part plus a <code>customerIdPhoto</code> image part.</li>
+<li><code>customerIdExpirationDate</code> is formatted as <code>YYYY-MM-DD</code>.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>registerCustomerIdentification</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-register-customer-identification" type="button">Copy</button><pre><code id="code-typescript-register-customer-identification" class="language-typescript">import { readFile } from &quot;node:fs/promises&quot;;
+
+await client.registerCustomerIdentification({
+  referenceNumber: &quot;REF-000013&quot;,
+  customerPhoneNumber: &quot;08064343187&quot;,
+  customerIdType: &quot;NATIONAL_ID&quot;,
+  customerIdNumber: &quot;12345678901&quot;,
+  customerIdExpirationDate: &quot;2030-01-01&quot;,
+  customerIdPhoto: await readFile(&quot;id-photo.jpg&quot;),
+});</code></pre></div>
+</article>
+</div>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

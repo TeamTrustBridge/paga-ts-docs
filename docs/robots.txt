@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://teamtrustbridge.github.io/paga-ts-docs/sitemap.xml

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manage accounts — paga-ts</title>
+<meta name="description" content="Your own account, your customers&#39; accounts, and the customers themselves. 22 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/manage-accounts.html">
+<meta property="og:title" content="Manage accounts — paga-ts">
+<meta property="og:description" content="Your own account, your customers&#39; accounts, and the customers themselves. 22 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/manage-accounts.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Manage accounts</h1>
+<p class="lead">Your own account, your customers' accounts, and the customers themselves.</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h3><a href="business-account.html">Your business account</a></h3>
+    <p>Your own balance, transaction history, merchant onboarding and cash dispensing.</p>
+  </div>
+  <div class="card">
+    <h3><a href="subsidiary.html">Subsidiary accounts</a></h3>
+    <p>Paga accounts for your customers, held on your behalf. Issue, hold and move money on their account.</p>
+  </div>
+  <div class="card">
+    <h3><a href="persistent.html">Persistent payment accounts</a></h3>
+    <p>A standing instruction that lets a customer pay you repeatedly from the same account.</p>
+  </div>
+  <div class="card">
+    <h3><a href="customers.html">Customer registration and KYC</a></h3>
+    <p>Open a Paga account for a customer, with identity documents if you need them.</p>
+  </div>
+</div>
+
+<h2 id="operations">Operations in this section</h2>
+<div class="table-wrap">
+<table>
+<caption>4 sections, 22 operations</caption>
+<thead><tr><th scope="col">Operation</th><th scope="col">Endpoint</th><th scope="col">Section</th><th scope="col">Method</th></tr></thead>
+<tbody>
+<tr data-filter-item data-section="business-account" data-search="check the business account balance your business account - check your balance post /accountbalance business account getbusinessbalance">
+  <td><a href="#op-get-business-balance">Check the business account balance</a></td>
+  <td><code>POST /accountBalance</code></td>
+  <td>Business account</td>
+  <td><code>getBusinessBalance</code></td>
+</tr>
+<tr data-filter-item data-section="business-account" data-search="get the transaction history your business account - get your transaction history post /transactionhistory business account getbusinesstransactions">
+  <td><a href="#op-get-business-transactions">Get the transaction history</a></td>
+  <td><code>POST /transactionHistory</code></td>
+  <td>Business account</td>
+  <td><code>getBusinessTransactions</code></td>
+</tr>
+<tr data-filter-item data-section="business-account" data-search="get the recent transactions your business account - get your recent transactions post /recenttransactionhistory business account getrecenttransactions">
+  <td><a href="#op-get-recent-transactions">Get the recent transactions</a></td>
+  <td><code>POST /recentTransactionHistory</code></td>
+  <td>Business account</td>
+  <td><code>getRecentTransactions</code></td>
+</tr>
+<tr data-filter-item data-section="business-account" data-search="check an operation&#39;s status business api - get an operation status post /getoperationstatus business account getoperationstatus">
+  <td><a href="#op-get-operation-status">Check an operation's status</a></td>
+  <td><code>POST /getOperationStatus</code></td>
+  <td>Business account</td>
+  <td><code>getOperationStatus</code></td>
+</tr>
+<tr data-filter-item data-section="business-account" data-search="onboard a merchant business api - onboard a merchant post /onboardmerchant business account onboardmerchant">
+  <td><a href="#op-onboard-merchant">Onboard a merchant</a></td>
+  <td><code>POST /onboardMerchant</code></td>
+  <td>Business account</td>
+  <td><code>onboardMerchant</code></td>
+</tr>
+<tr data-filter-item data-section="business-account" data-search="dispense cash business api - dispense cash post /dispensecash business account dispensecash">
+  <td><a href="#op-dispense-cash">Dispense cash</a></td>
+  <td><code>POST /dispenseCash</code></td>
+  <td>Business account</td>
+  <td><code>dispenseCash</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="create a subsidiary account subsidiary accounts - create an account post /subsidiary-accounts subsidiary accounts createsubsidiaryaccount">
+  <td><a href="#op-create-subsidiary-account">Create a subsidiary account</a></td>
+  <td><code>POST /subsidiary-accounts</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>createSubsidiaryAccount</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="charge a subsidiary account subsidiary accounts - charge an account post /subsidiary-accounts/{accountreference}/charge subsidiary accounts chargesubsidiaryaccount">
+  <td><a href="#op-charge-subsidiary-account">Charge a subsidiary account</a></td>
+  <td><code>POST /subsidiary-accounts/{accountReference}/charge</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>chargeSubsidiaryAccount</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="top up a subsidiary account subsidiary accounts - top up an account post /subsidiary-accounts/{accountreference}/topup subsidiary accounts topupsubsidiaryaccount">
+  <td><a href="#op-top-up-subsidiary-account">Top up a subsidiary account</a></td>
+  <td><code>POST /subsidiary-accounts/{accountReference}/topup</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>topUpSubsidiaryAccount</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="transfer between subsidiary accounts subsidiary accounts - transfer between accounts post /subsidiary-accounts/transfer subsidiary accounts transferbetweensubsidiaryaccounts">
+  <td><a href="#op-transfer-between-subsidiary-accounts">Transfer between subsidiary accounts</a></td>
+  <td><code>POST /subsidiary-accounts/transfer</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>transferBetweenSubsidiaryAccounts</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="retrieve a subsidiary account subsidiary accounts - retrieve an account get /subsidiary-accounts/{accountreference} subsidiary accounts retrievesubsidiaryaccount">
+  <td><a href="#op-retrieve-subsidiary-account">Retrieve a subsidiary account</a></td>
+  <td><code>GET /subsidiary-accounts/{accountReference}</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>retrieveSubsidiaryAccount</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="update a subsidiary account subsidiary accounts - update an account put /subsidiary-accounts/{accountreference} subsidiary accounts updatesubsidiaryaccount">
+  <td><a href="#op-update-subsidiary-account">Update a subsidiary account</a></td>
+  <td><code>PUT /subsidiary-accounts/{accountReference}</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>updateSubsidiaryAccount</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="get a subsidiary account balance subsidiary accounts - get the balance get /subsidiary-accounts/{accountreference}/balance subsidiary accounts getsubsidiarybalance">
+  <td><a href="#op-get-subsidiary-balance">Get a subsidiary account balance</a></td>
+  <td><code>GET /subsidiary-accounts/{accountReference}/balance</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>getSubsidiaryBalance</code></td>
+</tr>
+<tr data-filter-item data-section="subsidiary" data-search="get a subsidiary account history subsidiary accounts - get transaction history get /subsidiary-accounts/{accountreference}/history subsidiary accounts getsubsidiaryhistory">
+  <td><a href="#op-get-subsidiary-history">Get a subsidiary account history</a></td>
+  <td><code>GET /subsidiary-accounts/{accountReference}/history</code></td>
+  <td>Subsidiary accounts</td>
+  <td><code>getSubsidiaryHistory</code></td>
+</tr>
+<tr data-filter-item data-section="persistent" data-search="register a persistent payment account collect api - register a persistent payment account post /registerpersistentpaymentaccount persistent accounts registerpersistentpaymentaccount">
+  <td><a href="#op-register-persistent-payment-account">Register a persistent payment account</a></td>
+  <td><code>POST /registerPersistentPaymentAccount</code></td>
+  <td>Persistent accounts</td>
+  <td><code>registerPersistentPaymentAccount</code></td>
+</tr>
+<tr data-filter-item data-section="persistent" data-search="update a persistent payment account collect api - update a persistent payment account post /updatepersistentpaymentaccount persistent accounts updatepersistentpaymentaccount">
+  <td><a href="#op-update-persistent-payment-account">Update a persistent payment account</a></td>
+  <td><code>POST /updatePersistentPaymentAccount</code></td>
+  <td>Persistent accounts</td>
+  <td><code>updatePersistentPaymentAccount</code></td>
+</tr>
+<tr data-filter-item data-section="persistent" data-search="get a persistent payment account collect api - get a persistent payment account post /getpersistentpaymentaccount persistent accounts getpersistentpaymentaccount">
+  <td><a href="#op-get-persistent-payment-account">Get a persistent payment account</a></td>
+  <td><code>POST /getPersistentPaymentAccount</code></td>
+  <td>Persistent accounts</td>
+  <td><code>getPersistentPaymentAccount</code></td>
+</tr>
+<tr data-filter-item data-section="persistent" data-search="delete a persistent payment account collect api - delete a persistent payment account post /deletepersistentpaymentaccount persistent accounts deletepersistentpaymentaccount">
+  <td><a href="#op-delete-persistent-payment-account">Delete a persistent payment account</a></td>
+  <td><code>POST /deletePersistentPaymentAccount</code></td>
+  <td>Persistent accounts</td>
+  <td><code>deletePersistentPaymentAccount</code></td>
+</tr>
+<tr data-filter-item data-section="customers" data-search="register a customer business api - register a customer post /registercustomer customers registercustomer">
+  <td><a href="#op-register-customer">Register a customer</a></td>
+  <td><code>POST /registerCustomer</code></td>
+  <td>Customers</td>
+  <td><code>registerCustomer</code></td>
+</tr>
+<tr data-filter-item data-section="customers" data-search="register a customer with kyc business api - register a customer with kyc post /registercustomerwithkyc customers registercustomerwithkyc">
+  <td><a href="#op-register-customer-with-kyc">Register a customer with KYC</a></td>
+  <td><code>POST /registerCustomerWithKYC</code></td>
+  <td>Customers</td>
+  <td><code>registerCustomerWithKyc</code></td>
+</tr>
+<tr data-filter-item data-section="customers" data-search="upload a customer account photo business api - register a customer account photo post /registercustomeraccountphoto customers registercustomeraccountphoto">
+  <td><a href="#op-register-customer-account-photo">Upload a customer account photo</a></td>
+  <td><code>POST /registerCustomerAccountPhoto</code></td>
+  <td>Customers</td>
+  <td><code>registerCustomerAccountPhoto</code></td>
+</tr>
+<tr data-filter-item data-section="customers" data-search="upload a customer identification business api - register a customer identification post /registercustomeridentification customers registercustomeridentification">
+  <td><a href="#op-register-customer-identification">Upload a customer identification</a></td>
+  <td><code>POST /registerCustomerIdentification</code></td>
+  <td>Customers</td>
+  <td><code>registerCustomerIdentification</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

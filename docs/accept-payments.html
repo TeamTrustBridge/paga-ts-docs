@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accept payments — paga-ts</title>
+<meta name="description" content="Collect money from a customer. 14 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/accept-payments.html">
+<meta property="og:title" content="Accept payments — paga-ts">
+<meta property="og:description" content="Collect money from a customer. 14 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/accept-payments.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Accept payments</h1>
+<p class="lead">Collect money from a customer.</p>
+
+<div class="card-grid">
+  <div class="card">
+    <h3><a href="checkout.html">Checkout</a></h3>
+    <p>Take a card or bank payment on a Paga-hosted page. The customer is redirected to Paga, pays, and Paga notifies your server.</p>
+  </div>
+  <div class="card">
+    <h3><a href="collection.html">Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer</a></h3>
+    <p>Collect money from a customer with a payment request. The same request serves the virtual account, USSD, wallet and USD flows — you pick the method.</p>
+  </div>
+  <div class="card">
+    <h3><a href="refunds.html">Refunds</a></h3>
+    <p>Refund a payment in full or in part, or cancel one that was never paid.</p>
+  </div>
+  <div class="card">
+    <h3><a href="direct-debit.html">Direct Debit (Open Banking)</a></h3>
+    <p>Take a standing authorisation to debit a customer's bank account, then charge against it.</p>
+  </div>
+</div>
+
+<h2 id="operations">Operations in this section</h2>
+<div class="table-wrap">
+<table>
+<caption>4 sections, 14 operations</caption>
+<thead><tr><th scope="col">Operation</th><th scope="col">Endpoint</th><th scope="col">Section</th><th scope="col">Method</th></tr></thead>
+<tbody>
+<tr data-filter-item data-section="checkout" data-search="verify a charge checkout - verify a charge post /checkout/transaction/verify checkout verifycharge">
+  <td><a href="#op-verify-charge">Verify a charge</a></td>
+  <td><code>POST /checkout/transaction/verify</code></td>
+  <td>Checkout</td>
+  <td><code>verifyCharge</code></td>
+</tr>
+<tr data-filter-item data-section="collection" data-search="create a payment request dynamic virtual account - create a payment request post /paymentrequest collection createpayment">
+  <td><a href="#op-create-payment">Create a payment request</a></td>
+  <td><code>POST /paymentRequest</code></td>
+  <td>Collection</td>
+  <td><code>createPayment</code></td>
+</tr>
+<tr data-filter-item data-section="collection" data-search="check payment status dynamic virtual account - check payment status post /status collection getpaymentstatus">
+  <td><a href="#op-get-payment-status">Check payment status</a></td>
+  <td><code>POST /status</code></td>
+  <td>Collection</td>
+  <td><code>getPaymentStatus</code></td>
+</tr>
+<tr data-filter-item data-section="collection" data-search="list the customer&#39;s banks bank ussd - get the customer&#39;s bank post /banks collection getcollectbanks">
+  <td><a href="#op-get-collect-banks">List the customer's banks</a></td>
+  <td><code>POST /banks</code></td>
+  <td>Collection</td>
+  <td><code>getCollectBanks</code></td>
+</tr>
+<tr data-filter-item data-section="collection" data-search="check usd payment status bank transfer (ach, wire and swift) - check payment status post /status collection getusdpaymentstatus">
+  <td><a href="#op-get-usd-payment-status">Check USD payment status</a></td>
+  <td><code>POST /status</code></td>
+  <td>Collection</td>
+  <td><code>getUsdPaymentStatus</code></td>
+</tr>
+<tr data-filter-item data-section="collection" data-search="payment request history collect api - payment request history post /history collection getpaymentrequesthistory">
+  <td><a href="#op-get-payment-request-history">Payment request history</a></td>
+  <td><code>POST /history</code></td>
+  <td>Collection</td>
+  <td><code>getPaymentRequestHistory</code></td>
+</tr>
+<tr data-filter-item data-section="refunds" data-search="refund or cancel a payment request refunds - refund or cancel a payment request post /refund/v2 refunds refundpayment">
+  <td><a href="#op-refund-payment">Refund or cancel a payment request</a></td>
+  <td><code>POST /refund/v2</code></td>
+  <td>Refunds</td>
+  <td><code>refundPayment</code></td>
+</tr>
+<tr data-filter-item data-section="refunds" data-search="check refund status refunds - check refund status post /status refunds getrefundstatus">
+  <td><a href="#op-get-refund-status">Check refund status</a></td>
+  <td><code>POST /status</code></td>
+  <td>Refunds</td>
+  <td><code>getRefundStatus</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="start a hosted set-up session direct debit - start a hosted set-up session post /checkout/charge-process/start direct debit startdirectdebitsession">
+  <td><a href="#op-start-direct-debit-session">Start a hosted set-up session</a></td>
+  <td><code>POST /checkout/charge-process/start</code></td>
+  <td>Direct Debit</td>
+  <td><code>startDirectDebitSession</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="set up a mandate by api direct debit - set up a mandate by api post /paymentrequest direct debit createdirectdebitmandate">
+  <td><a href="#op-create-direct-debit-mandate">Set up a mandate by API</a></td>
+  <td><code>POST /paymentRequest</code></td>
+  <td>Direct Debit</td>
+  <td><code>createDirectDebitMandate</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="check mandate status direct debit - check mandate status post /status direct debit getmandatestatus">
+  <td><a href="#op-get-mandate-status">Check mandate status</a></td>
+  <td><code>POST /status</code></td>
+  <td>Direct Debit</td>
+  <td><code>getMandateStatus</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="charge the mandate direct debit - charge the mandate post /chargedebitmandate direct debit chargemandate">
+  <td><a href="#op-charge-mandate">Charge the mandate</a></td>
+  <td><code>POST /chargeDebitMandate</code></td>
+  <td>Direct Debit</td>
+  <td><code>chargeMandate</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="check charge status direct debit - check charge status post /getchargemandatestatus direct debit getchargemandatestatus">
+  <td><a href="#op-get-charge-mandate-status">Check charge status</a></td>
+  <td><code>POST /getChargeMandateStatus</code></td>
+  <td>Direct Debit</td>
+  <td><code>getChargeMandateStatus</code></td>
+</tr>
+<tr data-filter-item data-section="direct-debit" data-search="disable a mandate direct debit - disable a mandate post /disablemandate direct debit disablemandate">
+  <td><a href="#op-disable-mandate">Disable a mandate</a></td>
+  <td><code>POST /disableMandate</code></td>
+  <td>Direct Debit</td>
+  <td><code>disableMandate</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

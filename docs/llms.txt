@@ -1,0 +1,92 @@
+# paga-ts
+
+> Unofficial async TypeScript SDK for the Paga Engine API. Not built, endorsed or supported by Paga.
+
+Source: https://github.com/TeamTrustBridge/paga-ts
+Install: npm install paga-ts
+
+## Pages
+
+- [Getting started](https://teamtrustbridge.github.io/paga-ts-docs/index.html): Install, quick start, and the SDK's conventions.
+- [Accept payments](https://teamtrustbridge.github.io/paga-ts-docs/accept-payments.html): Collect money from a customer.
+  - [Checkout](https://teamtrustbridge.github.io/paga-ts-docs/checkout.html): Take a card or bank payment on a Paga-hosted page. The customer is redirected to Paga, pays, and Paga notifies your server. (1 operations)
+  - [Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer](https://teamtrustbridge.github.io/paga-ts-docs/collection.html): Collect money from a customer with a payment request. The same request serves the virtual account, USSD, wallet and USD flows — you pick the method. (5 operations)
+  - [Refunds](https://teamtrustbridge.github.io/paga-ts-docs/refunds.html): Refund a payment in full or in part, or cancel one that was never paid. (2 operations)
+  - [Direct Debit (Open Banking)](https://teamtrustbridge.github.io/paga-ts-docs/direct-debit.html): Take a standing authorisation to debit a customer's bank account, then charge against it. (6 operations)
+- [Make payments](https://teamtrustbridge.github.io/paga-ts-docs/make-payments.html): Send money out to a customer, a biller or a network.
+  - [Money Transfer](https://teamtrustbridge.github.io/paga-ts-docs/money-transfer.html): Send money out of your business balance to a bank account or a Paga wallet. (6 operations)
+  - [Airtime and data](https://teamtrustbridge.github.io/paga-ts-docs/airtime.html): Top up a phone with airtime or a data bundle. (3 operations)
+  - [Bill payment (VAS)](https://teamtrustbridge.github.io/paga-ts-docs/bill-payment.html): Pay a biller on behalf of a customer: electricity, water, TV, airtime and more. (4 operations)
+  - [Check the transaction status](https://teamtrustbridge.github.io/paga-ts-docs/status.html): Find out what happened to a money transfer, airtime purchase or bill payment you already sent. (1 operations)
+- [Manage accounts](https://teamtrustbridge.github.io/paga-ts-docs/manage-accounts.html): Your own account, your customers' accounts, and the customers themselves.
+  - [Your business account](https://teamtrustbridge.github.io/paga-ts-docs/business-account.html): Your own balance, transaction history, merchant onboarding and cash dispensing. (6 operations)
+  - [Subsidiary accounts](https://teamtrustbridge.github.io/paga-ts-docs/subsidiary.html): Paga accounts for your customers, held on your behalf. Issue, hold and move money on their account. (8 operations)
+  - [Persistent payment accounts](https://teamtrustbridge.github.io/paga-ts-docs/persistent.html): A standing instruction that lets a customer pay you repeatedly from the same account. (4 operations)
+  - [Customer registration and KYC](https://teamtrustbridge.github.io/paga-ts-docs/customers.html): Open a Paga account for a customer, with identity documents if you need them. (4 operations)
+- [All operations](https://teamtrustbridge.github.io/paga-ts-docs/reference.html): Every documented operation, with endpoints and hash fields.
+- [Webhooks](https://teamtrustbridge.github.io/paga-ts-docs/webhooks.html): Every callback, and how to verify it.
+
+## Operations
+
+- `verifyCharge` — Verify a charge (`POST /checkout/transaction/verify`). Confirms a Checkout payment from your server at any time, using its `paymentReference`. Uses HTTP Basic only — it sends no `hash` header.
+- `createPayment` — Create a payment request (`POST /paymentRequest`). Creates a payment request. The customer pays via the payment methods you send, and Paga calls your callback when the payment completes. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email.
+- `getPaymentStatus` — Check payment status (`POST /status`). Returns the status of a payment request. The outer `statusCode` only says whether the status request worked; the payment's own status is in `data.statusCode`. Hash: referenceNumber.
+- `getCollectBanks` — List the customer's banks (`POST /banks`). Lists the banks available for a Bank USSD payment. Send a bank's `uuid` as `payer.bankId` when creating a payment request, or as `autoSweep.bankPublicId` for subsidiary accounts. Hash: referenceNumber.
+- `getUsdPaymentStatus` — Check USD payment status (`POST /status`). Returns the status of a USD payment request. Unlike the other `/status` operations, this one signs the currency as well as the reference number. Hash: referenceNumber + paymentCurrency.
+- `getPaymentRequestHistory` — Payment request history (`POST /history`). Returns the history of your payment requests. Hash: referenceNumber.
+- `refundPayment` — Refund or cancel a payment request (`POST /refund/v2`). Refunds a paid payment request in full or in part, or cancels one that has not been paid. Hash: referenceNumber + refundAmount.
+- `getRefundStatus` — Check refund status (`POST /status`). Checks whether a payment request was refunded. Call it with the **original** payment request's `referenceNumber`, not the refund's. Hash: referenceNumber.
+- `startDirectDebitSession` — Start a hosted set-up session (`POST /checkout/charge-process/start`). Creates a hosted session and returns the `checkoutUrl` to redirect your customer to. This endpoint uses HTTP Basic only — it sends no `hash` header.
+- `createDirectDebitMandate` — Set up a mandate by API (`POST /paymentRequest`). Creates a payment request with `paymentMethods` set to `["DIRECT_DEBIT"]`, so the customer authorises you to debit their bank account. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email.
+- `getMandateStatus` — Check mandate status (`POST /status`). Returns a mandate's status. Hash: referenceNumber.
+- `chargeMandate` — Charge the mandate (`POST /chargeDebitMandate`). Debits an approved mandate for any amount up to its limit. Hash: referenceNumber + amount + accountReference.
+- `getChargeMandateStatus` — Check charge status (`POST /getChargeMandateStatus`). Returns the status of a mandate charge, using the charge's own `referenceNumber`. Hash: referenceNumber.
+- `disableMandate` — Disable a mandate (`POST /disableMandate`). Stops all future charges on a mandate. Its `ProcessStatusId` then becomes `REJECTED`, and it can never be charged again. Hash: referenceNumber + accountReference.
+- `getBanks` — List institutions you can pay (`POST /getBanks`). Lists every institution money can be sent to, with the `uuid` you send as `destinationBankUUID`. Hash: referenceNumber.
+- `validateDepositToBank` — Validate the destination account (`POST /validateDepositToBank`). Confirms the account exists and returns the account holder's name and the fee, before any money moves. Hash: referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber.
+- `sendMoney` — Send money to a bank account (`POST /depositToBank`). Sends money from the business balance to a bank account, or to a Paga wallet using Paga's UUID. Hash: referenceNumber + amount + destinationBankUUID + destinationBankAccountNumber.
+- `transferToPagaWallet` — Send money to a Paga wallet (`POST /moneyTransfer`). Sends money from the business balance to a Paga user, identified by their phone number, nickname or account number. Hash: referenceNumber + amount + destinationAccount.
+- `validateMoneyTransfer` — Validate a Paga wallet transfer (`POST /validateMoneyTransfer`). Confirms the recipient exists and returns their name, registration status, KYC level and the fee, before any money moves. Hash: referenceNumber + amount + destinationAccount.
+- `sendBulkMoneyTransfer` — Bulk money transfer (`POST /moneyTransferBulk`). Sends up to 300 money transfers in one call. Hash: referenceNumber + amount + destinationAccount + itemCount.
+- `getTransactionStatus` — Check the transaction status (`POST /transactionStatus`). Checks what happened to a transaction you already sent. It covers money transfers, airtime purchases and bill payments. Hash: referenceNumber.
+- `getMobileOperators` — List mobile operators (`POST /getMobileOperators`). Lists the networks you can top up. Hash: referenceNumber.
+- `getDataBundles` — List data bundles (`POST /getDataBundleByOperator`). Lists a network's data bundles. Hash: referenceNumber + operatorPublicId.
+- `buyAirtime` — Buy airtime or data (`POST /airtimePurchase`). Tops up a phone with airtime or data from the business balance. Hash: referenceNumber + amount + destinationPhoneNumber.
+- `getMerchants` — List billers (`POST /getMerchants`). Lists every biller, with the `uuid` you send as `merchantAccount`. Cache the list. Hash: referenceNumber.
+- `getMerchantServices` — List a biller's services (`POST /getMerchantServices`). Lists what a biller can be paid for. Hash: referenceNumber + merchantPublicId.
+- `getMerchantAccountDetails` — Validate the customer (`POST /getMerchantAccountDetails`). Checks a meter, smart card or account number and returns the customer's name. Hash: referenceNumber + merchantAccount + merchantReferenceNumber + merchantServiceProductCode.
+- `payBill` — Pay the bill (`POST /merchantPayment`). Pays a bill from the business balance. Hash: referenceNumber + amount + merchantAccount + merchantReferenceNumber.
+- `getBusinessBalance` — Check the business account balance (`POST /accountBalance`). Returns the business account balance. Hash: referenceNumber.
+- `getBusinessTransactions` — Get the transaction history (`POST /transactionHistory`). Returns every transaction on the business account between two dates: money in, money out and fees, up to 10,000 at a time. Hash: referenceNumber.
+- `getRecentTransactions` — Get the recent transactions (`POST /recentTransactionHistory`). Returns the last five transactions on the business account, newest first, without a date range. Hash: referenceNumber.
+- `getOperationStatus` — Check an operation's status (`POST /getOperationStatus`). Returns the status of a business operation. Hash: referenceNumber.
+- `onboardMerchant` — Onboard a merchant (`POST /onboardMerchant`). Onboards a merchant and returns the credentials Paga issues for it. Hash: referenceNumber + merchantExternalId + name + phone + email.
+- `dispenseCash` — Dispense cash (`POST /dispenseCash`). Dispenses cash against a customer's withdrawal code. Hash: referenceNumber + customerPhoneNumber + amount + withdrawalCode.
+- `createSubsidiaryAccount` — Create a subsidiary account (`POST /subsidiary-accounts`). Creates a Paga account for one of your customers. Hash: referenceNumber + accountReference + iifiNumber + autoSweep.bankPublicId + autoSweep.destination + autoSweep.accountNumber + callbackUrl.
+- `chargeSubsidiaryAccount` — Charge a subsidiary account (`POST /subsidiary-accounts/{accountReference}/charge`). Debits a ledger-backed subsidiary account. Hash: referenceNumber + amount + currency + narration.
+- `topUpSubsidiaryAccount` — Top up a subsidiary account (`POST /subsidiary-accounts/{accountReference}/topup`). Credits a ledger-backed subsidiary account from your business balance. Hash: referenceNumber + amount + currency + narration.
+- `transferBetweenSubsidiaryAccounts` — Transfer between subsidiary accounts (`POST /subsidiary-accounts/transfer`). Moves money between two ledger-backed subsidiary accounts. Hash: referenceNumber + sourceAccountIdentifier + destinationAccountIdentifier + amount + currency + narration.
+- `retrieveSubsidiaryAccount` — Retrieve a subsidiary account (`GET /subsidiary-accounts/{accountReference}`). Returns an account's details, limits, callback URL and balance. Hash: referenceNumber + accountIdentifier.
+- `updateSubsidiaryAccount` — Update a subsidiary account (`PUT /subsidiary-accounts/{accountReference}`). Changes an account. Hash: referenceNumber + accountIdentifier + iifiNumber + autoSweep.destination + autoSweep.bankPublicId + autoSweep.accountNumber + callbackUrl.
+- `getSubsidiaryBalance` — Get a subsidiary account balance (`GET /subsidiary-accounts/{accountReference}/balance`). Returns an account's balance. Hash: referenceNumber + accountIdentifier.
+- `getSubsidiaryHistory` — Get a subsidiary account history (`GET /subsidiary-accounts/{accountReference}/history`). Returns an account's transactions. Hash: accountIdentifier + startDateTimeUTC + endDateTimeUTC.
+- `registerPersistentPaymentAccount` — Register a persistent payment account (`POST /registerPersistentPaymentAccount`). Registers a standing instruction that lets a customer pay you repeatedly from the same account. Hash: referenceNumber + accountReference + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl.
+- `updatePersistentPaymentAccount` — Update a persistent payment account (`POST /updatePersistentPaymentAccount`). Changes a persistent payment account. Hash: referenceNumber + accountIdentifier + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl.
+- `getPersistentPaymentAccount` — Get a persistent payment account (`POST /getPersistentPaymentAccount`). Returns a persistent payment account. Hash: referenceNumber + accountIdentifier.
+- `deletePersistentPaymentAccount` — Delete a persistent payment account (`POST /deletePersistentPaymentAccount`). Deletes a persistent payment account. Hash: referenceNumber + accountIdentifier.
+- `registerCustomer` — Register a customer (`POST /registerCustomer`). Opens a Paga account for a customer on your business account. Hash: referenceNumber + customerPhoneNumber + customerFirstName + customerLastName.
+- `registerCustomerWithKyc` — Register a customer with KYC (`POST /registerCustomerWithKYC`). Opens a Paga account for a customer and uploads their identification photographs. Hash: referenceNumber + customerPhoneNumber + customerFirstName + customerLastName.
+- `registerCustomerAccountPhoto` — Upload a customer account photo (`POST /registerCustomerAccountPhoto`). Uploads a customer's account photograph. Hash: referenceNumber + customerPhoneNumber.
+- `registerCustomerIdentification` — Upload a customer identification (`POST /registerCustomerIdentification`). Uploads a customer's identification and its photograph. Hash: referenceNumber + customerPhoneNumber + customerIdType + customerIdNumber + customerIdExpirationDate.
+
+## Webhooks
+
+- `verifyCheckoutNotification` — Checkout payment notification. Hash: amount + timeStamp + paymentReference.
+- `verifyPaymentCallback` — Dynamic virtual account callback. Hash: notificationId + statusCode + externalReferenceNumber + state + outstandingBalance.
+- `verifyFundingNotification` — Subsidiary account funding notification. Hash: transactionReference + transactionDate + amount + accountNumber + timestamp.
+- `verifySubsidiaryOperation` — Subsidiary charge, top-up or transfer callback. Hash: externalReferenceNumber + transactionDate + amount + accountNumber.
+- `verifyMoneyTransferNotification` — Money transfer notification. Hash: referenceNumber + transactionDate + transactionId + amount + sessionId.
+- `verifyPersistentPaymentAccountCallback` — Persistent payment account callback. Hash: statusCode + accountNumber + amount + clearingFeeAmount + transferFeeAmount.
+- `verifyMandateCallback` — Direct Debit mandate callback. Hash: statusCode + timeStamp + accountNumber + bankName + referenceNumber + mandateStatus.
+- `verifyChargeCallback` — Direct Debit charge callback. Hash: statusCode + referenceNumber + accountReference + amount.
+- `parseUsdPaymentWebhook` — USD (ACH, Wire and Swift) payment webhook. No signature.

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — paga-ts</title>
+<meta name="description" content="Take a card or bank payment on a Paga-hosted page. The customer is redirected to Paga, pays, and Paga notifies your server. 1 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/checkout.html">
+<meta property="og:title" content="Checkout — paga-ts">
+<meta property="og:description" content="Take a card or bank payment on a Paga-hosted page. The customer is redirected to Paga, pays, and Paga notifies your server. 1 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/checkout.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html" aria-current="page">Checkout</a></li>
+<li><a href="collection.html">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Checkout</h1>
+<p class="lead">Take a card or bank payment on a Paga-hosted page. The customer is redirected to Paga, pays, and Paga notifies your server.</p>
+
+<p>Checkout is the hosted flow: you send the customer to a Paga page and Paga handles the payment instrument. Use it when you want Paga to own the payment UI rather than building your own.</p>
+
+<h2 id="operations">Operations</h2>
+<article class="op" id="op-verify-charge" data-operation="verify-charge">
+  <div class="op-header">
+    <h3 class="op-name">Verify a charge</h3>
+    <a class="op-anchor" href="#op-verify-charge" aria-label="Link to Verify a charge">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /checkout/transaction/verify</span>
+    <span class="tag ">HTTP Basic</span>
+    
+  </div>
+  <p>Confirms a Checkout payment from your server at any time, using its <code>paymentReference</code>. Uses HTTP Basic only — it sends no <code>hash</code> header.</p>
+  <ul><li><code>status_code</code> <code>0</code> means paid, <code>2</code> means pending.</li>
+<li>A pending charge is a legitimate answer, so the response is returned rather than raised.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>verifyCharge</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-verify-charge" type="button">Copy</button><pre><code id="code-typescript-verify-charge" class="language-typescript">const verified = await client.verifyCharge({
+  paymentReference: &quot;PAY-2026-0311&quot;,
+  publicKey: &quot;YOUR_PUBLIC_KEY&quot;,
+  amount: 50,
+});
+if (verified.status_code === 0) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<h2 id="next">Next</h2>
+<ul>
+<li><a href="collection.html">Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit (Open Banking)</a></li>
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment (VAS)</a></li>
+<li><a href="status.html">Check the transaction status</a></li>
+<li><a href="business-account.html">Your business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent payment accounts</a></li>
+<li><a href="customers.html">Customer registration and KYC</a></li>
+  <li><a href="reference.html">All operations</a></li>
+</ul>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>

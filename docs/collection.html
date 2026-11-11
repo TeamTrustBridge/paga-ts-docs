@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer — paga-ts</title>
+<meta name="description" content="Collect money from a customer with a payment request. The same request serves the virtual account, USSD, wallet and USD flows — you pick the method. 5 operations in the TypeScript SDK for the Paga Engine API.">
+<link rel="canonical" href="https://teamtrustbridge.github.io/paga-ts-docs/collection.html">
+<meta property="og:title" content="Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer — paga-ts">
+<meta property="og:description" content="Collect money from a customer with a payment request. The same request serves the virtual account, USSD, wallet and USD flows — you pick the method. 5 operations in the TypeScript SDK for the Paga Engine API.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://teamtrustbridge.github.io/paga-ts-docs/collection.html">
+<meta name="generator" content="paga-docs-builder">
+<link rel="stylesheet" href="assets/style.css">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="layout">
+<nav class="sidebar" aria-label="Documentation">
+  <a class="brand" href="index.html">
+    <span class="brand-name">Paga Engine</span>
+    <span class="brand-language">TypeScript</span>
+  </a>
+  <li><a href="index.html">Getting started</a></li>
+<div class="nav-group"><p class="nav-heading">Accept payments</p><ul class="nav-list">
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="collection.html" aria-current="page">Collection</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Make payments</p><ul class="nav-list">
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment</a></li>
+<li><a href="status.html">Transaction status</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Manage accounts</p><ul class="nav-list">
+<li><a href="business-account.html">Business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent accounts</a></li>
+<li><a href="customers.html">Customers</a></li>
+</ul></div>
+<div class="nav-group"><p class="nav-heading">Reference</p><ul class="nav-list">
+<li><a href="reference.html">All operations</a></li>
+<li><a href="webhooks.html">Webhooks</a></li>
+</ul></div>
+</nav>
+<div class="main">
+  <div class="topbar">
+    <button class="button menu-toggle" data-menu-toggle type="button" aria-expanded="false" aria-label="Toggle navigation">Menu</button>
+    <span class="topbar-spacer"></span>
+    <button class="button" data-theme-toggle type="button" aria-label="Toggle the colour theme">☾</button>
+  </div>
+  <main class="content" id="main">
+<h1>Dynamic virtual account, Bank USSD, Paga wallet and USD bank transfer</h1>
+<p class="lead">Collect money from a customer with a payment request. The same request serves the virtual account, USSD, wallet and USD flows — you pick the method.</p>
+
+<p>A payment request tells Paga to collect a specific amount from a specific customer. How the customer pays is up to you: a one-time virtual account number, a USSD prompt, their Paga wallet, or a USD bank transfer.</p>
+
+<h2 id="operations">Operations</h2>
+<article class="op" id="op-create-payment" data-operation="create-payment">
+  <div class="op-header">
+    <h3 class="op-name">Create a payment request</h3>
+    <a class="op-anchor" href="#op-create-payment" aria-label="Link to Create a payment request">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /paymentRequest</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
+  </div>
+  <p>Creates a payment request. The customer pays via the payment methods you send, and Paga calls your callback when the payment completes.</p>
+  <ul><li>The same operation serves the Bank USSD, Paga wallet and USD bank transfer flows — pick the flow with <code>paymentMethods</code>.</li>
+<li><code>payer.email</code> takes part in the hash even when you omit it.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>createPayment</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-create-payment" type="button">Copy</button><pre><code id="code-typescript-create-payment" class="language-typescript">const payment = await client.createPayment({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+  amount: 50,
+  payerName: &quot;Bello Ramon&quot;,
+  payerPhoneNumber: &quot;08064343187&quot;,
+  payeeName: &quot;Your business name&quot;,
+  payerEmail: &quot;customer@example.com&quot;,
+  callBackUrl: &quot;https://yourstore.com/webhooks/paga&quot;,
+  paymentMethods: [&quot;BANK_TRANSFER&quot;],
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-payment-status" data-operation="get-payment-status">
+  <div class="op-header">
+    <h3 class="op-name">Check payment status</h3>
+    <a class="op-anchor" href="#op-get-payment-status" aria-label="Link to Check payment status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the status of a payment request. The outer <code>statusCode</code> only says whether the status request worked; the payment's own status is in <code>data.statusCode</code>.</p>
+  <ul><li><code>data.statusCode</code> of <code>&quot;0&quot;</code> means the payment was paid.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getPaymentStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-payment-status" class="language-typescript">const status = await client.getPaymentStatus({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+});
+if (status.data?.statusCode === &quot;0&quot;) {
+  console.log(&quot;paid&quot;);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-collect-banks" data-operation="get-collect-banks">
+  <div class="op-header">
+    <h3 class="op-name">List the customer's banks</h3>
+    <a class="op-anchor" href="#op-get-collect-banks" aria-label="Link to List the customer&#39;s banks">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /banks</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Lists the banks available for a Bank USSD payment. Send a bank's <code>uuid</code> as <code>payer.bankId</code> when creating a payment request, or as <code>autoSweep.bankPublicId</code> for subsidiary accounts.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getCollectBanks</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-collect-banks" type="button">Copy</button><pre><code id="code-typescript-get-collect-banks" class="language-typescript">const banks = await client.getCollectBanks({ referenceNumber: &quot;REF-000001&quot; });
+for (const bank of banks.banks ?? []) {
+  console.log(bank.name, bank.uuid);
+}</code></pre></div>
+</article>
+
+<article class="op" id="op-get-usd-payment-status" data-operation="get-usd-payment-status">
+  <div class="op-header">
+    <h3 class="op-name">Check USD payment status</h3>
+    <a class="op-anchor" href="#op-get-usd-payment-status" aria-label="Link to Check USD payment status">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /status</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag tag-endpoint">referenceNumber + paymentCurrency</span>
+  </div>
+  <p>Returns the status of a USD payment request. Unlike the other <code>/status</code> operations, this one signs the currency as well as the reference number.</p>
+  <ul><li><code>data.statusCode</code> of <code>&quot;1&quot;</code> means the payment is still pending.</li></ul>
+  <h4>TypeScript</h4>
+  <p><code>getUsdPaymentStatus</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-usd-payment-status" type="button">Copy</button><pre><code id="code-typescript-get-usd-payment-status" class="language-typescript">const status = await client.getUsdPaymentStatus({
+  referenceNumber: &quot;ORD-2026-0187&quot;,
+  paymentCurrency: &quot;USD&quot;,
+});</code></pre></div>
+</article>
+
+<article class="op" id="op-get-payment-request-history" data-operation="get-payment-request-history">
+  <div class="op-header">
+    <h3 class="op-name">Payment request history</h3>
+    <a class="op-anchor" href="#op-get-payment-request-history" aria-label="Link to Payment request history">#</a>
+  </div>
+  <div class="meta">
+    <span class="tag tag-collect">Collect API</span>
+    <span class="tag tag-endpoint">POST /history</span>
+    <span class="tag ">HTTP Basic</span>
+    <span class="tag tag-endpoint">referenceNumber</span>
+  </div>
+  <p>Returns the history of your payment requests.</p>
+  
+  <h4>TypeScript</h4>
+  <p><code>getPaymentRequestHistory</code></p>
+  <div class="code-block"><button class="button" data-copy="#code-typescript-get-payment-request-history" type="button">Copy</button><pre><code id="code-typescript-get-payment-request-history" class="language-typescript">const history = await client.getPaymentRequestHistory({
+  referenceNumber: &quot;REF-000001&quot;,
+});</code></pre></div>
+</article>
+
+<h2 id="next">Next</h2>
+<ul>
+<li><a href="checkout.html">Checkout</a></li>
+<li><a href="refunds.html">Refunds</a></li>
+<li><a href="direct-debit.html">Direct Debit (Open Banking)</a></li>
+<li><a href="money-transfer.html">Money Transfer</a></li>
+<li><a href="airtime.html">Airtime and data</a></li>
+<li><a href="bill-payment.html">Bill payment (VAS)</a></li>
+<li><a href="status.html">Check the transaction status</a></li>
+<li><a href="business-account.html">Your business account</a></li>
+<li><a href="subsidiary.html">Subsidiary accounts</a></li>
+<li><a href="persistent.html">Persistent payment accounts</a></li>
+<li><a href="customers.html">Customer registration and KYC</a></li>
+  <li><a href="reference.html">All operations</a></li>
+</ul>
+  </main>
+  <footer class="footer">
+    <span>Unofficial community documentation. Not built, endorsed or supported by Paga.</span>
+    <nav aria-label="Footer">
+      <a href="https://github.com/TeamTrustBridge/paga-ts">paga-ts on GitHub</a>
+      <a href="operations.json">operations.json</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="https://github.com/TeamTrustBridge/paga">All Paga SDKs</a>
+    </nav>
+  </footer>
+</div>
+</div>
+<script src="assets/script.js" defer></script>
+</body>
+</html>
