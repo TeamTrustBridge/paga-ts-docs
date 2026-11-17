@@ -29,7 +29,7 @@ Install: npm install paga-ts
 ## Operations
 
 - `verifyCharge` — Verify a charge (`POST /checkout/transaction/verify`). Confirms a Checkout payment from your server at any time, using its `paymentReference`. Uses HTTP Basic only — it sends no `hash` header.
-- `createPayment` — Create a payment request (`POST /paymentRequest`). Creates a payment request. The customer pays via the payment methods you send, and Paga calls your callback when the payment completes. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email.
+- `createPayment` — Create a payment request (`POST /paymentRequest`). Creates a payment request. The customer pays via the payment methods you send, and Paga calls your callback when the payment completes. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email + payee.accountNumber + payee.phoneNumber + payee.bankId + payee.bankAccountNumber.
 - `getPaymentStatus` — Check payment status (`POST /status`). Returns the status of a payment request. The outer `statusCode` only says whether the status request worked; the payment's own status is in `data.statusCode`. Hash: referenceNumber.
 - `getCollectBanks` — List the customer's banks (`POST /banks`). Lists the banks available for a Bank USSD payment. Send a bank's `uuid` as `payer.bankId` when creating a payment request, or as `autoSweep.bankPublicId` for subsidiary accounts. Hash: referenceNumber.
 - `getUsdPaymentStatus` — Check USD payment status (`POST /status`). Returns the status of a USD payment request. Unlike the other `/status` operations, this one signs the currency as well as the reference number. Hash: referenceNumber + paymentCurrency.
@@ -37,7 +37,7 @@ Install: npm install paga-ts
 - `refundPayment` — Refund or cancel a payment request (`POST /refund/v2`). Refunds a paid payment request in full or in part, or cancels one that has not been paid. Hash: referenceNumber + refundAmount.
 - `getRefundStatus` — Check refund status (`POST /status`). Checks whether a payment request was refunded. Call it with the **original** payment request's `referenceNumber`, not the refund's. Hash: referenceNumber.
 - `startDirectDebitSession` — Start a hosted set-up session (`POST /checkout/charge-process/start`). Creates a hosted session and returns the `checkoutUrl` to redirect your customer to. This endpoint uses HTTP Basic only — it sends no `hash` header.
-- `createDirectDebitMandate` — Set up a mandate by API (`POST /paymentRequest`). Creates a payment request with `paymentMethods` set to `["DIRECT_DEBIT"]`, so the customer authorises you to debit their bank account. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email.
+- `createDirectDebitMandate` — Set up a mandate by API (`POST /paymentRequest`). Creates a payment request with `paymentMethods` set to `["DIRECT_DEBIT"]`, so the customer authorises you to debit their bank account. Hash: referenceNumber + amount + currency + payer.phoneNumber + payer.email + payee.accountNumber + payee.phoneNumber + payee.bankId + payee.bankAccountNumber.
 - `getMandateStatus` — Check mandate status (`POST /status`). Returns a mandate's status. Hash: referenceNumber.
 - `chargeMandate` — Charge the mandate (`POST /chargeDebitMandate`). Debits an approved mandate for any amount up to its limit. Hash: referenceNumber + amount + accountReference.
 - `getChargeMandateStatus` — Check charge status (`POST /getChargeMandateStatus`). Returns the status of a mandate charge, using the charge's own `referenceNumber`. Hash: referenceNumber.

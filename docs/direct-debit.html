@@ -104,10 +104,11 @@
     <span class="tag tag-collect">Collect API</span>
     <span class="tag tag-method tag-post">POST</span><span class="tag tag-endpoint">/paymentRequest</span>
     <span class="tag ">HTTP Basic</span>
-    <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email</span>
+    <span class="tag tag-endpoint">referenceNumber + amount + currency + payer.phoneNumber + payer.email + payee.accountNumber + payee.phoneNumber + payee.bankId + payee.bankAccountNumber</span>
   </div>
   <p>Creates a payment request with <code>paymentMethods</code> set to <code>[&quot;DIRECT_DEBIT&quot;]</code>, so the customer authorises you to debit their bank account.</p>
   <ul><li>The authorisation transfer must come from mobile banking, internet banking or a branch — not from POS, USSD or ATM.</li>
+<li>The hash signs the payee fields as well, exactly like the Create a payment request operation.</li>
 <li><code>payerCollectionFeeShare</code> and <code>payeeCollectionFeeShare</code> must sum to 1.0.</li></ul>
   <h4>TypeScript</h4>
   <p><code>createDirectDebitMandate</code></p>

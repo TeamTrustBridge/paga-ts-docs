@@ -82,6 +82,7 @@
   </div>
   <p>Registers a standing instruction that lets a customer pay you repeatedly from the same account.</p>
   <ul><li><code>accountReference</code> must be 11 to 30 characters.</li>
+<li><code>accountName</code>, <code>firstName</code> and <code>lastName</code> are required; <code>phoneNumber</code>, <code>email</code> and <code>fundingTransactionLimit</code> are optional.</li>
 <li>Paga calls your <code>callbackUrl</code> whenever the account is funded.</li></ul>
   <h4>TypeScript</h4>
   <p><code>registerPersistentPaymentAccount</code></p>
@@ -91,6 +92,9 @@
   financialIdentificationNumber: <span class="tok-str">&quot;22222132329&quot;</span>,
   creditBankId: <span class="tok-str">&quot;40090E2F-7446-4217-9345-7BBAB7043C4C&quot;</span>,
   creditBankAccountNumber: <span class="tok-str">&quot;0000000000&quot;</span>,
+  accountName: <span class="tok-str">&quot;Acme Store&quot;</span>,
+  firstName: <span class="tok-str">&quot;Jane&quot;</span>,
+  lastName: <span class="tok-str">&quot;Doe&quot;</span>,
   callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga&quot;</span>,
 });</code></pre></div>
 </article>
@@ -107,13 +111,15 @@
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier + financialIdentificationNumber + creditBankId + creditBankAccountNumber + callbackUrl</span>
   </div>
   <p>Changes a persistent payment account.</p>
-  <ul><li>Every field takes part in the hash, so send the current value of the ones you are not changing.</li></ul>
+  <ul><li>Every field takes part in the hash, so send the current value of the ones you are not changing.</li>
+<li>Optional: <code>accountName</code>, <code>firstName</code>, <code>lastName</code> and <code>phoneNumber</code>, alongside the credit and callback fields.</li></ul>
   <h4>TypeScript</h4>
   <p><code>updatePersistentPaymentAccount</code></p>
   <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-update-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-update-persistent-payment-account" class="language-typescript"><span class="tok-kw">const</span> account = <span class="tok-kw">await</span> client.<span class="tok-fn">updatePersistentPaymentAccount</span>({
   referenceNumber: <span class="tok-str">&quot;REF-000007&quot;</span>,
   accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
   callbackUrl: <span class="tok-str">&quot;https://yourstore.com/webhooks/paga-v2&quot;</span>,
+  accountName: <span class="tok-str">&quot;Acme Store&quot;</span>,
 });</code></pre></div>
 </article>
 
@@ -150,12 +156,14 @@
     <span class="tag tag-endpoint">referenceNumber + accountIdentifier</span>
   </div>
   <p>Deletes a persistent payment account.</p>
-  <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li></ul>
+  <ul><li>The <code>accountIdentifier</code> accepts a NUBAN **or** an <code>accountReference</code>.</li>
+<li><code>reason</code> is optional.</li></ul>
   <h4>TypeScript</h4>
   <p><code>deletePersistentPaymentAccount</code></p>
   <div class="code-block"><button class="button copy-button" data-copy="#code-typescript-delete-persistent-payment-account" type="button" aria-label="Copy this sample to the clipboard">Copy</button><pre><code id="code-typescript-delete-persistent-payment-account" class="language-typescript"><span class="tok-kw">await</span> client.<span class="tok-fn">deletePersistentPaymentAccount</span>({
   referenceNumber: <span class="tok-str">&quot;REF-000009&quot;</span>,
   accountIdentifier: <span class="tok-str">&quot;CUST-000184-WALLET&quot;</span>,
+  reason: <span class="tok-str">&quot;Account closed&quot;</span>,
 });</code></pre></div>
 </article>
 
